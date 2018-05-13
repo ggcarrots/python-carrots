@@ -9,7 +9,7 @@ Windows
 
 You can download Python for Windows directly from `python.org`_. Look for version 3 and above.
 After downloading the file  ``*.msi``, open it and follow the instructions.
-It is important to remember the path of installation – the directory – as we will need this information during the :ref:`installation of tools <tools>`.
+It is important to remember the path of installation, i.e. the directory, as we will need this information during the :ref:`installation of tools <tools>`.
 
 .. note::
     Remember to check "Add Python 3.4 to PATH" when running the installer . This way you will be able to run Python form

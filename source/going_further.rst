@@ -264,13 +264,15 @@ re-usability and readability. You can find more information on project handling 
 PEP8 and coding in style
 ========================
 
-* `PEP8 can be found here <pep8>`_.
+* `PEP8 can be found here <https://www.python.org/dev/peps/pep-0008/>`_.
 
 A well formatted code improves readability. But what exactly does it mean for code to be well formatted? This definition might change from one developer
 to another. Should you write ``x = max( 1, 2 )`` or ``x = max(1, 2)`` or ``x = max(1,2)``? 
 
 Generally, there are two main coding guides for python developers. The first, most important, but also very broad, is the *Zen of Python*. You can see it
 by typing ``import this`` in the interpreter:
+
+.. _zen-of-python:
 
 .. code-block:: python
 
@@ -305,7 +307,7 @@ like Unicode integration (PEP100) or iterator implementations (PEP234) (two latt
 `pip index <https://www.python.org/dev/peps/>`_.
 
 PEP8 gives a set of rules for code formatting. Below we show a few excerpts from this document, some of which you probably learned already during the workshops.
-It is recommended, though, to read through the whole document (`pep8 <pep8>`_).
+It is recommended, though, to read through the whole document (`pep8 <https://www.python.org/dev/peps/pep-0008/>`_).
 
 .. note::
 
