@@ -203,7 +203,7 @@ New virtual environment installation:
 .. code-block:: bat
 
     :: Windows
-    C:\Users\Alal> C:\Python34\python -m venv workshops
+    C:\Users\Ala> C:\Python36\python -m venv workshops
 
 .. code-block:: sh
 
