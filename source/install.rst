@@ -12,7 +12,7 @@ After downloading the file  ``*.msi``, open it and follow the instructions.
 It is important to remember the path of installation, i.e. the directory, as we will need this information during the :ref:`installation of tools <tools>`.
 
 .. note::
-    Remember to check "Add Python 3.4 to PATH" when running the installer . This way you will be able to run Python form
+    Remember to check "Add Python 3.6 to PATH" when running the installer . This way you will be able to run Python form
     console by just writing ``python``.
 
 
@@ -131,18 +131,6 @@ For Linux or Mac user:
 
     ~$ python3.6 -m venv workshops
 
-.. note::
-    Ubuntu 14.04 has a bug (https://bugs.launchpad.net/ubuntu/+source/python3.4/+bug/1290847) that causes Python3.4 `venv` module to fail when installing with `pip`.
-    To work around this please use this command to create virtual environment::
-
-        ~$ python -m venv --without-pip workshops
-        ~$ source workshops/bin/activate
-        ~$ wget https://bootstrap.pypa.io/get-pip.py
-        ~$ python get-pip.py
-        ~$ pip --version
-
-    Check out _`https://pip.pypa.io/en/latest/installing.html` for more information about installing pip.
-
 This creates a directory ``workshops``. This is your virtual environment. Right now it's still incative.
 
 To activate it on Windows write:
@@ -183,7 +171,7 @@ path at the beginning nor the version at the end. Note ``(workshop)`` at the beg
     ...
 
     (workshops) ~$ python --version
-    3.4.0
+    3.6.0
 
 
 
@@ -220,7 +208,7 @@ New virtual environment installation:
 .. code-block:: sh
 
     # Linux or Mac
-    ~$ python3.4 -m venv workshops
+    ~$ python3.6 -m venv workshops
 
 Virtual environment activation:
 
@@ -239,7 +227,7 @@ Just make sure that you use the proper Python version:
 .. code-block:: sh
 
     (workshops) ~$ python --version
-    3.4.0
+    3.6.0
 
 pip
 ---

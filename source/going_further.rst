@@ -19,7 +19,7 @@ rises it is better to divide your code into smaller files, that is to create lib
 every class in a separate file, but having one file for classes that are logically connected is better for readability.
 Going through a file that has thousands lines of code can be difficult.
 
-As an example, let us consider a program for handling regular polygons. Imagine that every figure has its own, simplified class. You might want to
+As an example, let us consider a program for handling regular polygons. Every figure has its own, simplified class. You might want to
 consider separating main functionality e. g. calculating perimeter, from definitions of those shapes [#fn1]_. That is, to put calculations of fields in one
 file and definitions in another:
 
@@ -82,7 +82,7 @@ use and for the side length/radius, and calculates perimeter:
 
 The ``import polygons`` and ``import shapefunctions`` lines tell the program that we are going to use functionality defined in files ``polygons.py`` and ``shapefunctions.py``.
 Note that these files must be in a place Python can find them, e.g. in the same directory you are running
-python from or on a path defined by ``PYTHONPATH`` variable. Also, note that in the imports we are not using file type extensions, i.e. there is no ``.py`` in
+python. Also, note that in the imports we are not using file type extensions, i.e. there is no ``.py`` in
 ``import`` statements.
 
 There is also a possibility of using aliases for libraries:
@@ -108,9 +108,9 @@ Sometimes you might want to explicitly state what you are importing. In that cas
     circle   = Circle(20)
 
 In this case, to create a shape you don't need to precede it's name with the name of the library. This approach, although more explicit,
-and `Explicit is better than implicit <zen-of-python>`_),
+and `Explicit is better than implicit <zen-of-python>`_,
 has several major drawbacks. For one, if you need 100 functions from a large library it might be tedious to write every one of them. Secondly, you might
-accidentally overwrite other functions. Imagine, for example, that you wrote a ``max`` function that sorts polygons by the number of sides:
+accidentally overwrite other functions. To ilustrate this, let's write a ``max`` function that sorts polygons by the number of sides:
 
 .. code-block:: python
 
@@ -135,6 +135,12 @@ will cause an error. A better way to do this is, in this case, to use an alias:
 
     polygon_max(triangle1, triangle2) # returns triangle2
     max(1, 2) # Hey, it still works!
+
+.. note::
+
+    It is highly discouraged to name variables and functions using
+    names of build-in functions (full list `here <https://docs.python.org/3/library/functions.html>`_).
+    This might break your program and debugging those problems can be difficult. 
 
 Get me ALL of them!
 -------------------
@@ -313,7 +319,7 @@ It is recommended, though, to read through the whole document (`pep8 <https://ww
 
     Although important, style rules are just guidelines. They are not laws! Although is advised, especially for a beginner developer, to follow those
     rules, seasoned programmers tend to compromise between strict rule obedience and their work routine (consistency with surrounding code) or making the
-    code less readable (_beautiful is better than ugly_ and _Readability counts_). Know when to break rules, or, in the words of PEP8 itself, _A Foolish Consistency is the Hobgoblin of Little Minds_
+    code less readable (*Beautiful is better than ugly* and *Readability counts*). Know when to break rules, or, in the words of PEP8 itself, *A Foolish Consistency is the Hobgoblin of Little Minds*.
 
 * Use meaningful naming conventions. Don't use one or two letter variable names unless it's obvious or inline with other conventions
 * Use 4 spaces per indentation level
