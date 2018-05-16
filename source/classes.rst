@@ -266,7 +266,8 @@ For that we need to modify the ``plot`` method:
                         char_to_print = "o"
                     else:
                         char_to_print = " "
-                    print(char_to_print)
+                    print(char_to_print, end = " | ")
+                print()
 
 Notice that we didn't provide lists of positions of crosses or noughts as arguments.
 We just told python to use attributes of the instance that called the method.
@@ -283,6 +284,17 @@ Let's see how it works:
     my_board.crosses = [(0, 0), (1, 1), (2, 2)]
     my_board.noughts = [(1, 2), (0, 2)]
     my_board.plot()
+
+.. testoutput::
+
+    x |   | o | 
+      | x | o | 
+      |   | x | 
+
+
+Additional task: Try to modify the ``plot`` method,
+so that the board would look nicer;
+for example, it doesn't need "|" at the end of each row.
 
 Great, now we have a way to plot crosses and noughts on our board!
 But what if we forgot to define these attributes?
@@ -326,10 +338,10 @@ let's add some methods to actually put them there.
             self.crosses = []
             self.noughts = []
 
-        def add_cross(x, y):
+        def add_cross(self, x, y):
             self.crosses.append((x, y))
 
-        def add_nought(x, y):
+        def add_nought(self, x, y):
             self.noughts.append((x, y))
 
 
@@ -356,7 +368,7 @@ Now we can finnally create a simple game using our class ``TicTacToeBoard``:
 Of course now the game goes on forever.
 Let's make ``board`` in charge of checking whether the game should end or not.
 
-# kod z funkcja check
+# TODO: some nice way to write check method
 
 Notice that in the while loop we do almost the same thing two times.
 When we added checking, we needed to remember to add it in two places.
@@ -374,17 +386,21 @@ Let's modify this code so that it will look more elegant:
         def __init__(self):
             self.pawns = {'o':[], 'x':[]}
 
-        def add_pawn(pawn, x, y):
+        def add_pawn(self, pawn, x, y):
             self.pawns[pawn].append((x, y))
 
+        def check(self):
+            # TODO
+
     board = TicTacToeBoard()
-    while condition:
+    should_game_end = False
+    while not should_game_end:
         for pawn in ('o', 'x'):
-            answer = input("Player, where do you place your '" + pawn "'?")
+            answer = input("Player, where do you place your '" + pawn + "'?")
             x, y = answer.strip().split()
             board.add_pawn(pawn, int(x), int(y))
             board.plot()
-            condition = board.check()
+            should_game_end = board.check()
 
 Additional task:
 modify the ``check`` method, so it will return who won the game.
@@ -425,14 +441,15 @@ Now we can make our game a little bit nicer for the players:
 
     board = TicTacToeBoard()
     players = [Player('Loki', 'o'), Player('Thor', 'x')]
-    while condition:
+    should_game_end = False
+    while not should_game_end:
         for player in players:
             answer = input("Dear " + player.name + 
                 ", where do you place your '" + player.char + "'?")
             x, y = answer.strip().split()
             board.add_pawn(player.char, int(x), int(y))
             board.plot()
-            condition = board.check()
+            should_game_end = board.check()
 
 Now that we have a backbone of our game, we can develop it as we like:
 we can store statistics of wins for every player,
@@ -481,7 +498,8 @@ Let's make our TicTacToeBoard more general.
                         if (row, column) in self.pawns[pawn]:
                             character_to_print = pawn
                             break
-                    print(character_to_print)
+                    print(character_to_print, end=' | ')
+                print()
 
 Now our board can have any size, and can have any pawns placed on it.
 Next we will define two classes: TicTacToeBoard and ConnectFourBoard.
