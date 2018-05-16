@@ -37,7 +37,7 @@ file and definitions in another:
             self.side = side
 
     class Square:
-        def __init__(self):
+        def __init__(self, side):
             self.no_sides = 4
             self.side = side
 
