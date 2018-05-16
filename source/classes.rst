@@ -105,6 +105,10 @@ In summary, we've looked at the classes :func:`int`, :func:`str`, :func:`tuple` 
 a function, by using parentheses ``()``. For instance:
 ``int()``.
 
+Note: usually functions called on instances of some class are called **methods**.
+It's mostly a naming matter, and sometimes you might see these names being used interchangeably,
+but throughout this chapter we will refer to functions defined inside a class as methods.
+
 Define classes
 --------------
 
@@ -165,8 +169,8 @@ by writing it's name and then ``()``.
 Every instance of ``TicTacToeBoard``, like ``my_board``, has all the methods that we defined for that class.
 In that case that would be one method, called ``plot``.
 You may have noticed that it has one weird argument ``self`` that we don't actually use in it.
-It's important to remember that every function in the class must have at least one argument.
-Its value is an object from which we have called this function -
+It's important to remember that every method (or function) in the class must have at least one argument.
+Its value is an object from which we have called this method -
 that would be some instance of the class. This argument should be called ``self``
 `by convention <https://www.python.org/dev/peps/pep-0008/#function-and-method-arguments>`_
 (technically you could call it otherwise, but other programmers would be angry with you if you did).
@@ -177,9 +181,9 @@ Let's see how it works in practice:
     my_board = TicTacToeBoard()
     my_board.plot()
 
-As you can see, you don't actually put any argument in the brackets while calling the function.
+As you can see, you don't actually put any argument in the brackets while calling the method.
 Rather it's the ``TicTacToeBoard`` instance before the dot;
-we put it there, but ``plot`` function knows that ``my_board`` is now its ``self`` argument.
+we put it there, but ``plot`` method knows that ``my_board`` is now its ``self`` argument.
 Recall that in the same way we called some methods on lists and other objects,
 for example: ``my_list.append(4)``.
 
@@ -247,7 +251,7 @@ Observe:
     [(1, 2), (2, 0)]
 
 Now it would be nice if our boards could print the noughts and crosses that we put in them.
-For that we need to modify the ``plot`` function:
+For that we need to modify the ``plot`` method:
 
 .. testcode:: simple-class
 
@@ -265,10 +269,10 @@ For that we need to modify the ``plot`` function:
                     print(char_to_print)
 
 Notice that we didn't provide lists of positions of crosses or noughts as arguments.
-We just told python to use attributes of the instance that called the function.
+We just told python to use attributes of the instance that called the method.
 Recall that the instance is passed as ``self`` argument,
-even though while calling the function we don't put the instance inside the brackets; we put it before the dot.
-So now the ``plot`` function for every position will check
+even though while calling the method we don't put the instance inside the brackets; we put it before the dot.
+So now the ``plot`` method for every position will check
 if this position is in the attribute ``crosses`` of the instance that it has been called from;
 and the same with the attribute ``noughts``.
 Let's see how it works:
@@ -282,7 +286,7 @@ Let's see how it works:
 
 Great, now we have a way to plot crosses and noughts on our board!
 But what if we forgot to define these attributes?
-The ``plot()`` function wouldn't know what ``self.noughts`` or ``self.crosses`` are;
+The ``plot()`` method wouldn't know what ``self.noughts`` or ``self.crosses`` are;
 it won't even print an empty board, it will just return an error.
 It would be better to assure that every instance of our class have these attributes.
 Is there a way to do that? Yes!
@@ -291,9 +295,9 @@ We need to tell python that we want some specific stuff to happen
 (in this case, we want to create some attributes)
 when we initialise an instance of a ``TicTacToeBoard``.
 We do that by adding a method ``__init__`` to the definition of the class.
-It's a function that is called when an object is created; that's why it's called a **constructor**.
-Actually every class has this function defined, even if we don't do it ourselves.
-So, when we typed ``my_board = TicTacToeBoard()`` python actually called a function ``__init__`` of a class ``TicTacToeBoard``.
+It's a method that is called when an object is created; that's why it's called a **constructor**.
+Actually every class has this method defined, even if we don't do it ourselves.
+So, when we typed ``my_board = TicTacToeBoard()`` python actually called a method ``__init__`` of a class ``TicTacToeBoard``.
 We can define it ourselves and add what we need.
 
 .. testcode:: simple-class
@@ -552,12 +556,12 @@ anything that should be specific to ``TicTacToeBoard`` or ``ConnectFourBoard``, 
 
 Additional task: add a method ``add_pawn(pawn, x, y)`` to the ``Board`` class.
 
-What about the function ``__init__``, that appears in all the classes?
+What about the method ``__init__``, that appears in all the classes?
 More important for python is the more specific one;
 that is,  if we create an object ``ConnectFourBoard``,
 the one defined inside the ``ConnectFourBoard`` definition will be used.
 The one inside the ``Board`` is more general,
-and would be used only if we define a sub-class of ``Board`` without its own ``__init__`` function.
+and would be used only if we define a sub-class of ``Board`` without its own ``__init__`` method.
 Observe: ::
 
     class Some_Random_Board(Board):
@@ -571,7 +575,7 @@ Figuratively speaking: when we created it, python tried to use ``__init__`` meth
 but it didn't find it there;
 so it moved to the declaration of more general class, that is ``Board``,
 and used ``__init__`` method from there.
-The ``Some_Random_Board`` class inherits the ``__init__`` function.
+The ``Some_Random_Board`` class inherits the ``__init__`` method.
 On the other hand, when we created ``TicTacToeBoard``, python used method from ``TicTacToeBoard`` -
 as you can see, we didn't have to provide ``ncol`` and ``nrow`` arguments, and python knew they should be equal to 3.
 
