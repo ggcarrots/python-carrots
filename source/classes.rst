@@ -122,9 +122,10 @@ Classes like ``int`` or ``str`` are already known to Python, but we can create o
 This is called defining a class.
 
 You can define your class as easy as you can define a function. In fact, a class is
-basically nothing but a group of functions. Let's define a class named ``TicTacToeBoard``:
+basically nothing but a group of functions. Let's define a class named ``TicTacToeBoard``,
+and give it a method that will print a simplified empty board:
 
-.. testcode:: simple-class
+.. code:: python
 
     class TicTacToeBoard(object):
 
@@ -143,7 +144,7 @@ This is another way of looking at the phrase *Everything in Python is an object*
 Each class is a specialization of ``object`` in Python. Every value has ``object``
 as the most general type. And so, because it is the default behaviour, we can actually ommit writing it:
 
-.. code::
+.. code:: python
 
     class TicTacToeBoard:
         # ...
@@ -153,7 +154,7 @@ We can check it's type with :func:`type` function.
 We can also ask if it's an instance of a type ``TicTacToeBoard``, ``list``, ``object`` or whatever we like
 using function ``isinstance()``.
 
-.. testcode:: simple-class
+.. code:: python
 
     my_board = TicTacToeBoard()
     type(my_board)
@@ -181,7 +182,7 @@ that would be some instance of the class. This argument should be called ``self`
 (technically you could call it otherwise, but other programmers would be angry with you if you did).
 Let's see how it works in practice:
 
-.. testcode:: simple-class
+.. code:: python
 
     my_board = TicTacToeBoard()
     my_board.plot()
@@ -203,7 +204,7 @@ and print itself accordingly.
 This can be accomplished by giving our ``TicTacToeBoard`` instance some **attributes**, values assigned
 to this specific object.
 
-.. testcode:: simple-class
+.. code:: python
 
     my_board = TicTacToeBoard()
     my_board.crosses = [(0, 1), (0, 0)]
@@ -211,7 +212,7 @@ to this specific object.
     print(my_board.crosses)
     print(my_board.noughts)
 
-.. testoutput:: simple-class
+.. testoutput::
 
     [(0, 1), (0, 0)]
     [(2, 2)]
@@ -230,7 +231,7 @@ and have all the methods specific for the class ``list``, each one is independen
 
 Observe:
 
-.. testcode:: class
+.. code:: python
 
     my_new_board = TicTacToeBoard()
     my_new_board.noughts
@@ -244,7 +245,7 @@ Observe:
 
     AttributeError: TicTacToeBoard instance has no attribute 'noughts'
 
-.. testcode::
+.. code:: python
 
     my_new_board.noughts = [(1, 2), (2, 0)]
     print(my_board.noughts)
@@ -258,7 +259,7 @@ Observe:
 Now it would be nice if our boards could print the noughts and crosses that we put in them.
 For that we need to modify the ``plot`` method:
 
-.. testcode:: simple-class
+.. code:: python
 
     class TicTacToeBoard:
 
@@ -271,7 +272,8 @@ For that we need to modify the ``plot`` method:
                         char_to_print = "o"
                     else:
                         char_to_print = " "
-                    print(char_to_print)
+                    print(char_to_print, end = " | ")
+                print()
 
 Notice that we didn't provide lists of positions of crosses or noughts as arguments.
 We just told python to use attributes of the instance that called the method.
@@ -282,12 +284,23 @@ if this position is in the attribute ``crosses`` of the instance that it has bee
 The same with the attribute ``noughts``.
 Let's see how it works:
 
-.. testcode:: simple-class
+.. code:: python
 
     my_board = TicTacToeBoard()
     my_board.crosses = [(0, 0), (1, 1), (2, 2)]
     my_board.noughts = [(1, 2), (0, 2)]
     my_board.plot()
+
+.. testoutput::
+
+    x |   | o | 
+      | x | o | 
+      |   | x | 
+
+
+**Additional task**: Try to modify the ``plot`` method,
+so that the board would look nicer;
+for example, it doesn't need "|" at the end of each row.
 
 Great, now we have a way to plot crosses and noughts on our board!
 But what if we forgot to define these attributes?
@@ -305,7 +318,7 @@ Actually, every class has this method defined, even if we don't do it ourselves.
 So, when we typed ``my_board = TicTacToeBoard()`` python actually called a method ``__init__`` of a class ``TicTacToeBoard``.
 We can define it ourselves and add what we need.
 
-.. testcode:: simple-class
+.. code:: python
 
     class TicTacToeBoard:
         
@@ -323,7 +336,7 @@ even if we don't provide it neither inside the brackets, nor before the dot.
 Now that our boards can store coordinates of noughts and crosses,
 let's add some methods to actually put them there.
 
-.. testcode:: simple-class
+.. code:: python
 
     class TicTacToeBoard:
         
@@ -331,21 +344,22 @@ let's add some methods to actually put them there.
             self.crosses = []
             self.noughts = []
 
-        def add_cross(x, y):
+        def add_cross(self, x, y):
             self.crosses.append((x, y))
 
-        def add_nought(x, y):
+        def add_nought(self, x, y):
             self.noughts.append((x, y))
 
 
-Additional task: modify the method that adds a cross,
+
+**Additional task**: modify the method that adds a cross,
 so that it will check whether it is a legal move.
 That is, whether the coordinates are inside the board and whether the field is free.
 Do the same for the ``add_nought()`` method.
 
 Now we can finnally create a simple game using our class ``TicTacToeBoard``:
 
-.. testcode:: simple-class  
+.. code:: python
 
     board = TicTacToeBoard()
     while True:
@@ -361,37 +375,102 @@ Now we can finnally create a simple game using our class ``TicTacToeBoard``:
 Of course now the game goes on forever.
 Let's put ``board`` in charge of checking whether the game should end or not.
 
-# kod z funkcja check
+.. code:: python
+
+    class TicTacToeBoard:
+
+        # ... (init, add_cross, add_nought stay the same)
+
+        def check(self):
+            """
+            check whether the game is won by some player
+            return True if so, False otherwise
+            """
+            potential_wins = []
+            potential_wins.extend([[(row, column) for row in range(3)]
+                for column in range(3)])    # vertical win
+            potential_wins.extend([[(row, column) for row in range(3)]
+                for column in range(3)])    # horizontal win
+            potential_wins.append([(i, i) for i in range(3)])
+            potential_wins.append([(i, 2-i) for i in range(3)])
+            # diagonal win
+            for win in potential_wins:
+                if (all([field in self.noughts for field in win]) or
+                    all([field in self.crosses for field in win])):
+                    return True
+            return False
+
+    board = TicTacToeBoard()
+    should_the_game_end = False
+    while not should_the_game_end:
+        answer = input("Player1, where do you place your 'o'?")
+        x, y = answer.strip().split()
+        board.add_nought(int(x), int(y))
+        board.plot()
+        should_the_game_end = board.check()
+        if should_the_game_end:
+            break
+        answer = input("Player2, where do you place your 'x'?")
+        x, y = answer.strip().split()
+        board.add_cross(int(x), int(y))
+        board.plot()
+        should_the_game_end = board.check()
+
+**Additional task**: the game should also end when the board is full.
+Add that to the ``check`` method.
 
 Notice that in the while loop we do similar thing two times.
 When we added checking, we needed to remember to add it in two places.
+We needed to add extra ``if`` to check if we should end the game in the middle of the loop.
 Also, if you added some checking if the move is legal,
 you needed to put it in two different methods.
-If we ever decide to do some small change, we need to do it in several places.
-It seems like a lot of unnecessary work and and is error-prone.
+If we ever decide to do some small change, we need to do it in two places.
+It seems like a lot of unnecessary work and is error-prone.
+And furthermore, ``check`` method generates the lists of potential wins after every move,
+which is a waste of time - after all, the list stays the same throughout the whole game.
 Let's modify this code so that it will look more elegant:
 
 
-.. code::
+.. code:: python
 
     class TicTacToeBoard:
 
         def __init__(self):
             self.pawns = {'o':[], 'x':[]}
+            self.potential_wins = self.generate_potential_wins()
 
-        def add_pawn(pawn, x, y):
+        def add_pawn(self, pawn, x, y):
             self.pawns[pawn].append((x, y))
 
+        def generate_potential_wins(self):
+            potential_wins = []
+            potential_wins.extend([[(row, column) for row in range(3)]
+                for column in range(3)])    # vertical win
+            potential_wins.extend([[(row, column) for row in range(3)]
+                for column in range(3)])    # horizontal win
+            potential_wins.append([(i, i) for i in range(3)])
+            potential_wins.append([(i, 2-i) for i in range(3)])
+            # diagonal win
+            return potential_wins
+
+        def check(self):
+            for win in self.potential_wins:
+                for fields in self.pawns.values():
+                    if all([field in fields for field in win]):
+                        return True
+            return False
+
     board = TicTacToeBoard()
-    while condition:
+    should_game_end = False
+    while not should_game_end:
         for pawn in ('o', 'x'):
-            answer = input("Player, where do you place your '" + pawn "'?")
+            answer = input("Player, where do you place your '" + pawn + "'?")
             x, y = answer.strip().split()
             board.add_pawn(pawn, int(x), int(y))
             board.plot()
-            condition = board.check()
+            should_game_end = board.check()
 
-Additional task:
+**Additional task**:
 modify the ``check`` method, so it will return who won the game.
 Then, at the end, announce the winner.
 
@@ -402,7 +481,7 @@ Thanks to classes we can more easily store some informations about players, like
 and refer to them accordingly.
 Let's create a ``Player`` class:
 
-.. code::
+.. code:: python
 
     class Player:
 
@@ -426,18 +505,19 @@ After all, they mean the same thing.
 
 Now we can make our game a little bit nicer for the players:
 
-.. code::
+.. code:: python
 
     board = TicTacToeBoard()
     players = [Player('Loki', 'o'), Player('Thor', 'x')]
-    while condition:
+    should_game_end = False
+    while not should_game_end:
         for player in players:
             answer = input("Dear " + player.name + 
                 ", where do you place your '" + player.char + "'?")
             x, y = answer.strip().split()
             board.add_pawn(player.char, int(x), int(y))
             board.plot()
-            condition = board.check()
+            should_game_end = board.check()
 
 Now that we have a backbone of our game, we can develop it as we like:
 we can store statistics of wins for every player,
@@ -469,7 +549,7 @@ Can we do so? Of course! We can use class **inheritance**.
 
 Let's make our TicTacToeBoard more general.
 
-.. code::
+.. code:: python
 
     class Board:
 
@@ -486,13 +566,14 @@ Let's make our TicTacToeBoard more general.
                         if (row, column) in self.pawns[pawn]:
                             character_to_print = pawn
                             break
-                    print(character_to_print)
+                    print(character_to_print, end=' | ')
+                print()
 
 Now our board can have any size, and can have any pawns placed on it.
 Next we will define two classes: TicTacToeBoard and ConnectFourBoard.
 They will both be subtypes, or subclasses of Board.
 
-.. code::
+.. code:: python
 
     class TicTacToeBoard(Board):
 
@@ -514,8 +595,9 @@ but it will be also an instance of a more general class ``Board``
 The same goes for ``ConnectFourBoard``.
 We say that ``Board`` is a **parent** class of ``TicTacToeBoard`` and ``ConnectFourBoard``,
 and ``TicTacToeBoard`` and ``ConnectFourBoard`` are **child** classes of ``Board``.
-We can check it with ``isinstance`` function::
+We can check it with ``isinstance`` function:
 
+.. code:: python
     board = ConnectFourBoard()
     isinstance(board, ConnectFourBoard)
     isinstance(board, TicTacToeBoard)
@@ -540,8 +622,9 @@ has a ``plot()`` method, even though we don't define it in them anymore.
 They have all the methods defined in the ``Board`` class.
 We say that classes ``TicTacToeBoard`` and ``ConnectFourBoard`` **inherit** the method ``plot``.
 
-Let's see how it works in practice::
+Let's see how it works in practice
 
+.. code:: python
     tic_tac_toe = TicTacToeBoard()
     connect4 = ConnectFourBoard()
     some_small_board = Board(2, 2)
@@ -559,13 +642,16 @@ but not every ``Board`` will be a ``TicTacToeBoard`` or a ``ConnectFourBoard``.
 Anything that we want to be shared by ``TicTacToeBoard`` and ``ConnectFourBoard``  we store in ``Board``.
 Anything that should be specific to ``TicTacToeBoard`` or ``ConnectFourBoard``, we store in ``TicTacToeBoard`` or ``ConnectFourBoard``.
 
-Additional task: add a method ``add_pawn(pawn, x, y)`` to the ``Board`` class.
+**Additional task**: add a method ``add_pawn(pawn, x, y)`` to the ``Board`` class.
 
+
+=======
 What about the method ``__init__``, that appears in all the classes? Which one will be used during construction of an object?
 Well, wehen we create an object ``ConnectFourBoard``, its constructor will be evoked, not its parent's.
 The one inside the ``Board`` is more general, and would be used only if we define a sub-class of ``Board`` without its own ``__init__`` method.
-Observe: ::
+Observe:
 
+.. code:: python
     class Some_Random_Board(Board):
         pass
         
@@ -586,7 +672,7 @@ We can create some other class, for example ``Chessboard``, that will be a child
 but will have it's own, unique ``plot`` method, that will allow it to print black and white fields.
 In such cases we say that ``plot`` method gets **overridden** in ``Chessboard``.
 
-Additional task: Make the ``add_pawn`` method check whether the move is legal.
+**Additional task**: Make the ``add_pawn`` method check whether the move is legal.
 In the general class ``Board`` it means whether the move is inside the board, and that's all.
 Implement more specific cases for the other boards:
 for ``TicTacToeBoard``, it should also mean the field cannot be already taken
