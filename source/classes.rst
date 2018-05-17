@@ -292,7 +292,7 @@ Let's see how it works:
       |   | x | 
 
 
-Additional task: Try to modify the ``plot`` method,
+****Additional task**:** Try to modify the ``plot`` method,
 so that the board would look nicer;
 for example, it doesn't need "|" at the end of each row.
 
@@ -345,7 +345,7 @@ let's add some methods to actually put them there.
             self.noughts.append((x, y))
 
 
-Additional task: modify the method that adds a cross,
+**Additional task**: modify the method that adds a cross,
 so that it will check whether it is a legal move:
 that is, whether the coordinates are inside the board and whether the field is free.
 Do the same for the ``add_nought()`` method.
@@ -368,14 +368,52 @@ Now we can finnally create a simple game using our class ``TicTacToeBoard``:
 Of course now the game goes on forever.
 Let's make ``board`` in charge of checking whether the game should end or not.
 
-# TODO: some nice way to write check method
+.. code:: python
+
+    class TicTacToeBoard:
+
+        # ... (init, add_cross, add_nought stay the same)
+
+        def check(self):
+            potential_wins = []
+            potential_wins.extend([[(row, column) for row in range(3)]
+                for column in range(3)])    # vertical win
+            potential_wins.extend([[(row, column) for row in range(3)]
+                for column in range(3)])    # horizontal win
+            potential_wins.append([(i, i) for i in range(3)])
+            potential_wins.append([(i, 2-i) for i in range(3)])
+            # diagonal win
+            for win in potential_wins:
+                if (all([field in self.noughts for field in win]) or
+                    all([field in self.crosses for field in win])):
+                    return True
+            return False
+
+    board = TicTacToeBoard()
+    should_the_game_end = False
+    while not should_the_game_end:
+        answer = input("Player1, where do you place your 'o'?")
+        x, y = answer.strip().split()
+        board.add_nought(int(x), int(y))
+        board.plot()
+        should_the_game_end = board.check()
+        if should_the_game_end:
+            break
+        answer = input("Player2, where do you place your 'x'?")
+        x, y = answer.strip().split()
+        board.add_cross(int(x), int(y))
+        board.plot()
+        should_the_game_end = board.check()
 
 Notice that in the while loop we do almost the same thing two times.
 When we added checking, we needed to remember to add it in two places.
-Also if you added some checking if the move is legal,
+We needed to add extra ``if`` to check if we should end the game in the middle of the loop.
+If you added some checking if the move is legal,
 you needed to put it in two different methods.
 If we ever decide to do some small change, we need to do it in two places.
 It seems like a lot of unnecessary work and also asking for mistakes.
+And furthermore, ``check`` method generates the lists of potential wins after every move,
+which is a waste of time - the lists stays the same throughout the whole game!
 Let's modify this code so that it will look more elegant:
 
 
@@ -385,12 +423,28 @@ Let's modify this code so that it will look more elegant:
 
         def __init__(self):
             self.pawns = {'o':[], 'x':[]}
+            self.potential_wins = self.generate_potential_wins()
 
         def add_pawn(self, pawn, x, y):
             self.pawns[pawn].append((x, y))
 
+        def generate_potential_wins(self):
+            potential_wins = []
+            potential_wins.extend([[(row, column) for row in range(3)]
+                for column in range(3)])    # vertical win
+            potential_wins.extend([[(row, column) for row in range(3)]
+                for column in range(3)])    # horizontal win
+            potential_wins.append([(i, i) for i in range(3)])
+            potential_wins.append([(i, 2-i) for i in range(3)])
+            # diagonal win
+            return potential_wins
+
         def check(self):
-            # TODO
+            for win in self.potential_wins:
+                for fields in self.pawns.values():
+                    if all([field in fields for field in win]):
+                        return True
+            return False
 
     board = TicTacToeBoard()
     should_game_end = False
@@ -402,7 +456,7 @@ Let's modify this code so that it will look more elegant:
             board.plot()
             should_game_end = board.check()
 
-Additional task:
+**Additional task**:
 modify the ``check`` method, so it will return who won the game.
 Then at the end announce the winner.
 
@@ -574,7 +628,7 @@ but not every ``Board`` will be a ``TicTacToeBoard`` or a ``ConnectFourBoard``.
 Anything that we want to be shared by ``TicTacToeBoard`` and ``ConnectFourBoard``  we can store in ``Board``;
 anything that should be specific to ``TicTacToeBoard`` or ``ConnectFourBoard``, we will store in ``TicTacToeBoard`` or ``ConnectFourBoard``.
 
-Additional task: add a method ``add_pawn(pawn, x, y)`` to the ``Board`` class.
+**Additional task**: add a method ``add_pawn(pawn, x, y)`` to the ``Board`` class.
 
 What about the method ``__init__``, that appears in all the classes?
 More important for python is the more specific one;
@@ -606,7 +660,7 @@ We can create some other class, for example ``Chessboard``, that will be a child
 but will have it's own unique ``plot`` method, that will allow it to print black and white fields.
 In such cases we say that ``plot`` method is **overridden** in ``Chessboard``.
 
-Additional task: Make the ``add_pawn`` method check whether the move is legal.
+**Additional task**: Make the ``add_pawn`` method check whether the move is legal.
 In the general class ``Board`` it means whether the move is inside the board, and that's all.
 Implement more specific cases for the other boards:
 for ``TicTacToeBoard``, it should also mean the field cannot be already taken
