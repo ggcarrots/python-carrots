@@ -293,7 +293,7 @@ Let's see how it works:
       |   | x | 
 
 
-****Additional task**:** Try to modify the ``plot`` method,
+**Additional task**: Try to modify the ``plot`` method,
 so that the board would look nicer;
 for example, it doesn't need "|" at the end of each row.
 
