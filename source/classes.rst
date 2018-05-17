@@ -1,19 +1,24 @@
-
+===================
 Objects and classes
 ===================
 
 Every value is an object
 ------------------------
 
-Everything that we have called a variable until now can be called “an object” in the world of Python. We saw it in the
-example of integers, when :func:`help` printed for us dozens of additional lines of information about
+Every value that we have seen in Python, can be called **an object**. Each object can be assigned to
+a variable (even functions) and/or passed to a function as an argument (yes, even other functions).
+Similar objects share their functionality - number ``1`` has the same functionality as number ``2``, ``3`` and so on.
+We saw earlier, when :func:`help`, acting on any number, printed for us dozens of additional lines of information about
 :func:`int`.
 
 Every object has a class
 ------------------------
 
-The class is the type of an object.
-To know what is the class of an object, simply use the function :func:`type`:
+We say that similar objects have the same **type**. Number ``1`` is of type ``int``, same as ``2`` and ``42``.
+The type of an object is defined by its **class**
+To know what is the class of an object, what is its type, simply use the function :func:`type`:
+
+.. code-block:: python
 
     >>> type(2)
     <class 'int'>
@@ -29,53 +34,55 @@ To know what is the class of an object, simply use the function :func:`type`:
 
 We have talked about classes you can see here earlier: ``int``, ``float``, ``str``, ``tuple``.
 
-When we use numbers in our program, we expect that it will behave like a number - we rely on our
+When we use a ``int`` or a ``float`` in our program, we expect it to behave like a number. We rely on our
 intuition.
-
 However, Python has to know exactly what it means to be a number, e.g., what should happen when we
-sum up two numbers and what when we divide them. The class ``int`` provides all this information and
+add two numbers or divide them. The class ``int`` provides all this information and
 even more.
 
-By using :func:`help` , check what the class ``str`` gives us. Here we give just a few interesting
+Using :func:`help` , check what functionality class ``str`` provides us. Here we give just a few interesting
 features:
+
+.. code-block:: python
 
     >>> help(str.lower)
     Help on method_descriptor:
-    <BLANKLINE>
+
     lower(...)
         S.lower() -> str
-    <BLANKLINE>
+    
         Return a copy of the string S converted to lowercase.
-    <BLANKLINE>
+    
     >>> help(str.upper)
     Help on method_descriptor:
-    <BLANKLINE>
+
     upper(...)
         S.upper() -> str
-    <BLANKLINE>
+    
         Return a copy of S converted to uppercase.
-    <BLANKLINE>
+
     >>> help(str.ljust)
     Help on method_descriptor:
-    <BLANKLINE>
+
     ljust(...)
         S.ljust(width[, fillchar]) -> str
-    <BLANKLINE>
+
         Return S left-justified in a Unicode string of length width. Padding is
         done using the specified fill character (default is a space).
-    <BLANKLINE>
+
     >>> help(str.center)
     Help on method_descriptor:
-    <BLANKLINE>
+
     center(...)
         S.center(width[, fillchar]) -> str
-    <BLANKLINE>
+
         Return S centered in a string of length width. Padding is
         done using the specified fill character (default is a space)
-    <BLANKLINE>
 
 All these are operations that each string can do. We can get to them by using dots and calling the
 function:
+
+.. code-block:: python
 
     >>> x = "Ala"
     >>> x.upper()
@@ -85,8 +92,12 @@ function:
     >>> x.center(9)
     '   Ala   '
 
-And one more important function of a class - it can create a new object of the type it describes. This is called
-called "an instance" of a class:
+Functions of classes are called **methods**. This is opposed to **free functions** that do not require 
+objects to be evoked.
+
+Creating an object of a given type, also called **an instance** of a class, is done by using its class name:
+
+.. code-block::
 
     >>> int()
     0
@@ -97,23 +108,18 @@ called "an instance" of a class:
     >>> tuple()
     ()
 
-So an instance is a new, fresh value of the type described by the class.
+An instance is a new, fresh value of the type described by the class.
 
 In summary, we've looked at the classes :func:`int`, :func:`str`, :func:`tuple` and
-:func:`list`. To find out from which class is the value (object), we use the function
-:func:`type`. To create an instance of a class (a new object), we call the class like call
-a function, by using parentheses ``()``. For instance:
-``int()``.
-
-Note: usually functions called on instances of some class are called **methods**.
-It's mostly a naming matter, and sometimes you might see these names being used interchangeably,
-but throughout this chapter we will refer to functions defined inside a class as methods.
+:func:`list`. To find the type of an object, its class, we use the function
+:func:`type`. To create an instance of a class, we call the class like we would call
+a function, by using parentheses ``()``, e. g. ``int()``.
 
 Define classes
 --------------
 
-Classes like ``int`` or ``str`` are already known to Python, but we can create our own classes to
-customize their behavior. This is called defining a class.
+Classes like ``int`` or ``str`` are already known to Python, but we can create our own types.
+This is called defining a class.
 
 You can define your class as easy as you can define a function. In fact, a class is
 basically nothing but a group of functions. Let's define a class named ``TicTacToeBoard``,
@@ -130,22 +136,21 @@ and give it a method that will print a simplified empty board:
 
 
 Class definitions begin with the word :keyword:`class`, after which we give the name of the new class.
-The ``(object)`` indicates that our new type ``TicTacToeBoard`` is a specific sub-type of ``object``.
-That is, instances of our class, i.e. variables created from it, will be of the type ``TicTacToeBoard`` but
+The ``(object)`` indicates that our new type ``TicTacToeBoard`` is a specific sub-type of an ``object`` class.
+That is, instances of our class, i.e. variables created from it, will be of the type ``TicTacToeBoard`` and
 also of the more general type ``object``.
 
-Actually this is what we said that every variable is an object.
-Each class is a specialization of ``object`` in Python. Hence, every value always has ``object``
-as most general type.
-And so, because it is the default behaviour, we can actually ommit writing it:
+This is another way of looking at the phrase *Everything in Python is an object*.
+Each class is a specialization of ``object`` in Python. Every value has ``object``
+as the most general type. And so, because it is the default behaviour, we can actually ommit writing it:
 
 .. code:: python
 
     class TicTacToeBoard:
         # ...
 
-We can create an instance of a class ``TicTacToeBoard``; let's call it ``my_board``.
-We can check it's type with ``type()`` function.
+We can create an instance of a class ``TicTacToeBoard``. Let's call it ``my_board``.
+We can check it's type with :func:`type` function.
 We can also ask if it's an instance of a type ``TicTacToeBoard``, ``list``, ``object`` or whatever we like
 using function ``isinstance()``.
 
@@ -164,13 +169,13 @@ using function ``isinstance()``.
     False
     True
 
-As you can see, you create an instance of a class just like you call a function:
+As you can see, you create an instance of a class just like you call a function
 by writing it's name and then ``()``.
 (Spoiler: there can be some arguments in those brackets! But we will talk about it later.)
-Every instance of ``TicTacToeBoard``, like ``my_board``, has all the methods that we defined for that class.
-In that case that would be one method, called ``plot``.
+Every instance of ``TicTacToeBoard``, like ``my_board``, has all the methods that we defined in that class.
+Here that would be one method, called ``plot``.
 You may have noticed that it has one weird argument ``self`` that we don't actually use in it.
-It's important to remember that every method (or function) in the class must have at least one argument.
+It's important to remember that every method in the class must have at least one argument.
 Its value is an object from which we have called this method -
 that would be some instance of the class. This argument should be called ``self``
 `by convention <https://www.python.org/dev/peps/pep-0008/#function-and-method-arguments>`_
@@ -183,9 +188,9 @@ Let's see how it works in practice:
     my_board.plot()
 
 As you can see, you don't actually put any argument in the brackets while calling the method.
-Rather it's the ``TicTacToeBoard`` instance before the dot;
-we put it there, but ``plot`` method knows that ``my_board`` is now its ``self`` argument.
-Recall that in the same way we called some methods on lists and other objects,
+Rather, :func:`plot` uses the ``TicTacToeBoard`` instance that is before the dot.
+The method knows that ``my_board`` should be its ``self`` argument.
+Recall that we called some methods of lists and other objects the same way,
 for example: ``my_list.append(4)``.
 
 
@@ -193,10 +198,11 @@ Attributes of objects
 ---------------------
 
 Obviously, we don't want our board to stay empty all the time.
-We want to be able to place crosses and noughts on the instances of our new class;
-and we want these instances to remember where the crosses and noughts were placed,
+We want to be able to place crosses and noughts on the instances of our new class.
+We want our board to remember where the crosses and noughts were placed,
 and print itself accordingly.
-This can be accomplished by giving our ``TicTacToeBoard`` instance some **attributes**.
+This can be accomplished by giving our ``TicTacToeBoard`` instance some **attributes**, values assigned
+to this specific object.
 
 .. code:: python
 
@@ -212,18 +218,17 @@ This can be accomplished by giving our ``TicTacToeBoard`` instance some **attrib
     [(2, 2)]
 
 Now our instance ``my_board`` has attributes ``crosses`` and ``noughts``.
-They both store list of tuples; every tuple is a pair of coordinates, where a nought or cross were placed.
-As you can see we can get to them by writing the name of our instance, a dot and then the name of an attribute.
-That way we can create  new attributes or get the values of the ones already created.
+They both store list of tuples. Every tuple is a pair of coordinates where a nought or cross were placed.
+As you can see, we can get to them by writing the name of our instance, a dot, and the name of an attribute.
 
 Values of the attributes are something specific to the instance of a class.
 That means, if we create a new instance of the class ``TicTacToeBoard``, it won't have the defined attributes.
-We can give them to it, of course, and they can be different than the attributes of ``my_board``,
-and it won't affect the attributes of ``my_board``.
-It's just like when we create different lists: we could put different values in every of them,
-and they are totally independent,
-though they all are instances of the class ``list``,
-and have all the methods specific for the class ``list``.
+We can assign them to it, of course, and they can be different than attributes of ``my_board``,
+This won't affect the attributes of ``my_board``.
+It's just like when we create different lists. We can put different values into every object.
+Although they all are instances of the class ``list``,
+and have all the methods specific for the class ``list``, each one is independent of another.
+
 Observe:
 
 .. code:: python
@@ -273,10 +278,10 @@ For that we need to modify the ``plot`` method:
 Notice that we didn't provide lists of positions of crosses or noughts as arguments.
 We just told python to use attributes of the instance that called the method.
 Recall that the instance is passed as ``self`` argument,
-even though while calling the method we don't put the instance inside the brackets; we put it before the dot.
-So now the ``plot`` method for every position will check
-if this position is in the attribute ``crosses`` of the instance that it has been called from;
-and the same with the attribute ``noughts``.
+even though while calling the method we don't put the instance inside the parentheses. We put it before the dot.
+So now the ``plot`` method, for every position, will check
+if this position is in the attribute ``crosses`` of the instance that it has been called from.
+The same with the attribute ``noughts``.
 Let's see how it works:
 
 .. code:: python
@@ -299,17 +304,17 @@ for example, it doesn't need "|" at the end of each row.
 
 Great, now we have a way to plot crosses and noughts on our board!
 But what if we forgot to define these attributes?
-The ``plot()`` method wouldn't know what ``self.noughts`` or ``self.crosses`` are;
-it won't even print an empty board, it will just return an error.
-It would be better to assure that every instance of our class have these attributes.
+The ``plot()`` method wouldn't know what ``self.noughts`` or ``self.crosses`` are.
+It won't even print an empty board, just return an error.
+It would be better to assure that every instance of our class has these attributes.
 Is there a way to do that? Yes!
 We can define attributes of an object when it is created.
-We need to tell python that we want some specific stuff to happen
+We need to tell Python that we want some specific stuff to happen
 (in this case, we want to create some attributes)
 when we initialise an instance of a ``TicTacToeBoard``.
 We do that by adding a method ``__init__`` to the definition of the class.
-It's a method that is called when an object is created; that's why it's called a **constructor**.
-Actually every class has this method defined, even if we don't do it ourselves.
+It's a method that is called when an object is created, that's why it's called a **constructor**.
+Actually, every class has this method defined, even if we don't do it ourselves.
 So, when we typed ``my_board = TicTacToeBoard()`` python actually called a method ``__init__`` of a class ``TicTacToeBoard``.
 We can define it ourselves and add what we need.
 
@@ -325,10 +330,10 @@ We can define it ourselves and add what we need.
 Now every time we create a new instance of the class TicTacToeBoard,
 it already has the attributes ``crosses`` and ``noughts`` -
 empty lists, ready to be filled.
-Also, notice that the constructor also needs the ``self`` argument,
+Note that the constructor also needs the ``self`` argument,
 even if we don't provide it neither inside the brackets, nor before the dot. 
 
-Now that our boards can store coordinates of noughts and crosses that was put,
+Now that our boards can store coordinates of noughts and crosses,
 let's add some methods to actually put them there.
 
 .. code:: python
@@ -346,9 +351,10 @@ let's add some methods to actually put them there.
             self.noughts.append((x, y))
 
 
+
 **Additional task**: modify the method that adds a cross,
-so that it will check whether it is a legal move:
-that is, whether the coordinates are inside the board and whether the field is free.
+so that it will check whether it is a legal move.
+That is, whether the coordinates are inside the board and whether the field is free.
 Do the same for the ``add_nought()`` method.
 
 Now we can finnally create a simple game using our class ``TicTacToeBoard``:
@@ -367,7 +373,7 @@ Now we can finnally create a simple game using our class ``TicTacToeBoard``:
         board.plot()
 
 Of course now the game goes on forever.
-Let's make ``board`` in charge of checking whether the game should end or not.
+Let's put ``board`` in charge of checking whether the game should end or not.
 
 .. code:: python
 
@@ -413,15 +419,15 @@ Let's make ``board`` in charge of checking whether the game should end or not.
 **Additional task**: the game should also end when the board is full.
 Add that to the ``check`` method.
 
-Notice that in the while loop we do almost the same thing two times.
+Notice that in the while loop we do similar thing two times.
 When we added checking, we needed to remember to add it in two places.
 We needed to add extra ``if`` to check if we should end the game in the middle of the loop.
-If you added some checking if the move is legal,
+Also, if you added some checking if the move is legal,
 you needed to put it in two different methods.
 If we ever decide to do some small change, we need to do it in two places.
-It seems like a lot of unnecessary work and also asking for mistakes.
+It seems like a lot of unnecessary work and is error-prone.
 And furthermore, ``check`` method generates the lists of potential wins after every move,
-which is a waste of time - the lists stays the same throughout the whole game!
+which is a waste of time - after all, the list stays the same throughout the whole game.
 Let's modify this code so that it will look more elegant:
 
 
@@ -466,20 +472,20 @@ Let's modify this code so that it will look more elegant:
 
 **Additional task**:
 modify the ``check`` method, so it will return who won the game.
-Then at the end announce the winner.
+Then, at the end, announce the winner.
 
 Notice that we've cheated a little bit here -
 to simplify constructing our prompt, we replaced customized phrase "Player 1" or "Player 2" with more general "Player".
 We don't need to do that!
-Furthermore, thanks to classes we can more easily store some informations about players, like their name,
+Thanks to classes we can more easily store some informations about players, like their name,
 and refer to them accordingly.
-Let's create a class Player:
+Let's create a ``Player`` class:
 
 .. code:: python
 
     class Player:
 
-        def __init__(self, name, char = 'o'):
+        def __init__(self, name, char='o'):
             self.name = name
             self.char = char
 
@@ -494,8 +500,8 @@ to attribute ``char`` of newly created object (and the same for ``name``).
 These two names don't have to be the same;
 the ``__init__`` method can get an argument called ``char``
 and give it's value to some attribute called ``players_character``,
-however when there is no need to call them differently, let's not do that;
-after all, they mean the same thing.
+however when there is no need to call them differently, let's not do that.
+After all, they mean the same thing.
 
 Now we can make our game a little bit nicer for the players:
 
@@ -527,18 +533,18 @@ Inheritance
 
 Let's say we got bored with tic-tac-toe and want to write a new game - Connect Four.
 It's different from tic-tac-toe, of course, but it has some simmilarities:
-two players move in turns, by placing some pawns on the board;
-the goal is to have some number of pawns in one line;
-board can be printed in a simmilar manner, even though it has different size
-(Connect Four is played on a board with 6 rows and 7 columns);
-the whole game menu could be essentially the same.
+two players move in turns, by placing some pawns on the board.
+The goal is to have some number of pawns in one line.
+Board can be printed in a simmilar manner, even though it has different size
+(Connect Four is played on a board with 6 rows and 7 columns).
+The whole game menu could be essentially the same.
 What shall we do? Write it all from the scratch?
 That would be a waste of time.
 Maybe copy it all and just change the bits that we want to be different?
 That would be a bad habit.
 What if we want to change it later, for example - we have an idea how to improve printing of the board?
-We would have to change it in both implemented games.
-It would be nice if we can implement it once and just use it in two different games.
+We would have to change it in both game implementations.
+It would be nice if we could implement it once and then just use it in two different games.
 Can we do so? Of course! We can use class **inheritance**.
 
 Let's make our TicTacToeBoard more general.
@@ -609,12 +615,12 @@ We can create a list and it will be an instance of a class ``list``, but also an
 In other words, ``list`` is a subtype of ``object``.
 Every type in python, including those that we define ourselves, like ``Board`` or ``Player``, are subtypes of ``object``.
 
-Every instance of a class has all the methods defined in the definition of that class;
-so far that meant for us that every ``TicTacToeBoard`` object has ``plot`` and ``add_pawn`` methods.
-Now it means that every ``TicTacToeBoard`` object and every ``ConnectFourBoard`` object
-has a ``plot()`` method, even though we don't define it in them anymore;
-they just have all the methods defined in the ``Board`` class.
-We say that classes ``TicTacToeBoard`` and ``ConnectFourBoard`` **inherited** the method ``plot``.
+Every instance of a class has all the methods defined in the definition of that class.
+So far that meant that every ``TicTacToeBoard`` object has ``plot`` and ``add_pawn`` methods.
+Now, after adding inheritance, every ``TicTacToeBoard`` object and every ``ConnectFourBoard`` object
+has a ``plot()`` method, even though we don't define it in them anymore.
+They have all the methods defined in the ``Board`` class.
+We say that classes ``TicTacToeBoard`` and ``ConnectFourBoard`` **inherit** the method ``plot``.
 
 Let's see how it works in practice
 
@@ -633,17 +639,16 @@ Let's see how it works in practice
 It works!
 Now every ``TicTacToeBoard`` will be a ``Board``, and every ``ConnectFourBoard`` will be a ``Board``,
 but not every ``Board`` will be a ``TicTacToeBoard`` or a ``ConnectFourBoard``.
-Anything that we want to be shared by ``TicTacToeBoard`` and ``ConnectFourBoard``  we can store in ``Board``;
-anything that should be specific to ``TicTacToeBoard`` or ``ConnectFourBoard``, we will store in ``TicTacToeBoard`` or ``ConnectFourBoard``.
+Anything that we want to be shared by ``TicTacToeBoard`` and ``ConnectFourBoard``  we store in ``Board``.
+Anything that should be specific to ``TicTacToeBoard`` or ``ConnectFourBoard``, we store in ``TicTacToeBoard`` or ``ConnectFourBoard``.
 
 **Additional task**: add a method ``add_pawn(pawn, x, y)`` to the ``Board`` class.
 
-What about the method ``__init__``, that appears in all the classes?
-More important for python is the more specific one;
-that is,  if we create an object ``ConnectFourBoard``,
-the one defined inside the ``ConnectFourBoard`` definition will be used.
-The one inside the ``Board`` is more general,
-and would be used only if we define a sub-class of ``Board`` without its own ``__init__`` method.
+
+=======
+What about the method ``__init__``, that appears in all the classes? Which one will be used during construction of an object?
+Well, wehen we create an object ``ConnectFourBoard``, its constructor will be evoked, not its parent's.
+The one inside the ``Board`` is more general, and would be used only if we define a sub-class of ``Board`` without its own ``__init__`` method.
 Observe:
 
 .. code:: python
@@ -654,19 +659,18 @@ Observe:
     print(really_big_board.nrow)
 
 The type ``Some_Random_Board`` is a subtype of ``Board``, so any instance of class ``Some_Random_Board`` is also a ``Board``.
-Figuratively speaking: when we created it, python tried to use ``__init__`` method defined in the most specific class, that is ``Some_Random_Board``,
-but it didn't find it there;
-so it moved to the declaration of more general class, that is ``Board``,
-and used ``__init__`` method from there.
-The ``Some_Random_Board`` class inherits the ``__init__`` method.
-On the other hand, when we created ``TicTacToeBoard``, python used method from ``TicTacToeBoard`` -
-as you can see, we didn't have to provide ``ncol`` and ``nrow`` arguments, and python knew they should be equal to 3.
+When we created it, Python tried to use ``__init__`` method defined in ``Some_Random_Board``,
+but it didn't find it there.
+It moved then to the declaration of more general class, that is ``Board``, and used its ``__init__`` method.
+We say that ``Some_Random_Board`` class inherits the ``__init__`` method.
+On the other hand, when we created ``TicTacToeBoard``, python used constructor from ``TicTacToeBoard``.
+We didn't have to provide ``ncol`` and ``nrow`` arguments, and python knew they should be equal to 3.
 
 This has some important consequence: not all child classes must have all the methods from parent class exactly the same.
 We've already seen that child classes of ``Board`` had different ``__init__`` methods.
 We can create some other class, for example ``Chessboard``, that will be a child of ``Board``,
-but will have it's own unique ``plot`` method, that will allow it to print black and white fields.
-In such cases we say that ``plot`` method is **overridden** in ``Chessboard``.
+but will have it's own, unique ``plot`` method, that will allow it to print black and white fields.
+In such cases we say that ``plot`` method gets **overridden** in ``Chessboard``.
 
 **Additional task**: Make the ``add_pawn`` method check whether the move is legal.
 In the general class ``Board`` it means whether the move is inside the board, and that's all.
@@ -679,7 +683,7 @@ Try not to copy your code - if something is shared (like the condition "don't pu
 
 The inheritance chain can be much longer than the one we created here.
 We can create a class ThreeDimensionChessboard, that would inherit from the class Chessboard, that would inherit from class SquaredBoard, that would inherit from class Board.
-Furthermore, it's possible to inherit from more than one class;
-so, ThreeDimensionChessboard could inherit from both MultidimensionalBoard and Chessboard.
+Furthermore, it's possible to inherit from more than one class.
+The ThreeDimensionChessboard could inherit from both MultidimensionalBoard and Chessboard.
 Bear in mind, however, that too complicated schemes of inheritance can be hard to understand, and therefore also hard to use.
 
