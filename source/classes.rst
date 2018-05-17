@@ -118,7 +118,7 @@ customize their behavior. This is called defining a class.
 You can define your class as easy as you can define a function. In fact, a class is
 basically nothing but a group of functions. Let's define a class named ``TicTacToeBoard``:
 
-.. testcode:: simple-class
+.. code:: python
 
     class TicTacToeBoard(object):
 
@@ -138,7 +138,7 @@ Each class is a specialization of ``object`` in Python. Hence, every value alway
 as most general type.
 And so, because it is the default behaviour, we can actually ommit writing it:
 
-.. code::
+.. code:: python
 
     class TicTacToeBoard:
         # ...
@@ -148,7 +148,7 @@ We can check it's type with ``type()`` function.
 We can also ask if it's an instance of a type ``TicTacToeBoard``, ``list``, ``object`` or whatever we like
 using function ``isinstance()``.
 
-.. testcode:: simple-class
+.. code:: python
 
     my_board = TicTacToeBoard()
     type(my_board)
@@ -176,7 +176,7 @@ that would be some instance of the class. This argument should be called ``self`
 (technically you could call it otherwise, but other programmers would be angry with you if you did).
 Let's see how it works in practice:
 
-.. testcode:: simple-class
+.. code:: python
 
     my_board = TicTacToeBoard()
     my_board.plot()
@@ -197,7 +197,7 @@ and we want these instances to remember where the crosses and noughts were place
 and print itself accordingly.
 This can be accomplished by giving our ``TicTacToeBoard`` instance some **attributes**.
 
-.. testcode:: simple-class
+.. code:: python
 
     my_board = TicTacToeBoard()
     my_board.crosses = [(0, 1), (0, 0)]
@@ -205,7 +205,7 @@ This can be accomplished by giving our ``TicTacToeBoard`` instance some **attrib
     print(my_board.crosses)
     print(my_board.noughts)
 
-.. testoutput:: simple-class
+.. testoutput::
 
     [(0, 1), (0, 0)]
     [(2, 2)]
@@ -225,7 +225,7 @@ though they all are instances of the class ``list``,
 and have all the methods specific for the class ``list``.
 Observe:
 
-.. testcode:: class
+.. code:: python
 
     my_new_board = TicTacToeBoard()
     my_new_board.noughts
@@ -239,7 +239,7 @@ Observe:
 
     AttributeError: TicTacToeBoard instance has no attribute 'noughts'
 
-.. testcode::
+.. code:: python
 
     my_new_board.noughts = [(1, 2), (2, 0)]
     print(my_board.noughts)
@@ -253,7 +253,7 @@ Observe:
 Now it would be nice if our boards could print the noughts and crosses that we put in them.
 For that we need to modify the ``plot`` method:
 
-.. testcode:: simple-class
+.. code:: python
 
     class TicTacToeBoard:
 
@@ -278,7 +278,7 @@ if this position is in the attribute ``crosses`` of the instance that it has bee
 and the same with the attribute ``noughts``.
 Let's see how it works:
 
-.. testcode:: simple-class
+.. code:: python
 
     my_board = TicTacToeBoard()
     my_board.crosses = [(0, 0), (1, 1), (2, 2)]
@@ -312,7 +312,7 @@ Actually every class has this method defined, even if we don't do it ourselves.
 So, when we typed ``my_board = TicTacToeBoard()`` python actually called a method ``__init__`` of a class ``TicTacToeBoard``.
 We can define it ourselves and add what we need.
 
-.. testcode:: simple-class
+.. code:: python
 
     class TicTacToeBoard:
         
@@ -330,7 +330,7 @@ even if we don't provide it neither inside the brackets, nor before the dot.
 Now that our boards can store coordinates of noughts and crosses that was put,
 let's add some methods to actually put them there.
 
-.. testcode:: simple-class
+.. code:: python
 
     class TicTacToeBoard:
         
@@ -352,7 +352,7 @@ Do the same for the ``add_nought()`` method.
 
 Now we can finnally create a simple game using our class ``TicTacToeBoard``:
 
-.. testcode:: simple-class  
+.. code:: python
 
     board = TicTacToeBoard()
     while True:
@@ -379,7 +379,7 @@ It seems like a lot of unnecessary work and also asking for mistakes.
 Let's modify this code so that it will look more elegant:
 
 
-.. code::
+.. code:: python
 
     class TicTacToeBoard:
 
@@ -413,7 +413,7 @@ Furthermore, thanks to classes we can more easily store some informations about 
 and refer to them accordingly.
 Let's create a class Player:
 
-.. code::
+.. code:: python
 
     class Player:
 
@@ -437,7 +437,7 @@ after all, they mean the same thing.
 
 Now we can make our game a little bit nicer for the players:
 
-.. code::
+.. code:: python
 
     board = TicTacToeBoard()
     players = [Player('Loki', 'o'), Player('Thor', 'x')]
@@ -481,7 +481,7 @@ Can we do so? Of course! We can use class **inheritance**.
 
 Let's make our TicTacToeBoard more general.
 
-.. code::
+.. code:: python
 
     class Board:
 
@@ -505,7 +505,7 @@ Now our board can have any size, and can have any pawns placed on it.
 Next we will define two classes: TicTacToeBoard and ConnectFourBoard.
 They will both be subtypes, or subclasses of Board.
 
-.. code::
+.. code:: python
 
     class TicTacToeBoard(Board):
 
@@ -527,8 +527,9 @@ but it will be also an instance of a more general class ``Board``
 The same goes for ``ConnectFourBoard``.
 We say that ``Board`` is a **parent** class of ``TicTacToeBoard`` and ``ConnectFourBoard``,
 and ``TicTacToeBoard`` and ``ConnectFourBoard`` are **child** classes of ``Board``.
-We can check it with ``isinstance`` function::
+We can check it with ``isinstance`` function:
 
+.. code:: python
     board = ConnectFourBoard()
     isinstance(board, ConnectFourBoard)
     isinstance(board, TicTacToeBoard)
@@ -553,8 +554,9 @@ has a ``plot()`` method, even though we don't define it in them anymore;
 they just have all the methods defined in the ``Board`` class.
 We say that classes ``TicTacToeBoard`` and ``ConnectFourBoard`` **inherited** the method ``plot``.
 
-Let's see how it works in practice::
+Let's see how it works in practice
 
+.. code:: python
     tic_tac_toe = TicTacToeBoard()
     connect4 = ConnectFourBoard()
     some_small_board = Board(2, 2)
@@ -580,8 +582,9 @@ that is,  if we create an object ``ConnectFourBoard``,
 the one defined inside the ``ConnectFourBoard`` definition will be used.
 The one inside the ``Board`` is more general,
 and would be used only if we define a sub-class of ``Board`` without its own ``__init__`` method.
-Observe: ::
+Observe:
 
+.. code:: python
     class Some_Random_Board(Board):
         pass
         
