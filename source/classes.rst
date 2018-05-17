@@ -116,7 +116,8 @@ Classes like ``int`` or ``str`` are already known to Python, but we can create o
 customize their behavior. This is called defining a class.
 
 You can define your class as easy as you can define a function. In fact, a class is
-basically nothing but a group of functions. Let's define a class named ``TicTacToeBoard``:
+basically nothing but a group of functions. Let's define a class named ``TicTacToeBoard``,
+and give it a method that will print a simplified empty board:
 
 .. code:: python
 
@@ -375,6 +376,10 @@ Let's make ``board`` in charge of checking whether the game should end or not.
         # ... (init, add_cross, add_nought stay the same)
 
         def check(self):
+            """
+            check whether the game is won by some player
+            return True if so, False otherwise
+            """
             potential_wins = []
             potential_wins.extend([[(row, column) for row in range(3)]
                 for column in range(3)])    # vertical win
@@ -404,6 +409,9 @@ Let's make ``board`` in charge of checking whether the game should end or not.
         board.add_cross(int(x), int(y))
         board.plot()
         should_the_game_end = board.check()
+
+**Additional task**: the game should also end when the board is full.
+Add that to the ``check`` method.
 
 Notice that in the while loop we do almost the same thing two times.
 When we added checking, we needed to remember to add it in two places.
