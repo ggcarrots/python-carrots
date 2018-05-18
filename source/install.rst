@@ -45,8 +45,14 @@ In the command line enter::
 OS X
 ----
 
-Download and install the package for your system version from `python.org`_ .
+Install Homebrew - package manager for OSX.
+Instructions are available on site: https://brew.sh/index_pl
 
+Next step:
+
+In the command line enter::
+
+    brew install python3
 
 Other
 -----
