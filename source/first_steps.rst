@@ -704,60 +704,9 @@ Out of the three problems we had, this one is the easiest to solve.
 
 That’s why we left it for the end of our adventure with the BMI calculator. We already know
 that we can add strings to each other and multiply them by integers. You will see that we can also
-format them. But first we will need one more type of data (except the strings and the numbers we
-already know).
+format them. 
 
-
-.. _bmi-tuples:
-
-Tuples
-------
-
-At the beginning we mentioned that we can not use commas in numbers, because we will need them later
-while using tuples. And here they are:
-
-    >>> 1, 2, 3
-    (1, 2, 3)
-    >>> ("Ala", 15)
-    ('Ala', 15)
-    >>> x = 1,5
-    >>> print(x)
-    (1, 5)
-
-A tuple is nothing more than a few values grouped into one. The values we want to group should be
-separated by commas. The whole thing can be enclosed in parentheses to make it more clear, but it is
-not required. Except when we want to group none of the elements (however strange it may sound):
-
-    >>> ()
-    ()
-
-Tuples can be combined:
-
-    >>> names = ("Paulina", "Kowalska")
-    >>> details = (27, 1.70)
-    >>> names + details
-    ('Paulina', 'Kowalska', 27, 1.7)
-
-They may also contain other tuples e.g. information on a point on the map can be
-grouped as follows:
-
-    >>> point = ("Name of point", (x, y))
-
-where ``x`` and ``y`` are numbers.
-
-We can refer to the grouped values by using their positions in the tuple (counting form zero) e.g.:
-
-    >>> p = (10, 15)
-    >>> p[0]  #  first value
-    10
-    >>> p[1]  # second value
-    15
-
-
-Formatting
-----------
-
-Going back to our program: currently the result is reduced to a single line. Now we want to write the
+Currently the result is reduced to a single line. Now we want to write the
 BMI as a number and the interval in which it is located, that is to say::
 
     Your BMI is equal: 21.39 (normal weight)
@@ -780,7 +729,7 @@ required result:
 
     Your BMI is equal: 21.387755102040817 (normal weight)
 
-Well, almost….We still have too many digits. We would also have a problem if we wanted to generate
+Well, almost…. We still have too many digits. We would also have a problem if we wanted to generate
 such a string and save with a name, because we use :func:`print` to separate the elements.
 Fortunately, there is a better way:
 
@@ -792,8 +741,8 @@ Fortunately, there is a better way:
     >>> print(result)
     Your BMI: 21.387755 (normal weight)
 
-We have here a string and a tuple joined by ``%``. The string is a template which will be completed
-with values from the tuple. The spaces to be filled are also labeled with the percentage (``%``). .
+We have here a string and a couple of variables in brackets, joined by ``%``. The string is a template which will be completed
+with values present after ``%``. The spaces to be filled are also labeled with the percentage (``%``). .
 The letter that follows defines the type of a value we want to insert. The integers are represented
 by  ``i`` as **integer** (we can also use ``d`` as **decimal**),  strings are represented by ``s`` as
 **string**, and floating-point numbers are represented by ``f`` for **float**:
@@ -896,7 +845,7 @@ Summary
 =======
 
 In this chapter we learned basics of Python syntax. We discovered how to print integers,
-floating-point numbers, strings and tuples.
+floating-point numbers and strings.
 
 We learnt the function :func:`print`, that prints information for the user and the function
 :func:`input`, which reads it.
