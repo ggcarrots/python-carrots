@@ -403,6 +403,7 @@ We will start with writing a function that will accept field's address as an arg
             return ' '
 
 Now that we already have this function, let's test add it to the code that we've built before.
+
 .. note::
 
     The key to understanding what's hapenning in the next code snippet is to remember that we can concatenate strings using the `+` sign. So, for example, `'A' + '1' = 'A1'`
