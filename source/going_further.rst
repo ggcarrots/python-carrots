@@ -3,7 +3,7 @@ Going Further
 #############
 
 This section shows some helpful tools that might aid you along your programming path. We briefly describe here how
-to structure larger projects and work with multiple source files. We discuss python coding style guide (also known as PEP8).
+to structure larger projects and work with multiple source files. We discuss python coding style guide (also known as PEP8),
 and how pylint can help you to write and maintain readable and stylish code. At the end there is a list of resources you might find
 helpful in your day-to-day python programming.
 
@@ -14,12 +14,14 @@ Managing larger projects
 Divide and conquer
 --------------------
 
-Up to this point, you might have put all of your source coed in one file. For small libraries and project this is fine, but when complexity
-rises it is better to divide your code into smaller files, that is to create libraries or modules. It is not necessary, for example, to put
-every class in a separate file, but having one file for classes that are logically connected is better for readability.
+Up to this point, you might have put all of your source code in one file. For small libraries and projects this is fine, but when complexity
+rises it is better to divide your code into smaller files, that is to create libraries or modules.
 Going through a file that has thousands lines of code can be difficult.
+However it is not necessary to, for example, put every class in a separate file;
+having one file for classes that are logically connected is better for readability.
 
-As an example, let us consider a program for handling regular polygons. Every figure has its own, simplified class. You might want to
+As an example, let us consider a program for handling regular polygons (for the sake of the example let's assume that circle is a polygon, too).
+Every figure has its own, simplified class. You might want to
 consider separating main functionality e. g. calculating perimeter, from definitions of those shapes [#fn1]_. That is, to put calculations of fields in one
 file and definitions in another:
 
@@ -68,9 +70,7 @@ use and for the side length/radius, and calculates perimeter:
     print("1. Circle")
     print("2. Triangle")
     print("3. Square")
-    choice = int(input())
-    print("Choose the side length")
-    side = int(input())
+    side = int(input("Choose the side length or radius"))
     if choice == 1:
         shape = polygons.Circle(side)
     elif choice == 2:
@@ -310,7 +310,7 @@ We are going to leave the interpretation of this passage to the reader, although
 A more detailed guidance can be found in PEP8. PEP stands for Python Enhancement Proposal, these are propositions published by core
 developers that cover everything from release schedules, through peps about peps (like voting conventions - PEP10) to core language features
 like Unicode integration (PEP100) or iterator implementations (PEP234) (two latter PEPs are examples of proposals already implemented). See
-`pip index <https://www.python.org/dev/peps/>`_.
+`PEP index <https://www.python.org/dev/peps/>`_.
 
 PEP8 gives a set of rules for code formatting. Below we show a few excerpts from this document, some of which you probably learned already during the workshops.
 It is recommended, though, to read through the whole document (`pep8 <https://www.python.org/dev/peps/pep-0008/>`_).
@@ -403,7 +403,7 @@ Letters at the beginning of each line correspond to a type of problem detected:
 * [F]atal for errors which prevented further processing
 
 In our case, "only" style problems were detected. Each reporting line consists also of the line and column number where the
-problem that was spotted and a corresponing message. In the parenthesis is the name of the message, e.g. ``missing-docstring``.
+problem was spotted and a corresponing message. In the parenthesis is the name of the message, e.g. ``missing-docstring``.
 If you are not sure what given message means, you can ask pylint to explain it. For example to show what
 ``too-few-public-methods`` mean use:
 

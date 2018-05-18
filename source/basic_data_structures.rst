@@ -30,7 +30,7 @@ Let's make another list (which can have the same name or a different one):
     >>> len(L)
     3
 
-To preview a particular position of an element on the list (remember that we count the positions from 0 ):
+To preview a particular position of an element on the list (remember that we count the positions from 0):
 
     >>> L[0]
     'Jack'
@@ -112,7 +112,7 @@ the result will look like this:
 
 
 The :func:`range` function has three forms. The most basic and most used one creates a sequence from 0 to the
-given number. The other forms allow you to specify the start of the range and a step. The created
+given number minus one. The other forms allow you to specify the start of the range and a step. The created
 sequence never includes the end of the specified range.
 
 Tuples

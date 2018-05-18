@@ -12,7 +12,7 @@ After downloading the file  ``*.msi``, open it and follow the instructions.
 It is important to remember the path of installation, i.e. the directory, as we will need this information during the :ref:`installation of tools <tools>`.
 
 .. note::
-    Remember to check "Add Python 3.6 to PATH" when running the installer . This way you will be able to run Python form
+    Remember to check "Add Python 3.6 to PATH" when running the installer. This way you will be able to run Python form
     console by just writing ``python``.
 
 
@@ -26,7 +26,9 @@ In order to check our version of Python, enter the following in the command line
     $ python --version
     Python 3.6.5
 
-If the ``python`` command is not available or the wrong version appears try using ``python3`` command:
+If the ``python`` command is not available or the wrong version appears try using ``python3`` command.
+
+If Python is not installed, follow the instructions below.
 
 Ubuntu
 ------
@@ -86,7 +88,7 @@ A new window will appear with white text on a black background:
 Text may be different depending on the version of Windows you use.
 
 ``C:\Users\Name>``  is a prompt. It informs us of the directory (or folder) in which we currently are and waits for a command.
-Later during the workshop ``C:\Users\Name>`` we will refer to it with ``~$``, independently of your
+Later during the workshop we will refer to it with ``~$``, independently of your
 operating system (Windows, Linux, MacOS).
 
 Using the command line, you can move around the contents of the disc (in the same way as in
@@ -98,14 +100,14 @@ Use the following commands:
     shows  ``C:\Users\Name``, the ``dir`` command displays the contents of our home directory.
 
 ``cd directory``
-    Changes the current directory. For example, if you are in ``C:\Users\Name``,
+    Changes the current directory (stands for Change Directory). For example, if you are in ``C:\Users\Name``,
     you can access the directory with your documents by entering ``cd Documents``. If you execute the
     ``dir`` command, you will see something familiar.
     The command  ``cd..`` will move you one level up in the directory tree, that is,
     to the directory that contains your current directory.
 
 ``mkdir directory``
-    Creates a new directory.
+    Creates a new directory (MaKe DIRectory).
 
 
 Virtual environment
@@ -128,8 +130,7 @@ In Windows, to create virtual environment, write:
 
     C:\Users\Ala> python -m venv workshops
 
-This assumes that during installation python was added to your:w
- PATAH.
+This assumes that during installation python was added to your PATH.
 
 For Linux or Mac user:
 
@@ -137,7 +138,7 @@ For Linux or Mac user:
 
     ~$ python3.6 -m venv workshops
 
-This creates a directory ``workshops``. This is your virtual environment. Right now it's still incative.
+This creates a directory ``workshops``. This is your virtual environment. Right now it's still inactive.
 
 To activate it on Windows write:
 
@@ -265,7 +266,7 @@ installed, ``pip search`` will display ``INSTALLED`` and ``LATEST`` versions so 
 
 To update a package, use ``pip install --upgrade``.
 
-To list all installed packages us ``pip list``.
+To list all installed packages use ``pip list``.
 
 To see all options and flags that can be used with ``pip`` write ``pip --help`` and ``pip <option> --help``, where option is i.e. ``install``.
 
@@ -275,9 +276,6 @@ IPython
 IPython is a better shell for python. It enables code completion and enhances editing capabilities. We strongly suggest to use
 it instead of the `stock` version (i.e. ``python`` command).
 To install ``IPython`` in your virtual environment, write:
-from the console.
-
-``IPython`` installation:
 
 .. code-block:: sh
 

@@ -388,7 +388,7 @@ functions created by ourselves - they gave back the value they computed instead 
 
 In order to see an example of a function with the ``return`` statement, we will write another function that will help us draw our board.
 
-Let's say that our playes have already started the game. Nought has placed her pawn in the middle of the board, cross in the upper right corner. We need to store the list of moves somehow. One idea would be to make two lists: one for the pawns placed by each player. Then, when we will print our board, we can check our lists and print corresponding pawns to our board.
+Let's say that our players have already started the game. Nought has placed her pawn in the middle of the board, cross in the upper right corner. We need to store the list of moves somehow. One idea would be to make two lists: one for the pawns placed by each player. Then, when we will print our board, we can check our lists and print corresponding pawns to our board.
 
 We will start with writing a function that will accept field's address as an argument and return 'X' if the field is on the ``crosses`` list, 'O' if it's on the ``noughts`` list, and ' ' if it's on neither of them.
 
