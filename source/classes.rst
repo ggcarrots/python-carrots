@@ -219,7 +219,7 @@ It looks just like the code we've written in the last chapter, with some small c
 
 
 Notice that we didn't provide lists of positions of crosses or noughts as arguments,
-nor didn't we create them inside any of the methods.
+nor did we create them inside any of the methods.
 We just told python to use attributes of the instance that called the method.
 Recall that the instance is passed as ``self`` argument,
 even though while calling the method we don't put the instance inside the parentheses. We put it before the dot.
@@ -270,15 +270,17 @@ empty lists, ready to be filled.
 Note that the constructor also needs the ``self`` argument,
 even if we don't provide it neither inside the brackets, nor before the dot. 
 
-It's worth noting that it is highly discouraged to do what we did before:
-to add some attributes that weren't defined in the constructor.
-Usually we assume that whoever created some class, she knew what she was doing:
-she gave it all the methods and all the attributes it needs to fulfil it's function.
-So if we need to add some attributes, maybe we're not using it correctly;
-or maybe we should correct the definition of the class.
-But we didn't know it previously, so it's okay; let's hope noone tells Python police.
+.. note::
 
-Furthermore, it is not a good idea to modify attributes like we did.
+    It's worth noting that it is highly discouraged to do what we did before:
+    to add some attributes that weren't defined in the constructor.
+    Usually we assume that whoever created some class, she knew what she was doing:
+    she gave it all the methods and all the attributes it needs to fulfil it's function.
+    So if we need to add some attributes, maybe we're not using it correctly;
+    or maybe we should correct the definition of the class.
+    But we didn't know it previously, so it's okay; let's hope no one tells Python police.
+
+It is not a good idea to modify attributes like we did.
 Notice that attributes ``crosses`` and ``noughts`` need to be lists of strings
 to make the plotting method work properly.
 If we by mistake set ``crosses`` to something else, like a string "A1 B2 C0",
