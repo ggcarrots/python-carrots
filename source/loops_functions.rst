@@ -537,6 +537,7 @@ But wait! It only executes once. We want our game to have more than one round.
     letters = {0:'A', 1:'B', 2:'C'}
     noughts = []
     crosses = []
+    current_move = 'O'
 
     while True:
 
@@ -582,6 +583,7 @@ Whoops! We forgot one thing. Can you spot it?
     letters = {0:'A', 1:'B', 2:'C'}
     noughts = []
     crosses = []
+    current_move == 'O'
 
     while True:
         print('    1     2     3  ')
