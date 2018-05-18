@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en_GB">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Everything is an object &mdash; Code Carrots</title>
+    
+    <link rel="stylesheet" href="_static/carrots.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Code Carrots" href="index.html" />
+    <link rel="next" title="Basic Data Structures" href="basic_data_structures.html" />
+    <link rel="prev" title="Introduction to Python" href="first_steps.html" /> 
+  </head>
+  <body role="document">
+  
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="basic_data_structures.html" title="Basic Data Structures"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="first_steps.html" title="Introduction to Python"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Code Carrots</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="everything-is-an-object">
+<h1>Everything is an object<a class="headerlink" href="#everything-is-an-object" title="Permalink to this headline">¶</a></h1>
+<p>Every value that we have seen in Python, can be called <strong>an object</strong>. Each object can be assigned to
+a variable (even functions) and/or passed to a function as an argument (yes, even other functions).
+Similar objects share their functionality - number <code class="docutils literal"><span class="pre">1</span></code> has the same functionality as number <code class="docutils literal"><span class="pre">2</span></code>, <code class="docutils literal"><span class="pre">3</span></code> and so on.
+We saw earlier, when <a class="reference external" href="http://docs.python.org/3/library/functions.html#help" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">help()</span></code></a>, acting on any number, printed for us dozens of additional lines of information about
+<code class="xref py py-func docutils literal"><span class="pre">int()</span></code>.</p>
+<div class="section" id="every-object-has-a-class">
+<h2>Every object has a class<a class="headerlink" href="#every-object-has-a-class" title="Permalink to this headline">¶</a></h2>
+<p>We say that similar objects have the same <strong>type</strong>. Number <code class="docutils literal"><span class="pre">1</span></code> is of type <code class="docutils literal"><span class="pre">int</span></code>, same as <code class="docutils literal"><span class="pre">2</span></code> and <code class="docutils literal"><span class="pre">42</span></code>.
+The type of an object is defined by its <strong>class</strong>.
+To know what is the class of an object, what is its type, simply use the function <code class="xref py py-func docutils literal"><span class="pre">type()</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">&lt;class &#39;int&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="go">&lt;class &#39;float&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="s2">&quot;spam eggs&quot;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&lt;class &#39;tuple&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">([])</span>
+<span class="go">&lt;class &#39;list&#39;&gt;</span>
+</pre></div>
+</div>
+<p>We have talked about classes you can see here earlier: <code class="docutils literal"><span class="pre">int</span></code>, <code class="docutils literal"><span class="pre">float</span></code>, <code class="docutils literal"><span class="pre">str</span></code>, <code class="docutils literal"><span class="pre">tuple</span></code>.</p>
+<p>When we use a <code class="docutils literal"><span class="pre">int</span></code> or a <code class="docutils literal"><span class="pre">float</span></code> in our program, we expect it to behave like a number. We rely on our
+intuition.
+However, Python has to know exactly what it means to be a number, e.g., what should happen when we
+add two numbers or divide them. The class <code class="docutils literal"><span class="pre">int</span></code> provides all this information and
+even more.</p>
+<p>Using <a class="reference external" href="http://docs.python.org/3/library/functions.html#help" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">help()</span></code></a> , check what functionality class <code class="docutils literal"><span class="pre">str</span></code> provides us. Here we give just a few interesting
+features:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">)</span>
+<span class="go">Help on method_descriptor:</span>
+
+<span class="go">lower(...)</span>
+<span class="go">    S.lower() -&gt; str</span>
+
+<span class="go">    Return a copy of the string S converted to lowercase.</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">)</span>
+<span class="go">Help on method_descriptor:</span>
+
+<span class="go">upper(...)</span>
+<span class="go">    S.upper() -&gt; str</span>
+
+<span class="go">    Return a copy of S converted to uppercase.</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">ljust</span><span class="p">)</span>
+<span class="go">Help on method_descriptor:</span>
+
+<span class="go">ljust(...)</span>
+<span class="go">    S.ljust(width[, fillchar]) -&gt; str</span>
+
+<span class="go">    Return S left-justified in a Unicode string of length width. Padding is</span>
+<span class="go">    done using the specified fill character (default is a space).</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">center</span><span class="p">)</span>
+<span class="go">Help on method_descriptor:</span>
+
+<span class="go">center(...)</span>
+<span class="go">    S.center(width[, fillchar]) -&gt; str</span>
+
+<span class="go">    Return S centered in a string of length width. Padding is</span>
+<span class="go">    done using the specified fill character (default is a space)</span>
+</pre></div>
+</div>
+<p>All these are operations that each string can do. We can get to them by using dots and calling the
+function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Ala&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="go">&#39;ALA&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="go">&#39;ala&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="go">&#39;   Ala   &#39;</span>
+</pre></div>
+</div>
+<p>Functions of classes are called <strong>methods</strong>. This is opposed to <strong>free functions</strong> that do not require
+objects to be evoked.</p>
+<p>Creating an object of a given type, also called <strong>an instance</strong> of a class, is done by using its class name:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">()</span>
+<span class="go">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">()</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">()</span>
+<span class="go">()</span>
+</pre></div>
+</div>
+<p>An instance is a new, fresh value of the type described by the class.</p>
+<p>In summary, we&#8217;ve looked at the classes <code class="xref py py-func docutils literal"><span class="pre">int()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">str()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">tuple()</span></code> and
+<code class="xref py py-func docutils literal"><span class="pre">list()</span></code>. To find the type of an object, its class, we use the function
+<code class="xref py py-func docutils literal"><span class="pre">type()</span></code>. To create an instance of a class, we call the class like we would call
+a function, by using parentheses <code class="docutils literal"><span class="pre">()</span></code>, e. g. <code class="docutils literal"><span class="pre">int()</span></code>.</p>
+<p>In the next chapters you will not only learn how to use classes and methods,
+but also how to create your own.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <a href="index.html" class="logo"><img class="logo" src="_static/logo.png" style="width: 200px; height: 169px; margin: -10px 0 10px 0"></a>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Introduction to Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Everything is an object</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#every-object-has-a-class">Every object has a class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basic_data_structures.html">Basic Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loops_functions.html">Tic Tac Toe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="going_further.html">Going Further</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Geek Girls Carrots Code of Conduct</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright Code Carrots.
+  </div>
+  
+  <a href="https://github.com/ggcarrots/python-carrots">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
+  </a>
+  </body>
+</html>

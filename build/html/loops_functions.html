@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en_GB">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tic Tac Toe &mdash; Code Carrots</title>
+    
+    <link rel="stylesheet" href="_static/carrots.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Code Carrots" href="index.html" />
+    <link rel="next" title="Classes" href="classes.html" />
+    <link rel="prev" title="Basic Data Structures" href="basic_data_structures.html" /> 
+  </head>
+  <body role="document">
+  
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="classes.html" title="Classes"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="basic_data_structures.html" title="Basic Data Structures"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Code Carrots</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tic-tac-toe">
+<h1>Tic Tac Toe<a class="headerlink" href="#tic-tac-toe" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter we will implement a game of tic-tac-toe and learn some very useful programming concepts along the way! :)</p>
+<p>You might want to take some time to figure out how to approach this problem. Think about what you normally do when you play pen and paper version of the game.</p>
+<p>We are going to start from the most basic version of this exercise so that we can later extend it to a more functional version. First thing we have to do is drawing the board.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;_|_|_&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;_|_|_&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39; | | &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>_|_|_
+_|_|_
+ | |
+</pre></div>
+</div>
+<p>It resembles the tic-tac-toe board, but is just a little bit too small. Let&#8217;s try to add more <cite>_</cite> and <cite>|</cite> characters in order to make the board a bit bigger.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;     |     |     &#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;     |     |     &#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;_____|_____|_____&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;     |     |     &#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;     |     |     &#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;_____|_____|_____&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;     |     |     &#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;     |     |     &#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;     |     |     &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>     |     |
+     |     |
+_____|_____|_____
+     |     |
+     |     |
+_____|_____|_____
+     |     |
+     |     |
+     |     |
+</pre></div>
+</div>
+<p>It doesn’t look bad, but we have had to do a lot of typing. What if we would like to have a smaller board? Or a bigger one? Or maybe even do a board with more than 9 fields? We would have to do too much typing, even if we would do it by multiplying strings  (<code class="docutils literal"><span class="pre">&quot;_____|&quot;</span> <span class="pre">*</span> <span class="pre">100</span></code>, and so on.).
+This is a repetitive action, one that computers are great at, way better than humans. Let&#8217;s use it!</p>
+<div class="section" id="the-for-loop">
+<h2>The <code class="docutils literal"><span class="pre">for</span></code> loop<a class="headerlink" href="#the-for-loop" title="Permalink to this headline">¶</a></h2>
+<p>Loops will serve us to deal with repetitive actions. In this chapter you will find out how to facilitate our drawing of the board with their help.</p>
+<p>Let&#8217;s examine how we draw the board. We have two types of lines that we print:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>     |     |
+_____|_____|_____
+</pre></div>
+</div>
+<p>You might have noticed that what we&#8217;re printing are just strings, consisting of &#8220;|&#8221;, &#8220;_&#8221; and &#8221; &#8221; characters. Since they are strings, we can assign them to variables to make our lives easier!</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>     |     |
+_____|_____|_____
+</pre></div>
+</div>
+<p>Well cool, the result is the same, but we did more writing than before. You might be wondering &#8220;what&#8217;s the point of that?&#8221;. Let&#8217;s go back to drawing the entire board.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>     |     |
+     |     |
+_____|_____|_____
+     |     |
+     |     |
+_____|_____|_____
+     |     |
+     |     |
+     |     |
+</pre></div>
+</div>
+<p>When you read the code used for creating the board, you might notice that each of the rows (except for the last one, but we will ignore it for now) is buiilt by printing <code class="docutils literal"><span class="pre">line_middle</span></code> twice, followed by <code class="docutils literal"><span class="pre">line_bottom</span></code>. That&#8217;s the repetition we were talking about just before! Let&#8217;s employ the <code class="docutils literal"><span class="pre">for</span></code> loop in order to save us some writing.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>     |     |
+     |     |
+_____|_____|_____
+     |     |
+     |     |
+_____|_____|_____
+     |     |
+     |     |
+_____|_____|_____
+</pre></div>
+</div>
+<p>Most of the things should look familiar to you. We are creating the strings and storing our board&#8217;s building blocks in them.</p>
+<p>A new element is a <code class="docutils literal"><span class="pre">for</span></code> loop itself, which consists of:</p>
+<ul class="simple">
+<li>the word <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#for" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">for</span></code></a>,</li>
+<li>names we want to give to the next elements,</li>
+<li>the word <a class="reference external" href="http://docs.python.org/3/reference/expressions.html#in" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">in</span></code></a>,</li>
+<li>the value of a list or the name that refers to it.</li>
+<li>the content indented of one level (the same way as in the case of <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#if" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">if</span></code></a>).</li>
+</ul>
+<p>You might notice that a horizontal line has appeared at the bottom of our board and it no longer looks as cool as it did when we were printing each line &#8220;by hand&#8221;. Sometimes with loops we want almost all of the elements to behave one way, and one or two elements to behave differently (usually first, last, or both). In our case, we want to print <code class="docutils literal"><span class="pre">line_middle</span></code> instead of <code class="docutils literal"><span class="pre">line_bottom</span></code> for the last row. Before we do that, let&#8217;s see another example of the <code class="docutils literal"><span class="pre">for</span></code> loop that will help us understand how to achieve that.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;We are printing row number {row}&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>We are printing row number 1
+We are printing row number 2
+We are printing row number 3
+</pre></div>
+</div>
+<p>So you see that we go through our list in order, each element only once, and inside the loop we have an additional variable <code class="docutils literal"><span class="pre">row</span></code> (or another one if we gave it a different name) that stores the value of the element.</p>
+<p>Well, unfortunately we still have to type the entire contents of the list. This problem can be solved by the function <code class="xref py py-func docutils literal"><span class="pre">range()</span></code>, that we already know as well.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;We are printing row number {row}&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>We are printing row number 0
+We are printing row number 1
+We are printing row number 2
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Recall that everything in Python is numbered starting with zero. That&#8217;s why <code class="docutils literal"><span class="pre">range(3)</span></code> produces numbers that are less than 3.</p>
+</div>
+<div class="section" id="task-getting-rid-of-that-horizontal-line-in-the-last-row">
+<h3>Task: getting rid of that horizontal line in the last row<a class="headerlink" href="#task-getting-rid-of-that-horizontal-line-in-the-last-row" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="docutils">
+<dt>Description:</dt>
+<dd>Right now you have all the tools necessary for making our board as pretty as it was before but using the <code class="docutils literal"><span class="pre">for</span></code> loop.
+What you have to do is check <code class="docutils literal"><span class="pre">if</span></code> we&#8217;re printing the last line right now, and if so - print <code class="docutils literal"><span class="pre">line_middle</span></code> instead of <code class="docutils literal"><span class="pre">line_bottom</span></code></dd>
+</dl>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Nothing prevents us to put one loop inside another loop, so let&#8217;s do it! Just remember to use appropriate indentations and use different names e.g. <code class="docutils literal"><span class="pre">i</span></code> and <code class="docutils literal"><span class="pre">j</span></code> (or more associated with the list content):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">):</span>
+<span class="gp">... </span>       <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+<span class="go">1 11</span>
+<span class="go">1 12</span>
+<span class="go">1 13</span>
+<span class="go">2 11</span>
+<span class="go">2 12</span>
+<span class="go">2 13</span>
+</pre></div>
+</div>
+<p>Here we have inner loop that iterates from 11 to 13 (remember, 14 is not included when using <code class="docutils literal"><span class="pre">range</span></code>) and outer loop that iterates from 1 to 2. As you can see, items from inner loop are printed twice, for each iteration of outer loop.</p>
+</div>
+</div>
+<div class="section" id="defining-a-function">
+<h2>Defining a <code class="docutils literal"><span class="pre">function</span></code><a class="headerlink" href="#defining-a-function" title="Permalink to this headline">¶</a></h2>
+<p>We have already seen how functions solve many of our problems. However, they do not solve all our problems – or at least not exactly the way we would like functions to solve them.
+Sometimes we must solve a problem on our own. If it occurs often in our program, it would be nice to have a function that solves it for us.</p>
+<p>A problem we&#8217;ve encountered in the previous part was finding an easy way of drawing the tic-tac-toe board. What we have right now should look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The board consists of three rows, each of them drawn almost identically - only the last one differs, because it uses <code class="docutils literal"><span class="pre">line_middle</span></code> instead of <code class="docutils literal"><span class="pre">line_bottom</span></code>.
+For the code repetitions like this one, we normally use functions.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_board_row</span><span class="p">(</span><span class="n">last_line</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">last_line</span><span class="p">)</span>
+
+
+
+<span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_middle</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let&#8217;s have a closer look at the function <code class="xref py py-func docutils literal"><span class="pre">draw_board_row()</span></code>.</p>
+<p>The definition of a function always starts with the word <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#def" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">def</span></code></a>. Next, we give the name to our
+function. Between the parenthesizes, we indicate what names should be given to its arguments when the function is
+called. In the following lines we provide instructions to be executed when we use the function. In our case we copied one of the <code class="docutils literal"><span class="pre">for</span></code> loops that we have been using before.</p>
+<p>As shown in the example, the instructions in the function may include names that we have given as the
+names of the arguments. The principle of operation is as follows - if you create a function with
+three arguments:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FOO&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When you call this new function, you need to
+specify a value for each argument. This just like all the functions we called before:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Ala&quot;</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">FOO 1 Ala 9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">FOO 42 43 44</span>
+</pre></div>
+</div>
+<p>Note that the argument name is just a label. If we change the value attached to a label for another one, the other labels will not
+change – the same happens with the arguments:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">plus_five</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">5</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">43</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plus_five</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">48</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">43</span>
+</pre></div>
+</div>
+<p>The variables inside the functions act similarly to the ones we&#8217;ve used before but with two small differences.</p>
+<p>Firstly, argument names of a function are defined at each function call, and Python attaches the corresponding
+argument value to to each of the argument names it just created.</p>
+<p>Secondly, the argument names are not available outside the function as they are created when the function is called
+and forgotten after the call. That is, if you try now to access
+the argument name <code class="docutils literal"><span class="pre">n</span></code> we defined in our <code class="xref py py-func docutils literal"><span class="pre">plus_five()</span></code> function outside of the function&#8217;s code,
+Python tells you it is not defined:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;n&#39; is not defined</span>
+</pre></div>
+</div>
+<p>That is, our prim and proper Python cleans up his room at the end of a function call :)</p>
+<p>Going back to our game board, we face one last problem before we move to storing the moves that were already made. How should the players input their choices?</p>
+<p>What we could do is give each field on the board a symbol describing it&#8217;s location: <code class="docutils literal"><span class="pre">A1</span></code> could be the field in the upper-left corner, <code class="docutils literal"><span class="pre">A3</span></code> in the upper-right etc. When our player places her pawn on the board, we will add the field to the list. It would be quite difficult for the user to remember every field&#8217;s symbol. The board should look like that:</p>
+<blockquote>
+<div><div class="highlight-none"><div class="highlight"><pre><span></span>    1     2     3
+       |     |
+A      |     |
+  _____|_____|_____
+       |     |
+B      |     |
+  _____|_____|_____
+       |     |
+C      |     |
+       |     |
+</pre></div>
+</div>
+</div></blockquote>
+<p>The first row is fairly easy: we just have to print numbers from 1 to 3 with an appropriate spacing between them. The tricky part are the letters on the left side of the board. We want our first row (or row 0 in Python index) to be &#8216;A&#8217;, our second (1), to be &#8216;B&#8217; and third (2) to be &#8216;C&#8217;. Looks like a job for a dictionary! Let&#8217;s adapt our code a bit.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_board_row</span><span class="p">(</span><span class="n">last_line</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {line_middle}&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{letter} {line_middle}&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {last_line}&#39;</span><span class="p">)</span>
+
+
+<span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">}</span>
+
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_middle</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>What changed? We&#8217;ve added the dictionary that translates our row numbers into letters as well as another parameter in our <code class="docutils literal"><span class="pre">draw_board_row</span></code> function, passing the letter that we want to be printed next to this row.</p>
+<p>The last part that&#8217;s missing is the top row, the one with column numbers. Let&#8217;s add them now!</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_board_row</span><span class="p">(</span><span class="n">last_line</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {line_middle}&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{letter} {line_middle}&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {last_line}&#39;</span><span class="p">)</span>
+
+
+<span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    1     2     3  &#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_middle</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="returning-values">
+<h2>Returning values<a class="headerlink" href="#returning-values" title="Permalink to this headline">¶</a></h2>
+<p>The functions which we have previously used had one important property that is missing in the
+functions created by ourselves - they gave back the value they computed instead of printing it immediately. To achieve the same effect, you need to use the instruction <a class="reference external" href="http://docs.python.org/3/reference/simple_stmts.html#return" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">return</span></code></a>. This is a special instruction that can be found only in functions.</p>
+<p>In order to see an example of a function with the <code class="docutils literal"><span class="pre">return</span></code> statement, we will write another function that will help us draw our board.</p>
+<p>Let&#8217;s say that our players have already started the game. Nought has placed her pawn in the middle of the board, cross in the upper right corner. We need to store the list of moves somehow. One idea would be to make two lists: one for the pawns placed by each player. Then, when we will print our board, we can check our lists and print corresponding pawns to our board.</p>
+<p>We will start with writing a function that will accept field&#8217;s address as an argument and return &#8216;X&#8217; if the field is on the <code class="docutils literal"><span class="pre">crosses</span></code> list, &#8216;O&#8217; if it&#8217;s on the <code class="docutils literal"><span class="pre">noughts</span></code> list, and &#8216; &#8216; if it&#8217;s on neither of them.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_field_content</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">noughts</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;O&#39;</span>
+    <span class="k">elif</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">crosses</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;X&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span>
+</pre></div>
+</div>
+<p>Now that we already have this function, let&#8217;s test add it to the code that we&#8217;ve built before.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The key to understanding what&#8217;s hapenning in the next code snippet is to remember that we can concatenate strings using the <cite>+</cite> sign. So, for example, <cite>&#8216;A&#8217; + &#8216;1&#8217; = &#8216;A1&#8217;</cite></p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_field_content</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">noughts</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;O&#39;</span>
+    <span class="k">elif</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">crosses</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;X&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span>
+
+<span class="k">def</span> <span class="nf">draw_board_row</span><span class="p">(</span><span class="n">last_line</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="n">symbol1</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="n">symbol2</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+    <span class="n">symbol3</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {line_middle}&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{letter}   {symbol1}  |  {symbol2}  |  {symbol3}  &#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {last_line}&#39;</span><span class="p">)</span>
+
+
+<span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">}</span>
+<span class="n">noughts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">]</span>
+<span class="n">crosses</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A3&#39;</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    1     2     3  &#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_middle</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>In case you&#8217;re wondering what happened to the <cite>draw_board_row</cite> function, in order to draw the entire row, we need to have all three of the symbols that appear in that row, so we start with fetching those. Then we have to edit the middle line of the field in order for the pawn to be displayed. We write the value gotten from the other function in the middle of the field.</p>
+</div>
+<div class="section" id="accepting-user-s-input">
+<h2>Accepting user&#8217;s input<a class="headerlink" href="#accepting-user-s-input" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>The finished tic-tac-toe game should do the actions below in a loop:</dt>
+<dd><ul class="first last simple">
+<li>print our tic-tac-toe board</li>
+<li>ask player for the next move</li>
+<li>check if it&#8217;s a valid move</li>
+<li>add the move to the moves list</li>
+<li>check if the player won</li>
+</ul>
+</dd>
+</dl>
+<p>We have already finished the first point and it&#8217;s high time to move to the next one. In order to accept the user&#8217;s input (without validation) we have to just write:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">user_move</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your next move&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">current_move</span> <span class="o">==</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span>
+    <span class="n">noughts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_move</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">crosses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_move</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let&#8217;s add this move to our current version of the game. don&#8217;t forget to empty the <cite>noughts</cite> and <cite>crosses</cite> lists and to add a new variable <cite>current_move</cite> that will store the info about which player moves next.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_field_content</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">noughts</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;O&#39;</span>
+    <span class="k">elif</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">crosses</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;X&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span>
+
+<span class="k">def</span> <span class="nf">draw_board_row</span><span class="p">(</span><span class="n">last_line</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="n">symbol1</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="n">symbol2</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+    <span class="n">symbol3</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {line_middle}&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{letter}   {symbol1}  |  {symbol2}  |  {symbol3}  &#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {last_line}&#39;</span><span class="p">)</span>
+
+
+<span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">}</span>
+<span class="n">noughts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">crosses</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    1     2     3  &#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_middle</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+
+<span class="n">user_move</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your next move: &#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">current_move</span> <span class="o">==</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span>
+    <span class="n">noughts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_move</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">crosses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_move</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>But wait! It only executes once. We want our game to have more than one round.</p>
+</div>
+<div class="section" id="while-loop">
+<h2><code class="docutils literal"><span class="pre">while</span></code> loop<a class="headerlink" href="#while-loop" title="Permalink to this headline">¶</a></h2>
+<p><cite>while</cite> is another example of a loop, after <cite>for</cite>. The difference is that when we want to use <cite>for</cite> we need to know how many times we want to execute the loop <em>before</em> we even start running it. <cite>while</cite> loop executes as long as a condition that we give it is fulfilled. It can run infinitely (<cite>while True</cite>) or never run (<cite>while False</cite>). We want our game to finish only if either of the players won or there are no more empty fields. Let&#8217;s adapt our code.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_field_content</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">noughts</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;O&#39;</span>
+    <span class="k">elif</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">crosses</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;X&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span>
+
+<span class="k">def</span> <span class="nf">draw_board_row</span><span class="p">(</span><span class="n">last_line</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="n">symbol1</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="n">symbol2</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+    <span class="n">symbol3</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {line_middle}&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{letter}   {symbol1}  |  {symbol2}  |  {symbol3}  &#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {last_line}&#39;</span><span class="p">)</span>
+
+
+<span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">}</span>
+<span class="n">noughts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">crosses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">current_move</span> <span class="o">=</span> <span class="s1">&#39;O&#39;</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;    1     2     3  &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_middle</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+
+    <span class="n">user_move</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your next move: &#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">current_move</span> <span class="o">==</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span>
+        <span class="n">noughts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_move</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">crosses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_move</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Whoops! We forgot one thing. Can you spot it?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_field_content</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">noughts</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;O&#39;</span>
+    <span class="k">elif</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">crosses</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;X&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span>
+
+<span class="k">def</span> <span class="nf">draw_board_row</span><span class="p">(</span><span class="n">last_line</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="n">symbol1</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="n">symbol2</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+    <span class="n">symbol3</span> <span class="o">=</span> <span class="n">get_field_content</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {line_middle}&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{letter}   {symbol1}  |  {symbol2}  |  {symbol3}  &#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;  {last_line}&#39;</span><span class="p">)</span>
+
+
+<span class="n">line_middle</span> <span class="o">=</span> <span class="s1">&#39;     |     |     &#39;</span>
+<span class="n">line_bottom</span> <span class="o">=</span> <span class="s1">&#39;_____|_____|_____&#39;</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">}</span>
+<span class="n">noughts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">crosses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">current_move</span> <span class="o">==</span> <span class="s1">&#39;O&#39;</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;    1     2     3  &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_middle</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">draw_board_row</span><span class="p">(</span><span class="n">line_bottom</span><span class="p">,</span> <span class="n">letters</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+
+    <span class="n">user_move</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your next move: &#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">current_move</span> <span class="o">==</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span>
+        <span class="n">noughts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_move</span><span class="p">)</span>
+        <span class="n">current_move</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">crosses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_move</span><span class="p">)</span>
+        <span class="n">current_move</span> <span class="o">=</span> <span class="s1">&#39;O&#39;</span>
+</pre></div>
+</div>
+<p>Before, we forgot to change the <cite>current_move</cite> variable, so every time it put a nought on the board. Now, we exchange the pawn after making a move. The game works!</p>
+<p>It still doesn&#8217;t validate whether the user has made a correct move nor does it proclaim a winner. We will take care of that in the next chapter.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <a href="index.html" class="logo"><img class="logo" src="_static/logo.png" style="width: 200px; height: 169px; margin: -10px 0 10px 0"></a>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_objects.html">Everything is an object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_data_structures.html">Basic Data Structures</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tic Tac Toe</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-for-loop">The <code class="docutils literal"><span class="pre">for</span></code> loop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#task-getting-rid-of-that-horizontal-line-in-the-last-row">Task: getting rid of that horizontal line in the last row</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#defining-a-function">Defining a <code class="docutils literal"><span class="pre">function</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#returning-values">Returning values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accepting-user-s-input">Accepting user&#8217;s input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#while-loop"><code class="docutils literal"><span class="pre">while</span></code> loop</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="going_further.html">Going Further</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Geek Girls Carrots Code of Conduct</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright Code Carrots.
+  </div>
+  
+  <a href="https://github.com/ggcarrots/python-carrots">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
+  </a>
+  </body>
+</html>

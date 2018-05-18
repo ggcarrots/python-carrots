@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en_GB">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Going Further &mdash; Code Carrots</title>
+    
+    <link rel="stylesheet" href="_static/carrots.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Code Carrots" href="index.html" />
+    <link rel="next" title="Geek Girls Carrots Code of Conduct" href="code_of_conduct.html" />
+    <link rel="prev" title="Classes" href="classes.html" /> 
+  </head>
+  <body role="document">
+  
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="code_of_conduct.html" title="Geek Girls Carrots Code of Conduct"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="classes.html" title="Classes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Code Carrots</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="going-further">
+<h1>Going Further<a class="headerlink" href="#going-further" title="Permalink to this headline">¶</a></h1>
+<p>This section shows some helpful tools that might aid you along your programming path. We briefly describe here how
+to structure larger projects and work with multiple source files. We discuss python coding style guide (also known as PEP8),
+and how pylint can help you to write and maintain readable and stylish code. At the end there is a list of resources you might find
+helpful in your day-to-day python programming.</p>
+<div class="section" id="managing-larger-projects">
+<h2>Managing larger projects<a class="headerlink" href="#managing-larger-projects" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="divide-and-conquer">
+<h3>Divide and conquer<a class="headerlink" href="#divide-and-conquer" title="Permalink to this headline">¶</a></h3>
+<p>Up to this point, you might have put all of your source code in one file. For small libraries and projects this is fine, but when complexity
+rises it is better to divide your code into smaller files, that is to create libraries or modules.
+Going through a file that has thousands lines of code can be difficult.
+However it is not necessary to, for example, put every class in a separate file;
+having one file for classes that are logically connected is better for readability.</p>
+<p>As an example, let us consider a program for handling regular polygons (for the sake of the example let&#8217;s assume that circle is a polygon, too).
+Every figure has its own, simplified class. You might want to
+consider separating main functionality e. g. calculating perimeter, from definitions of those shapes <a class="footnote-reference" href="#fn1" id="id1">[1]</a>. That is, to put calculations of fields in one
+file and definitions in another:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># File polygons.py</span>
+<span class="k">class</span> <span class="nc">Circle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_sides</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+<span class="k">class</span> <span class="nc">Triangle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">side</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_sides</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="n">side</span>
+
+<span class="k">class</span> <span class="nc">Square</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">side</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_sides</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="n">side</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># File shapefunctions.py</span>
+<span class="n">PI</span> <span class="o">=</span> <span class="mf">3.141592</span> <span class="c1"># or use math.PI</span>
+<span class="k">def</span> <span class="nf">calc_perimeter</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">no_sides</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">perimeter</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">no_sides</span> <span class="o">*</span> <span class="n">obj</span><span class="o">.</span><span class="n">side</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">perimeter</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">PI</span><span class="o">*</span><span class="n">obj</span><span class="o">.</span><span class="n">radius</span>
+    <span class="k">return</span> <span class="n">perimeter</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="importing-functionalities">
+<h3>Importing functionalities<a class="headerlink" href="#importing-functionalities" title="Permalink to this headline">¶</a></h3>
+<p>To use definitions and perimeter function you must now import those functionalities. Code below asks user to specify which shape to
+use and for the side length/radius, and calculates perimeter:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Main file or command line</span>
+<span class="kn">import</span> <span class="nn">polygons</span>
+<span class="kn">import</span> <span class="nn">shapefunctions</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Choose a shape:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;1. Circle&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;2. Triangle&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;3. Square&quot;</span><span class="p">)</span>
+<span class="n">side</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Choose the side length or radius&quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">polygons</span><span class="o">.</span><span class="n">Circle</span><span class="p">(</span><span class="n">side</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">polygons</span><span class="o">.</span><span class="n">Triangle</span><span class="p">(</span><span class="n">side</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">polygons</span><span class="o">.</span><span class="n">Square</span><span class="p">(</span><span class="n">side</span><span class="p">)</span>
+<span class="n">per</span> <span class="o">=</span> <span class="n">shapefunctions</span><span class="o">.</span><span class="n">perimeter</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;The perimeter of your shape is </span><span class="si">%3.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">per</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">import</span> <span class="pre">polygons</span></code> and <code class="docutils literal"><span class="pre">import</span> <span class="pre">shapefunctions</span></code> lines tell the program that we are going to use functionality defined in files <code class="docutils literal"><span class="pre">polygons.py</span></code> and <code class="docutils literal"><span class="pre">shapefunctions.py</span></code>.
+Note that these files must be in a place Python can find them, e.g. in the same directory you are running
+python. Also, note that in the imports we are not using file type extensions, i.e. there is no <code class="docutils literal"><span class="pre">.py</span></code> in
+<code class="docutils literal"><span class="pre">import</span></code> statements.</p>
+<p>There is also a possibility of using aliases for libraries:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Main file or command line</span>
+<span class="kn">import</span> <span class="nn">polygons</span> <span class="kn">as</span> <span class="nn">plg</span>
+<span class="n">triangle</span> <span class="o">=</span> <span class="n">plg</span><span class="o">.</span><span class="n">Triangle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, whenever you need objects from <code class="docutils literal"><span class="pre">polygons</span></code> library, you can use <code class="docutils literal"><span class="pre">plg</span></code> alias instead of writing its full name.</p>
+</div>
+<div class="section" id="importing-from">
+<h3>Importing from<a class="headerlink" href="#importing-from" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you might want to explicitly state what you are importing. In that case use <code class="docutils literal"><span class="pre">import</span> <span class="pre">from</span></code> statement:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Main file or command line</span>
+<span class="kn">from</span> <span class="nn">polygons</span> <span class="kn">import</span> <span class="n">Circle</span><span class="p">,</span> <span class="n">Triangle</span>
+<span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">circle</span>   <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, to create a shape you don&#8217;t need to precede it&#8217;s name with the name of the library. This approach, although more explicit,
+and <a class="reference external" href="zen-of-python">Explicit is better than implicit</a>,
+has several major drawbacks. For one, if you need 100 functions from a large library it might be tedious to write every one of them. Secondly, you might
+accidentally overwrite other functions. To ilustrate this, let&#8217;s write a <code class="docutils literal"><span class="pre">max</span></code> function that sorts polygons by the number of sides:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># shapefunctions.py</span>
+<span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">obj1</span><span class="o">.</span><span class="n">no_sides</span> <span class="o">&gt;</span> <span class="n">obj2</span><span class="o">.</span><span class="n">no_sides</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">obj2</span>
+</pre></div>
+</div>
+<p>Importing this function explicitly, i.e. <code class="docutils literal"><span class="pre">from</span> <span class="pre">shapefunctions</span> <span class="pre">import</span> <span class="pre">max</span></code>, will overwrite built in <code class="docutils literal"><span class="pre">max</span></code> function. That is, using <code class="docutils literal"><span class="pre">max(1,</span> <span class="pre">2)</span></code>
+will cause an error. A better way to do this is, in this case, to use an alias:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Main file or command line</span>
+<span class="kn">from</span> <span class="nn">shapefunctions</span> <span class="kn">import</span> <span class="nb">max</span> <span class="k">as</span> <span class="n">polygon_max</span>
+<span class="kn">from</span> <span class="nn">polygons</span> <span class="kn">import</span> <span class="n">Triangle</span>
+
+<span class="n">triangle1</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">triangle2</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">polygon_max</span><span class="p">(</span><span class="n">triangle1</span><span class="p">,</span> <span class="n">triangle2</span><span class="p">)</span> <span class="c1"># returns triangle2</span>
+<span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># Hey, it still works!</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is highly discouraged to name variables and functions using
+names of build-in functions (full list <a class="reference external" href="https://docs.python.org/3/library/functions.html">here</a>).
+This might break your program and debugging those problems can be difficult.</p>
+</div>
+</div>
+<div class="section" id="get-me-all-of-them">
+<h3>Get me ALL of them!<a class="headerlink" href="#get-me-all-of-them" title="Permalink to this headline">¶</a></h3>
+<p>You can also specify to import all of the functions and classes from a given library:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Main function or command line</span>
+<span class="kn">from</span> <span class="nn">polygons</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="mi">29</span><span class="p">)</span>
+<span class="n">square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is usually highly discouraged, though, as it might overwrite existing functionality, just like in the previous case, but this time there is
+no alias to help us.</p>
+<p>You can manage which elements are imported by <code class="docutils literal"><span class="pre">*</span></code> using <code class="docutils literal"><span class="pre">__all__</span></code> variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># polygons.py</span>
+<span class="c1"># At the beginning of the file:</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;Triangle&quot;</span><span class="p">,</span> <span class="s2">&quot;Circle&quot;</span> <span class="p">]</span>
+<span class="c1"># The rest of the library</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Main function or command line</span>
+<span class="kn">from</span> <span class="nn">polygons</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># but no Square definition</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h3>
+<p>With even larger projects you might want to use directories to group files. For example, to extend shapes into a third dimension, you could create
+a separate file with regular polyhedrons.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># polyhedrons.py</span>
+<span class="k">class</span> <span class="nc">Sphere</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_faces</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+<span class="k">class</span> <span class="nc">Tetrahedron</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">side</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_faces</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="n">side</span>
+
+<span class="k">class</span> <span class="nc">Cube</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">side</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_faces</span> <span class="o">=</span> <span class="mi">6</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="n">side</span>
+</pre></div>
+</div>
+<p>To keep all of shapes in one place, a good idea is to put all shape definitions into one folder - a module. This creates the following file structure:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+</span> <span class="n">shapes</span>
+<span class="o">|---</span> <span class="n">polygons</span><span class="o">.</span><span class="n">py</span>
+<span class="o">|---</span> <span class="n">polyhedrons</span><span class="o">.</span><span class="n">py</span>
+<span class="o">|---</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+<span class="n">shapefunctions</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">__init__.py</span></code> file in the <code class="docutils literal"><span class="pre">shapes</span></code> folder is necessary to tell python that this is a module. <a href="#id2"><span class="problematic" id="id3">:ref:`Using __init__.py &lt;going-further-init&gt;`_</span></a> section
+has more information of usage of <code class="docutils literal"><span class="pre">__init__.py</span></code> file.</p>
+<p>Importing from a module is quite similar to importing from regular files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapes</span> <span class="kn">import</span> <span class="n">polygons</span>
+<span class="kn">from</span> <span class="nn">shapes</span> <span class="kn">import</span> <span class="n">polyhedrons</span> <span class="k">as</span> <span class="n">plh</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">polygons</span><span class="o">.</span><span class="n">Triangle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">plh</span><span class="o">.</span><span class="n">Cube</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To import explicit object, use this construction:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapes.polygons</span> <span class="kn">import</span> <span class="n">Triangle</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-init-py">
+<h3>Using <code class="docutils literal"><span class="pre">__init__.py</span></code><a class="headerlink" href="#using-init-py" title="Permalink to this headline">¶</a></h3>
+<p id="going-further-init">The <code class="docutils literal"><span class="pre">__init__.py</span></code> file can be used to simplify imports. For example, putting imports in this file allows to import from shapes explicitly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># In __init__.py</span>
+<span class="kn">from</span> <span class="nn">shapes.polygons</span> <span class="kn">import</span> <span class="n">Triangle</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Main file or command line</span>
+<span class="kn">from</span> <span class="nn">shapes</span> <span class="kn">import</span> <span class="n">Triangle</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also specify the <code class="docutils literal"><span class="pre">*</span></code> behavior in the <code class="docutils literal"><span class="pre">__init__.py</span></code> by specifying <code class="docutils literal"><span class="pre">__all__</span></code> variable. This defines which
+files or sub-modules to import:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># __init__.py</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;polygons&quot;</span><span class="p">,</span> <span class="s2">&quot;polyhedrons&quot;</span> <span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Main file or command line</span>
+<span class="kn">from</span> <span class="nn">shapes</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">polygons</span><span class="o">.</span><span class="n">Triangle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># but no polyhedron definitions</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="going-even-further">
+<h3>Going even further!<a class="headerlink" href="#going-even-further" title="Permalink to this headline">¶</a></h3>
+<p>As the code base of your project grows, you will end up with a lot of modules and libraries. It is important to organize your work to increase
+re-usability and readability. You can find more information on project handling in the <a class="reference external" href="http://docs.python-guide.org/en/latest/writing/structure/">The Hitchhiker&#8217;s Guide to Python</a>.</p>
+</div>
+</div>
+<div class="section" id="pep8-and-coding-in-style">
+<h2>PEP8 and coding in style<a class="headerlink" href="#pep8-and-coding-in-style" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8 can be found here</a>.</li>
+</ul>
+<p>A well formatted code improves readability. But what exactly does it mean for code to be well formatted? This definition might change from one developer
+to another. Should you write <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">max(</span> <span class="pre">1,</span> <span class="pre">2</span> <span class="pre">)</span></code> or <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">max(1,</span> <span class="pre">2)</span></code> or <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">max(1,2)</span></code>?</p>
+<p>Generally, there are two main coding guides for python developers. The first, most important, but also very broad, is the <em>Zen of Python</em>. You can see it
+by typing <code class="docutils literal"><span class="pre">import</span> <span class="pre">this</span></code> in the interpreter:</p>
+<div class="highlight-python" id="zen-of-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">this</span>
+<span class="n">The</span> <span class="n">Zen</span> <span class="n">of</span> <span class="n">Python</span><span class="p">,</span> <span class="n">by</span> <span class="n">Tim</span> <span class="n">Peters</span>
+
+<span class="n">Beautiful</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">ugly</span><span class="o">.</span>
+<span class="n">Explicit</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">implicit</span><span class="o">.</span>
+<span class="n">Simple</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="nb">complex</span><span class="o">.</span>
+<span class="n">Complex</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">complicated</span><span class="o">.</span>
+<span class="n">Flat</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">nested</span><span class="o">.</span>
+<span class="n">Sparse</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">dense</span><span class="o">.</span>
+<span class="n">Readability</span> <span class="n">counts</span><span class="o">.</span>
+<span class="n">Special</span> <span class="n">cases</span> <span class="n">aren</span><span class="s1">&#39;t special enough to break the rules.</span>
+<span class="n">Although</span> <span class="n">practicality</span> <span class="n">beats</span> <span class="n">purity</span><span class="o">.</span>
+<span class="n">Errors</span> <span class="n">should</span> <span class="n">never</span> <span class="k">pass</span> <span class="n">silently</span><span class="o">.</span>
+<span class="n">Unless</span> <span class="n">explicitly</span> <span class="n">silenced</span><span class="o">.</span>
+<span class="n">In</span> <span class="n">the</span> <span class="n">face</span> <span class="n">of</span> <span class="n">ambiguity</span><span class="p">,</span> <span class="n">refuse</span> <span class="n">the</span> <span class="n">temptation</span> <span class="n">to</span> <span class="n">guess</span><span class="o">.</span>
+<span class="n">There</span> <span class="n">should</span> <span class="n">be</span> <span class="n">one</span><span class="o">--</span> <span class="ow">and</span> <span class="n">preferably</span> <span class="n">only</span> <span class="n">one</span> <span class="o">--</span><span class="n">obvious</span> <span class="n">way</span> <span class="n">to</span> <span class="n">do</span> <span class="n">it</span><span class="o">.</span>
+<span class="n">Although</span> <span class="n">that</span> <span class="n">way</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">obvious</span> <span class="n">at</span> <span class="n">first</span> <span class="n">unless</span> <span class="n">you</span><span class="s1">&#39;re Dutch.</span>
+<span class="n">Now</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">never</span><span class="o">.</span>
+<span class="n">Although</span> <span class="n">never</span> <span class="ow">is</span> <span class="n">often</span> <span class="n">better</span> <span class="n">than</span> <span class="o">*</span><span class="n">right</span><span class="o">*</span> <span class="n">now</span><span class="o">.</span>
+<span class="n">If</span> <span class="n">the</span> <span class="n">implementation</span> <span class="ow">is</span> <span class="n">hard</span> <span class="n">to</span> <span class="n">explain</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;s a bad idea.</span>
+<span class="n">If</span> <span class="n">the</span> <span class="n">implementation</span> <span class="ow">is</span> <span class="n">easy</span> <span class="n">to</span> <span class="n">explain</span><span class="p">,</span> <span class="n">it</span> <span class="n">may</span> <span class="n">be</span> <span class="n">a</span> <span class="n">good</span> <span class="n">idea</span><span class="o">.</span>
+<span class="n">Namespaces</span> <span class="n">are</span> <span class="n">one</span> <span class="n">honking</span> <span class="n">great</span> <span class="n">idea</span> <span class="o">--</span> <span class="n">let</span><span class="s1">&#39;s do more of those!</span>
+</pre></div>
+</div>
+<p>We are going to leave the interpretation of this passage to the reader, although some of those rules might get clearer with gained programming experience.</p>
+<p>A more detailed guidance can be found in PEP8. PEP stands for Python Enhancement Proposal, these are propositions published by core
+developers that cover everything from release schedules, through peps about peps (like voting conventions - PEP10) to core language features
+like Unicode integration (PEP100) or iterator implementations (PEP234) (two latter PEPs are examples of proposals already implemented). See
+<a class="reference external" href="https://www.python.org/dev/peps/">PEP index</a>.</p>
+<p>PEP8 gives a set of rules for code formatting. Below we show a few excerpts from this document, some of which you probably learned already during the workshops.
+It is recommended, though, to read through the whole document (<a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">pep8</a>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although important, style rules are just guidelines. They are not laws! Although is advised, especially for a beginner developer, to follow those
+rules, seasoned programmers tend to compromise between strict rule obedience and their work routine (consistency with surrounding code) or making the
+code less readable (<em>Beautiful is better than ugly</em> and <em>Readability counts</em>). Know when to break rules, or, in the words of PEP8 itself, <em>A Foolish Consistency is the Hobgoblin of Little Minds</em>.</p>
+</div>
+<ul class="simple">
+<li>Use meaningful naming conventions. Don&#8217;t use one or two letter variable names unless it&#8217;s obvious or inline with other conventions</li>
+<li>Use 4 spaces per indentation level</li>
+<li>Be weary of long lines. PEP8 suggests the maximum of 72 characters, but in standard library it&#8217;s 79. Break lines if you can.</li>
+<li>Use UTF-8 for file encoding</li>
+<li>Each import should be in a separate line, although this is fine: <code class="docutils literal"><span class="pre">form</span> <span class="pre">shapes</span> <span class="pre">import</span> <span class="pre">Triangle,</span> <span class="pre">Circle,</span> <span class="pre">Square</span></code></li>
+<li>Avoid extraneous spaces inside brackets or parentheses, i.e.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># YES</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="n">ham</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span>
+<span class="n">spam</span><span class="p">,</span> <span class="n">ham</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+<span class="k">def</span> <span class="nf">magic</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="o">=</span><span class="n">imag</span><span class="p">)</span>
+
+<span class="c1"># NO</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="n">ham</span><span class="p">[</span> <span class="mi">10</span> <span class="p">]</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">spam</span><span class="p">,</span> <span class="n">ham</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span>
+<span class="k">def</span> <span class="nf">magic</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">imag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real</span> <span class="o">=</span> <span class="n">real</span><span class="p">,</span> <span class="n">imag</span> <span class="o">=</span> <span class="n">imag</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Comments are important, but you need to keep them up to date. Self documenting code is better (meaningful naming conventions, readable code, etc.)</li>
+<li>Modules should have all lowercase names (e.g. <code class="docutils literal"><span class="pre">shapefunctions</span></code>), classes should use CamelCase convention (e.g. <code class="docutils literal"><span class="pre">SmallShape</span></code>), functions should
+use snake_case (e.g. <code class="docutils literal"><span class="pre">calc_perimeter</span></code>)</li>
+</ul>
+</div>
+<div class="section" id="using-pylint">
+<h2>Using pylint<a class="headerlink" href="#using-pylint" title="Permalink to this headline">¶</a></h2>
+<ul class="simple" id="going-further-pylint">
+<li><a class="reference external" href="https://www.pylint.org">pylint webpage</a></li>
+<li><a class="reference external" href="install-pylint">installation instructions</a></li>
+</ul>
+<p>Pylint is a tool that allows for an automatic check of coding style. It covers not only PEP8 guidelines, but also some issues that are common for
+all programming languages. For example, it allows for checking the number of arguments function allows. Usually, a function with large
+number of arguments is too complicated to be readable, and should be refactored. The full list of errors pylint can check
+is found <a class="reference external" href="http://pylint-messages.wikidot.com/all-codes">here</a>.</p>
+<p>To lint code, use <code class="docutils literal"><span class="pre">pylint</span></code> command on a script/module you want to lint:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">(</span>workshops<span class="o">)</span> ~$ pylint shapes
+
+No config file found, using default configuration
+************* Module shapes
+C:  <span class="m">1</span>, <span class="m">0</span>: Missing module docstring <span class="o">(</span>missing-docstring<span class="o">)</span>
+************* Module shapes.polygons
+C:  <span class="m">1</span>, <span class="m">0</span>: Missing module docstring <span class="o">(</span>missing-docstring<span class="o">)</span>
+C:  <span class="m">1</span>, <span class="m">0</span>: Missing class docstring <span class="o">(</span>missing-docstring<span class="o">)</span>
+R:  <span class="m">1</span>, <span class="m">0</span>: Too few public methods <span class="o">(</span><span class="m">0</span>/2<span class="o">)</span> <span class="o">(</span>too-few-public-methods<span class="o">)</span>
+C:  <span class="m">6</span>, <span class="m">0</span>: Missing class docstring <span class="o">(</span>missing-docstring<span class="o">)</span>
+R:  <span class="m">6</span>, <span class="m">0</span>: Too few public methods <span class="o">(</span><span class="m">0</span>/2<span class="o">)</span> <span class="o">(</span>too-few-public-methods<span class="o">)</span>
+C: <span class="m">11</span>, <span class="m">0</span>: Missing class docstring <span class="o">(</span>missing-docstring<span class="o">)</span>
+R: <span class="m">11</span>, <span class="m">0</span>: Too few public methods <span class="o">(</span><span class="m">0</span>/2<span class="o">)</span> <span class="o">(</span>too-few-public-methods<span class="o">)</span>
+************* Module shapes.polyhedrons
+C:  <span class="m">1</span>, <span class="m">0</span>: Missing module docstring <span class="o">(</span>missing-docstring<span class="o">)</span>
+C:  <span class="m">1</span>, <span class="m">0</span>: Missing class docstring <span class="o">(</span>missing-docstring<span class="o">)</span>
+R:  <span class="m">1</span>, <span class="m">0</span>: Too few public methods <span class="o">(</span><span class="m">0</span>/2<span class="o">)</span> <span class="o">(</span>too-few-public-methods<span class="o">)</span>
+C:  <span class="m">6</span>, <span class="m">0</span>: Missing class docstring <span class="o">(</span>missing-docstring<span class="o">)</span>
+R:  <span class="m">6</span>, <span class="m">0</span>: Too few public methods <span class="o">(</span><span class="m">0</span>/2<span class="o">)</span> <span class="o">(</span>too-few-public-methods<span class="o">)</span>
+C: <span class="m">11</span>, <span class="m">0</span>: Missing class docstring <span class="o">(</span>missing-docstring<span class="o">)</span>
+R: <span class="m">11</span>, <span class="m">0</span>: Too few public methods <span class="o">(</span><span class="m">0</span>/2<span class="o">)</span> <span class="o">(</span>too-few-public-methods<span class="o">)</span>
+
+------------------------------------------------------------------
+Your code has been rated at <span class="m">4</span>.23/10
+</pre></div>
+</div>
+<p>This checks all files in the module and displays a report. Each file in the module gets its own report.
+Letters at the beginning of each line correspond to a type of problem detected:</p>
+<ul class="simple">
+<li>[R]efactor for a &#8220;good practice&#8221; metric violation</li>
+<li>[C]onvention for coding standard violation</li>
+<li>[W]arning for stylistic problems, or minor programming issues</li>
+<li>[E]rror for important programming issues (i.e. most probably bug)</li>
+<li>[F]atal for errors which prevented further processing</li>
+</ul>
+<p>In our case, &#8220;only&#8221; style problems were detected. Each reporting line consists also of the line and column number where the
+problem was spotted and a corresponing message. In the parenthesis is the name of the message, e.g. <code class="docutils literal"><span class="pre">missing-docstring</span></code>.
+If you are not sure what given message means, you can ask pylint to explain it. For example to show what
+<code class="docutils literal"><span class="pre">too-few-public-methods</span></code> mean use:</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>(workshops) ~$ pylint --help-msg=too-few-public-methods
+No config file found, using default configuration
+:too-few-public-methods (R0903): *Too few public methods (%s/%s)*
+Used when class has too few public methods, so be sure it&#39;s really worth it.
+This message belongs to the design checker.
+</pre></div>
+</div>
+<p>At the end of the report is the score. It tells you, in a more-less objective way, how good your code is when it comes to style.
+In our case, the score of 4.23/10 is not a good one, but we are evaluating a simple example, not a real-life code. In your day-to-day
+work, a good rule of thumb is to keep it above 7.</p>
+<div class="section" id="configuring-pylint">
+<h3>Configuring pylint<a class="headerlink" href="#configuring-pylint" title="Permalink to this headline">¶</a></h3>
+<p>Pylint is fully configurable. You can suppress unwanted errors and format the report to your liking. You can do this using command
+line options of <code class="docutils literal"><span class="pre">pylint</span></code>, but a better way is to put those information in a configuration file attached to your project. By default,
+<code class="docutils literal"><span class="pre">pylint</span></code> will look for a file called <code class="docutils literal"><span class="pre">.pylintrc</span></code>:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># file .pylintrc</span>
+<span class="o">[</span>MESSAGES CONTROL<span class="o">]</span>
+<span class="nv">disable</span><span class="o">=</span>too-few-public-methods,
+        too-many-local-variables
+<span class="o">[</span>REPORTS<span class="o">]</span>
+msg-template<span class="o">=</span><span class="s1">&#39;{msg_id}:-:{line:3d}:-:{msg} found in {path}&#39;</span>
+</pre></div>
+</div>
+<p>Here, we disable two checks and change how the messages are displayed. More on message formatting can be found in <a class="reference external" href="https://pylint.readthedocs.io/en/latest/user_guide/output.html">pylint documentation</a>.
+The result of running of pylint now looks like this:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">(</span>workshops<span class="o">)</span> ~$ pylint shapes
+Using config file .pylintrc
+************* Module shapes
+C0111:-:  <span class="m">1</span>:-:Missing module docstring found in shapes/__init__.py
+************* Module shapes.polygons
+C0111:-:  <span class="m">1</span>:-:Missing module docstring found in shapes/polygons.py
+C0111:-:  <span class="m">1</span>:-:Missing class docstring found in shapes/polygons.py
+C0111:-:  <span class="m">6</span>:-:Missing class docstring found in shapes/polygons.py
+C0111:-: <span class="m">11</span>:-:Missing class docstring found in shapes/polygons.py
+************* Module shapes.polyhedrons
+C0111:-:  <span class="m">1</span>:-:Missing module docstring found in shapes/polyhedrons.py
+C0111:-:  <span class="m">1</span>:-:Missing class docstring found in shapes/polyhedrons.py
+C0111:-:  <span class="m">6</span>:-:Missing class docstring found in shapes/polyhedrons.py
+C0111:-: <span class="m">11</span>:-:Missing class docstring found in shapes/polyhedrons.py
+
+------------------------------------------------------------------
+Your code has been rated at <span class="m">6</span>.54/10 <span class="o">(</span>previous run: <span class="m">4</span>.23/10, +2.31<span class="o">)</span>
+</pre></div>
+</div>
+<p>Note that linter does not check for <code class="docutils literal"><span class="pre">too-few-public-methods</span></code>. As a result, the score of linting went up by 2.31 points. It is important to disable messages
+carefully, and not just to increase your score.</p>
+</div>
+</div>
+<div class="section" id="it-s-dangerous-to-go-alone-take-this">
+<h2>It&#8217;s dangerous to go alone. Take this!<a class="headerlink" href="#it-s-dangerous-to-go-alone-take-this" title="Permalink to this headline">¶</a></h2>
+<p>Here are some resources to get you going on your further python development.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.python.org/3/">Python documentation</a> - the most important source of Python knowledge.</li>
+<li><a class="reference external" href="https://stackoverflow.com/">Stack Overflow</a> - there is a high chance that someone has asked about problem you are having, and got an answer.</li>
+<li><a class="reference external" href="http://docs.python-guide.org/en/latest/">The Hitchhikers Guide to Python</a> - a living Python guide. Also, it has a fun name.</li>
+<li><a class="reference external" href="http://www.diveintopython3.net/">Dive Into Python 3</a> - A good introductory book to Python. And it&#8217;s free!</li>
+</ul>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="fn1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>This is just an example. In a day-to-day programming, writing such simple classes and not using inheritance is not a good idea.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <a href="index.html" class="logo"><img class="logo" src="_static/logo.png" style="width: 200px; height: 169px; margin: -10px 0 10px 0"></a>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_objects.html">Everything is an object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_data_structures.html">Basic Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loops_functions.html">Tic Tac Toe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Going Further</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#managing-larger-projects">Managing larger projects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#divide-and-conquer">Divide and conquer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#importing-functionalities">Importing functionalities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#importing-from">Importing from</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-me-all-of-them">Get me ALL of them!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-init-py">Using <code class="docutils literal"><span class="pre">__init__.py</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#going-even-further">Going even further!</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pep8-and-coding-in-style">PEP8 and coding in style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-pylint">Using pylint</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-pylint">Configuring pylint</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#it-s-dangerous-to-go-alone-take-this">It&#8217;s dangerous to go alone. Take this!</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Geek Girls Carrots Code of Conduct</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright Code Carrots.
+  </div>
+  
+  <a href="https://github.com/ggcarrots/python-carrots">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
+  </a>
+  </body>
+</html>

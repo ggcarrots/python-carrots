@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en_GB">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation &mdash; Code Carrots</title>
+    
+    <link rel="stylesheet" href="_static/carrots.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Code Carrots" href="index.html" />
+    <link rel="next" title="Introduction to Python" href="first_steps.html" />
+    <link rel="prev" title="Code Carrots Manual" href="index.html" /> 
+  </head>
+  <body role="document">
+  
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="first_steps.html" title="Introduction to Python"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Code Carrots Manual"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Code Carrots</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Before we start, we need to prepare our environment. Below are some instructions on installing the latest version of Python. Here we install version 3.6.5.</p>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<p>You can download Python for Windows directly from <a class="reference external" href="https://www.python.org/downloads/release/python-365/">python.org</a>. Look for version 3 and above.
+After downloading the file  <code class="docutils literal"><span class="pre">*.msi</span></code>, open it and follow the instructions.
+It is important to remember the path of installation, i.e. the directory, as we will need this information during the <a class="reference internal" href="#tools"><span class="std std-ref">installation of tools</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to check &#8220;Add Python 3.6 to PATH&#8221; when running the installer. This way you will be able to run Python form
+console by just writing <code class="docutils literal"><span class="pre">python</span></code>.</p>
+</div>
+</div>
+<div class="section" id="linux-ubuntu-fedora-etc-or-mac">
+<h2>Linux (Ubuntu, Fedora, etc.) or Mac<a class="headerlink" href="#linux-ubuntu-fedora-etc-or-mac" title="Permalink to this headline">¶</a></h2>
+<p>In order to check our version of Python, enter the following in the command line:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>$ python --version
+Python <span class="m">3</span>.6.5
+</pre></div>
+</div>
+<p>If the <code class="docutils literal"><span class="pre">python</span></code> command is not available or the wrong version appears try using <code class="docutils literal"><span class="pre">python3</span></code> command.</p>
+<p>If Python is not installed, follow the instructions below.</p>
+<div class="section" id="ubuntu">
+<h3>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h3>
+<p>In the command line enter:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span><span class="o">.</span><span class="mi">6</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fedora">
+<h3>Fedora<a class="headerlink" href="#fedora" title="Permalink to this headline">¶</a></h3>
+<p>In the command line enter:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">python3</span><span class="o">.</span><span class="mi">6</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="os-x">
+<h3>OS X<a class="headerlink" href="#os-x" title="Permalink to this headline">¶</a></h3>
+<p>Install Homebrew - package manager for OSX.
+Instructions are available on site: <a class="reference external" href="https://brew.sh/index_pl">https://brew.sh/index_pl</a></p>
+<p>Next step:</p>
+<p>In the command line enter:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">python3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="other">
+<h3>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h3>
+<p>Use the system of packages adequate for your distribution. If there is no adequate system
+or you cannot find python, you can install it using the sources on the <a class="reference external" href="https://www.python.org/downloads/release/python-365/">python.org</a>. website.
+A compiler and readline library will be required.</p>
+</div>
+</div>
+<div class="section" id="tools">
+<span id="id1"></span><h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="windows-command-line">
+<h3>Windows command line<a class="headerlink" href="#windows-command-line" title="Permalink to this headline">¶</a></h3>
+<p>We will do most of our work on the command line. To activate the command line in Windows,
+press <code class="docutils literal"><span class="pre">Win+R</span></code>. In the open window, type <code class="docutils literal"><span class="pre">cmd</span></code> and click <code class="docutils literal"><span class="pre">OK</span></code>.
+A new window will appear with white text on a black background:</p>
+<div class="highlight-bat"><div class="highlight"><pre><span></span>Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation. All rights reserved.
+
+
+C<span class="p">:</span><span class="nl">\Users\Name</span><span class="c1">&gt;</span>
+</pre></div>
+</div>
+<p>Text may be different depending on the version of Windows you use.</p>
+<p><code class="docutils literal"><span class="pre">C:\Users\Name&gt;</span></code>  is a prompt. It informs us of the directory (or folder) in which we currently are and waits for a command.
+Later during the workshop we will refer to it with <code class="docutils literal"><span class="pre">~$</span></code>, independently of your
+operating system (Windows, Linux, MacOS).</p>
+<p>Using the command line, you can move around the contents of the disc (in the same way as in
+<code class="docutils literal"><span class="pre">My</span> <span class="pre">Computer</span></code>).  You can do that by entering commands and pressing <code class="docutils literal"><span class="pre">Enter</span></code>.
+Use the following commands:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">dir</span></code></dt>
+<dd>Displays the contents of the current directory. For example, if the <code class="docutils literal"><span class="pre">prompt</span></code>
+shows  <code class="docutils literal"><span class="pre">C:\Users\Name</span></code>, the <code class="docutils literal"><span class="pre">dir</span></code> command displays the contents of our home directory.</dd>
+<dt><code class="docutils literal"><span class="pre">cd</span> <span class="pre">directory</span></code></dt>
+<dd>Changes the current directory (stands for Change Directory). For example, if you are in <code class="docutils literal"><span class="pre">C:\Users\Name</span></code>,
+you can access the directory with your documents by entering <code class="docutils literal"><span class="pre">cd</span> <span class="pre">Documents</span></code>. If you execute the
+<code class="docutils literal"><span class="pre">dir</span></code> command, you will see something familiar.
+The command  <code class="docutils literal"><span class="pre">cd..</span></code> will move you one level up in the directory tree, that is,
+to the directory that contains your current directory.</dd>
+<dt><code class="docutils literal"><span class="pre">mkdir</span> <span class="pre">directory</span></code></dt>
+<dd>Creates a new directory (MaKe DIRectory).</dd>
+</dl>
+</div>
+<div class="section" id="virtual-environment">
+<h3>Virtual environment<a class="headerlink" href="#virtual-environment" title="Permalink to this headline">¶</a></h3>
+<p>A virtual environment is a tool that allows us to
+isolate our work from other parts of the system. This ensures that any
+new and experimental library you use will be confined to this sandbox and won&#8217;t contaminate
+your system.</p>
+<p>To create a venv you need to choose a place where it will be created. For example, you can choose your home
+directory. If you select a different place, just remember where venv is created as we will use it often.</p>
+<p>In Windows, the path to your home directory, for the user  <code class="docutils literal"><span class="pre">Ala</span></code>, will look like this:
+<code class="docutils literal"><span class="pre">C:\Users\Ala\</span></code>. In Linux, writing <code class="docutils literal"><span class="pre">cd</span></code> in the command line will get you to your $HOME directory.</p>
+<p>In Windows, to create virtual environment, write:</p>
+<div class="highlight-bat"><div class="highlight"><pre><span></span>C<span class="p">:</span><span class="nl">\Users\Ala</span><span class="c1">&gt; python -m venv workshops</span>
+</pre></div>
+</div>
+<p>This assumes that during installation python was added to your PATH.</p>
+<p>For Linux or Mac user:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>~$ python3.6 -m venv workshops
+</pre></div>
+</div>
+<p>This creates a directory <code class="docutils literal"><span class="pre">workshops</span></code>. This is your virtual environment. Right now it&#8217;s still inactive.</p>
+<p>To activate it on Windows write:</p>
+<div class="highlight-bat"><div class="highlight"><pre><span></span>C<span class="p">:</span><span class="nl">\Users\Ala</span><span class="c1">&gt; workshops\Scripts\activate</span>
+</pre></div>
+</div>
+<p>For Linux or Mac users:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>~$ <span class="nb">source</span> workshops/bin/activate
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">python</span></code> command will run the correct version of Python, so we will not have to enter the full
+path at the beginning nor the version at the end. Note <code class="docutils literal"><span class="pre">(workshop)</span></code> at the beginning of your new prompt.</p>
+<div class="highlight-bat"><div class="highlight"><pre><span></span><span class="p">(</span>workshops<span class="p">)</span> C:\Users\Ala<span class="p">&gt;</span>where python
+C<span class="p">:</span><span class="nl">\Users\Ala\workshops\Scripts\python.exe</span>
+...
+
+<span class="p">(</span>workshops<span class="p">)</span> C:\Users\Ala<span class="p">&gt;</span>where pip
+C<span class="p">:</span><span class="nl">\Users\Ala\workshops\Scripts\pip.exe</span>
+...
+
+<span class="p">(</span>workshops<span class="p">)</span> C:\Users\Ala<span class="p">&gt;</span>python --version
+3.6.5
+</pre></div>
+</div>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Linux or Mac</span>
+<span class="o">(</span>workshops<span class="o">)</span> ~$ which python
+/home/Ala/workshops/bin/python
+<span class="o">(</span>workshops<span class="o">)</span> ~$ which pip
+/home/Ala/workshops/bin/pip
+...
+
+<span class="o">(</span>workshops<span class="o">)</span> ~$ python --version
+<span class="m">3</span>.6.0
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You may already have the <code class="docutils literal"><span class="pre">pip</span></code> command available on your system. Always check which pip you are using with command: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">--version</span></code>.
+You can do this by running one of these commands:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>~$ pip --version
+~$ pip3 --version
+~$ pip3.6 --version
+</pre></div>
+</div>
+<p>It will give you the version of pip and a path to your virtual environment directory.</p>
+<p>If you can&#8217;t find your <code class="docutils literal"><span class="pre">pip</span></code> or there is a problem after typing <code class="docutils literal"><span class="pre">which</span> <span class="pre">pip</span></code> (<code class="docutils literal"><span class="pre">where</span> <span class="pre">pip</span></code> on windows), you may need to reinstall pip:</p>
+<div class="last highlight-sh"><div class="highlight"><pre><span></span>~$ python -m pip uninstall pip
+~$ python -m ensurepip
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h3>
+<p>New virtual environment installation:</p>
+<div class="highlight-bat"><div class="highlight"><pre><span></span><span class="p">:</span><span class="c1">: Windows</span>
+C<span class="p">:</span><span class="nl">\Users\Ala</span><span class="c1">&gt; C:\Python36\python -m venv workshops</span>
+</pre></div>
+</div>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Linux or Mac</span>
+~$ python3.6 -m venv workshops
+</pre></div>
+</div>
+<p>Virtual environment activation:</p>
+<div class="highlight-bat"><div class="highlight"><pre><span></span><span class="p">:</span><span class="c1">: Windows</span>
+C<span class="p">:</span><span class="nl">\Users\Ala</span><span class="c1">&gt; workshops\Scripts\activate</span>
+</pre></div>
+</div>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="c1"># Linux or Mac</span>
+~$ <span class="nb">source</span> workshops/bin/activate
+</pre></div>
+</div>
+<p>Just make sure that you use the proper Python version:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">(</span>workshops<span class="o">)</span> ~$ python --version
+<span class="m">3</span>.6.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="pip">
+<h3>pip<a class="headerlink" href="#pip" title="Permalink to this headline">¶</a></h3>
+<p>Over the years, people have been creating new tools using python. Usually they are distributed in a form of packages. In most cases, those tools can be installed
+using python&#8217;s installation manager <code class="docutils literal"><span class="pre">pip</span></code>. By default it downloads packages from PyPI ( <a class="reference external" href="https://www.pypi.org">pypi.org</a> ), python package index, a free software depository
+used by open source python developers to distribute their work. After downloading the package, <code class="docutils literal"><span class="pre">pip</span></code> will install it, all done automatically.</p>
+<p>Below, we use <code class="docutils literal"><span class="pre">pip</span></code> to install some helpful tools, <code class="docutils literal"><span class="pre">IPython</span></code> and <code class="docutils literal"><span class="pre">pylint</span></code>. Besides installing, <code class="docutils literal"><span class="pre">pip</span></code> allows for searching of specific packages and
+updating packages if newer version is available in PyPI.</p>
+<p>To look for a specific package use <code class="docutils literal"><span class="pre">pip</span></code> with <code class="docutils literal"><span class="pre">search</span></code> option:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">(</span>workshops<span class="o">)</span> ~$ pip search ipython
+</pre></div>
+</div>
+<p>This prints a list of packages containing <code class="docutils literal"><span class="pre">ipython</span></code> in their names with a short description and a version available. If a package is already
+installed, <code class="docutils literal"><span class="pre">pip</span> <span class="pre">search</span></code> will display <code class="docutils literal"><span class="pre">INSTALLED</span></code> and <code class="docutils literal"><span class="pre">LATEST</span></code> versions so you know whether library is up to date:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">(</span>workshop<span class="o">)</span> ~$ pip search ipython
+ipython <span class="o">(</span><span class="m">6</span>.4.0<span class="o">)</span>                              - IPython: Productive Interactive
+                                                Computing
+INSTALLED: <span class="m">4</span>.1.2
+LATEST:    <span class="m">6</span>.4.0
+</pre></div>
+</div>
+<p>To update a package, use <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span></code>.</p>
+<p>To list all installed packages use <code class="docutils literal"><span class="pre">pip</span> <span class="pre">list</span></code>.</p>
+<p>To see all options and flags that can be used with <code class="docutils literal"><span class="pre">pip</span></code> write <code class="docutils literal"><span class="pre">pip</span> <span class="pre">--help</span></code> and <code class="docutils literal"><span class="pre">pip</span> <span class="pre">&lt;option&gt;</span> <span class="pre">--help</span></code>, where option is i.e. <code class="docutils literal"><span class="pre">install</span></code>.</p>
+</div>
+<div class="section" id="ipython">
+<h3>IPython<a class="headerlink" href="#ipython" title="Permalink to this headline">¶</a></h3>
+<p>IPython is a better shell for python. It enables code completion and enhances editing capabilities. We strongly suggest to use
+it instead of the <cite>stock</cite> version (i.e. <code class="docutils literal"><span class="pre">python</span></code> command).
+To install <code class="docutils literal"><span class="pre">IPython</span></code> in your virtual environment, write:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">(</span>workshops<span class="o">)</span> ~$ pip install ipython
+</pre></div>
+</div>
+</div>
+<div class="section" id="pylint">
+<h3>Pylint<a class="headerlink" href="#pylint" title="Permalink to this headline">¶</a></h3>
+<p>Pylint is a tool that helps keeping your code clean. It will check your source files for errors, but alse for common style problems
+like non-descriptive variable names, lack of documentation. In the result, it will display a grade of your code, from -10 to 10, higher
+means better code. A good rule of thumb, especially for beginners, is to keep your code above 7.</p>
+<p>To install it, type:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">(</span>workshops<span class="o">)</span> ~$ pip isntall pylint
+</pre></div>
+</div>
+<p>More on <code class="docutils literal"><span class="pre">pylint</span></code> can be found in <a class="reference internal" href="going_further.html#going-further-pylint"><span class="std std-ref">Going further</span></a> section.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <a href="index.html" class="logo"><img class="logo" src="_static/logo.png" style="width: 200px; height: 169px; margin: -10px 0 10px 0"></a>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linux-ubuntu-fedora-etc-or-mac">Linux (Ubuntu, Fedora, etc.) or Mac</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fedora">Fedora</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#os-x">OS X</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other">Other</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tools">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windows-command-line">Windows command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#virtual-environment">Virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pip">pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ipython">IPython</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pylint">Pylint</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_objects.html">Everything is an object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_data_structures.html">Basic Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loops_functions.html">Tic Tac Toe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="going_further.html">Going Further</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Geek Girls Carrots Code of Conduct</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright Code Carrots.
+  </div>
+  
+  <a href="https://github.com/ggcarrots/python-carrots">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
+  </a>
+  </body>
+</html>

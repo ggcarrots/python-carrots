@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en_GB">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction to Python &mdash; Code Carrots</title>
+    
+    <link rel="stylesheet" href="_static/carrots.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Code Carrots" href="index.html" />
+    <link rel="next" title="Everything is an object" href="intro_to_objects.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+  </head>
+  <body role="document">
+  
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="intro_to_objects.html" title="Everything is an object"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Code Carrots</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction-to-python">
+<h1>Introduction to Python<a class="headerlink" href="#introduction-to-python" title="Permalink to this headline">¶</a></h1>
+<p>Let’s start with running the Python interpreter we installed in the previous chapter. Please run:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">(</span>workshops<span class="o">)</span> ~$ python
+Python <span class="m">3</span>.4.0 <span class="o">(</span>...<span class="o">)</span>
+Type <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
+
+&gt;&gt;&gt;
+</pre></div>
+</div>
+<p>Earlier we were working in the operating system&#8217;s command line and we could give commands.
+The prompt was <code class="docutils literal"><span class="pre">~$</span></code>. After running the <code class="docutils literal"><span class="pre">python</span></code> command, the prompt changed to
+<code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code>.  For us, that means that for now we may only use commands from the Python language. Recent commands (
+such as: <code class="docutils literal"><span class="pre">cd</span></code>, <code class="docutils literal"><span class="pre">mkdir</span></code>) will not work. This is the moment when we start to learn a new language!</p>
+<p>We don&#8217;t type the prompt <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> (the same as with <code class="docutils literal"><span class="pre">~$</span></code>) - the interpreter will do that for us.</p>
+<p>Now we can count something, for example: <code class="docutils literal"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>Python is excellent as a calculator:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">6</span> <span class="o">*</span> <span class="mi">7</span>
+<span class="go">42</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">1252</span> <span class="o">-</span> <span class="mi">38</span> <span class="o">*</span> <span class="mi">6</span>
+<span class="go">1024</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">7</span>
+<span class="go">-14</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">21</span> <span class="o">/</span> <span class="mi">7</span>
+<span class="go">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="go">2.5</span>
+</pre></div>
+</div>
+<p>Please pay special attention when writing decimals: use a period, not a comma. Commas will be used to
+define some data structures like lists or tuples (but more on that later).</p>
+<div class="section" id="introduce-yourself">
+<h2>Introduce yourself<a class="headerlink" href="#introduce-yourself" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="strings">
+<h3>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h3>
+<p>Numbers, however, are not enough to communicate effectively. So we need to learn how to use <code class="docutils literal"><span class="pre">strings</span></code>.
+Here are some examples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;Hello World&quot;</span>
+<span class="go">&#39;Hello World&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;Foo Bar&#39;</span>
+<span class="go">&#39;Foo Bar&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;Rock &#39;n&#39; Roll&quot;</span>
+<span class="go">&quot;Rock &#39;n&#39; Roll&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;My name is &quot;James&quot;&#39;</span>
+<span class="go">&#39;My name is &quot;James&quot;&#39;</span>
+</pre></div>
+</div>
+<p>You can also add strings as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;My name is &#39;</span> <span class="o">+</span> <span class="s1">&#39;&quot;James&quot;&#39;</span>
+<span class="go">&#39;My name is &quot;James&quot;&#39;</span>
+</pre></div>
+</div>
+<p>or they can be multiplied by whole numbers:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;Hastur&#39;</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="go">&#39;HasturHasturHastur&#39;</span>
+</pre></div>
+</div>
+<p>The string must always begin and end with the same character. This may be a single quote (<code class="docutils literal"><span class="pre">'</span></code>) or
+double quotes (<code class="docutils literal"><span class="pre">&quot;</span></code>). It has no effect on the value of the string, i.e, typing <code class="docutils literal"><span class="pre">&quot;Batman&quot;</span></code> creates
+a string <code class="docutils literal"><span class="pre">Batman</span></code> - quotes are not a part of it, they only indicate that it is a string (
+unfortunately, Python is not so clever as to guess it by itself).</p>
+</div>
+<div class="section" id="printing-the-strings">
+<h3>Printing the strings<a class="headerlink" href="#printing-the-strings" title="Permalink to this headline">¶</a></h3>
+<p>How do we present values in a readable form? We can do it by using the <a class="reference external" href="http://docs.python.org/3/library/functions.html#print" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">print()</span></code></a> command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
+<span class="go">Hello World</span>
+</pre></div>
+</div>
+<p>In a similar way, we can write several strings in a single line without adding them to each other.
+They will be separated by spaces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hi, my name is&quot;</span><span class="p">,</span> <span class="s2">&quot;Łukasz&quot;</span><span class="p">)</span>
+<span class="go">Hi, my name is Łukasz</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="http://docs.python.org/3/library/functions.html#print" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">print()</span></code></a> command has many more applications as it can write almost everything.
+For now, the only other kind of values we know are numbers:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">1 2 3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2 + 2 =&quot;</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">2 + 2 = 4</span>
+</pre></div>
+</div>
+<p>We are done with the interactive console for now. To exit it enter <cite>quit()</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Or hold <code class="docutils literal"><span class="pre">Ctrl+D</span></code> (for Linux or OSX) or <code class="docutils literal"><span class="pre">Ctrl+Z</span></code> (for Windows).</p>
+</div>
+</div>
+<div class="section" id="source-files">
+<h2>Source files<a class="headerlink" href="#source-files" title="Permalink to this headline">¶</a></h2>
+<p>So far, our code was executed in an interactive mode where we give commands
+separately and immediately get an answer. It’s a great way to experiment and learn
+new language elements, which is why we will get back to it eventually.
+However now we will try to write our own, separate program.</p>
+<p>Our first program will look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hi, my name is Bond&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In order to write and save code in a file we need to use a text editor.
+Find a text editor that works on your OS (see <a class="reference external" href="http://en.wikipedia.org/wiki/List_of_text_editors">list of text editors on Wikipedia</a> for examples).
+Type the above Python code and save it in a new file called <code class="docutils literal"><span class="pre">visitingcard.py</span></code>.
+Then run your first Python program, from the command line, using the following.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="o">(</span>workshops<span class="o">)</span> ~$ python visitingcard.py
+Hi, my name is Bond
+<span class="o">(</span>workshops<span class="o">)</span> ~$
+</pre></div>
+</div>
+<p>A single program can contain more than one command. Each should be on a separate line. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hi,&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;my name is Bond.&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;James Bond.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can insert blank lines wherever we want in <code class="docutils literal"><span class="pre">visitingcard.py</span></code> file to increase its readability.
+Here, we split the message header from the content and the end.</p>
+</div>
+<div class="section" id="bmi-calculator">
+<h2>BMI calculator<a class="headerlink" href="#bmi-calculator" title="Permalink to this headline">¶</a></h2>
+<p>Now we are going to write a simple program to calculate <cite>BMI</cite> (<a class="reference external" href="http://pl.wikipedia.org/wiki/Body_Mass_Index">Body Mass Index</a>).
+The formula for its calculation is as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">BMI</span> <span class="o">=</span> <span class="p">(</span><span class="n">mass</span> <span class="p">(</span><span class="n">kg</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">height</span> <span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="n">squared</span>
+</pre></div>
+</div>
+<p>We already know how to divide, exponentiate, and print out numbers. Let&#8217;s create a new file called <code class="docutils literal"><span class="pre">bmi.py</span></code>
+and write a program that calculates our BMI:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your BMI is:&quot;</span><span class="p">,</span> <span class="mf">65.5</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.75</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Run our new program with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python bmi.py
+</pre></div>
+</div>
+<p>We get the following result:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Your BMI is: 21.387755102040817
+</pre></div>
+</div>
+<p>As you can see, our program still needs some improvements:</p>
+<ol class="arabic simple">
+<li>If someone else would like to use this program, we must change the contents of the <code class="docutils literal"><span class="pre">bmi.py</span></code> file.</li>
+<li>To someone who does has not memorized the BMI table, the value 21.387755102 won’t mean
+anything.</li>
+<li>Printing so many decimal places is unnecessary. BMI is measured with an accuracy of two decimal
+places.</li>
+</ol>
+<p>Programming is the art of solving problems, so… let&#8217;s get to work! It will give us an
+opportunity to learn about some new features of Python.</p>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s try to solve the first problem. We would like to make our program more
+readable, i.e. so that for the person reading the results, it would be obvious which value is the
+weight and which is the height.</p>
+<p>That&#8217;s why we give names to these values:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">weight</span> <span class="o">=</span> <span class="mf">65.5</span>
+<span class="n">height</span> <span class="o">=</span> <span class="mf">1.75</span>
+
+<span class="n">bmi</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">height</span><span class="o">**</span><span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your BMI is:&quot;</span><span class="p">,</span> <span class="n">bmi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>That way we created <strong>variables</strong> <code class="docutils literal"><span class="pre">weight</span></code> and <code class="docutils literal"><span class="pre">height</span></code>.
+The result has not changed:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Your BMI is: 21.387755102040817
+</pre></div>
+</div>
+<p>In order to better understand how variables work, let’s go back to the interactive mode
+for a while and give names to some values;
+that is, store some values on variables:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PI</span> <span class="o">=</span> <span class="mf">3.1415</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Amelia&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Things:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">PI</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="go">Things: 42 3.1415 Amelia</span>
+</pre></div>
+</div>
+<p>We can change the value assigned to the variable. The new value does not need to be of the same type as the old one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">13</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Scarab&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">Scarab</span>
+</pre></div>
+</div>
+<p>The variables are independent of each other. We have just assigned a new value
+to <code class="docutils literal"><span class="pre">x</span></code>, but the value assigned to <code class="docutils literal"><span class="pre">y</span></code> remains unchanged:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">42</span>
+</pre></div>
+</div>
+<p>As we have seen in our program, we can also give names to the results of calculations and use variables in
+calculations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="mf">65.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="mf">175.0</span> <span class="o">/</span> <span class="mf">100.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bmi</span> <span class="o">=</span> <span class="n">w</span> <span class="o">/</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">bmi</span><span class="p">)</span>
+<span class="go">65.5 1.75 21.387755102040817</span>
+</pre></div>
+</div>
+<p>Once a value is calculated, it is not modified:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">bmi</span><span class="p">)</span>
+<span class="go">64 1.75 21.387755102040817</span>
+</pre></div>
+</div>
+<p>Until we give the Python the command to repeat the calculation again:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bmi</span> <span class="o">=</span> <span class="n">w</span> <span class="o">/</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">bmi</span><span class="p">)</span>
+<span class="go">64 1.75 20.897959183673468</span>
+</pre></div>
+</div>
+<p>Now is time to add some comments to our program so that the user (and us too!)
+remembers that the weight has to be given in kilograms.</p>
+<p>Comments allow us to put arbitrary text in our python program. Comments will be ignored by the interpreter.</p>
+<p>A comment in Python is everything after the character <code class="docutils literal"><span class="pre">#</span></code> until the end of the line:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Weight in kilograms</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="mf">65.5</span>
+
+<span class="c1"># Height in meters</span>
+<span class="n">height</span> <span class="o">=</span> <span class="mf">1.75</span>
+
+<span class="n">bmi</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">height</span><span class="o">**</span><span class="mi">2</span> <span class="c1"># Count BMI</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your BMI is:&quot;</span><span class="p">,</span> <span class="n">bmi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="calling-a-function">
+<h2>Calling a function<a class="headerlink" href="#calling-a-function" title="Permalink to this headline">¶</a></h2>
+<p>Our program looks good, but if a user wants to calculate his/her BMI, they still have to change the
+content of the program. It would be more convenient to enter the required values in the console after
+opening the program and get the BMI result.</p>
+<p>To write such a program, we need to learn how to use <code class="docutils literal"><span class="pre">functions</span></code>. The first function we are
+going to learn is <a class="reference external" href="http://docs.python.org/3/library/functions.html#help" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">help()</span></code></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span>
+<span class="go">Type help() for interactive help, or help(object) for help about object.</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="http://docs.python.org/3/library/functions.html#help" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">help()</span></code></a> function is very friendly and tells us how we should use it. It can also tell you how to
+use other functions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">Help on function input in module builtins:</span>
+
+<span class="go">input(...)</span>
+<span class="go">    input([prompt]) -&gt; string</span>
+
+<span class="go">    Read a string from standard input.  The trailing newline is stripped.</span>
+<span class="go">    If the user hits EOF (Unix: Ctl-D, Windows: Ctl-Z+Return), raise EOFError.</span>
+<span class="go">    On Unix, GNU readline is used if enabled.  The prompt string, if given,</span>
+<span class="go">    is printed without a trailing newline before reading.</span>
+</pre></div>
+</div>
+<p>We will use <a class="reference external" href="http://docs.python.org/3/library/functions.html#input" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">input()</span></code></a> to load data from the user. As we read in the description, <a class="reference external" href="http://docs.python.org/3/library/functions.html#input" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">input()</span></code></a> reads the
+string:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span><span class="p">()</span>
+<span class="go">Ala has a cat</span>
+<span class="go">&#39;Ala has a cat&#39;</span>
+</pre></div>
+</div>
+<p>Now you will learn what &#8220;calling a function&#8221; means. You can call a function using <code class="docutils literal"><span class="pre">()</span></code>, which is
+an information for the interpreter to call a function. Calling a function will run a function. If you
+forget  to type <code class="docutils literal"><span class="pre">()</span></code> after the function name, the function is not called. In this situation,
+you will not get any informations about errors, because the command you typed is still correct.</p>
+<p>Generally, function calls <strong>return</strong> some values. The <a class="reference external" href="http://docs.python.org/3/library/functions.html#input" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">input()</span></code></a> function returns a string, that’s why
+we can use it the same way that we used strings before.</p>
+<p>For example, we can use <code class="docutils literal"><span class="pre">input()</span></code> to save a given string as a name:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, stranger. What&#39;s your name?&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="go">Joanna</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span>
+<span class="go">&#39;Joanna&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Very nice to meet you,&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="go">Very nice to meet you, Joanna</span>
+</pre></div>
+</div>
+<p>We can simplify it a little bit,
+by telling <a class="reference external" href="http://docs.python.org/3/library/functions.html#input" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">input()</span></code></a> function what should it ask:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Hello, stranger. What&#39;s your name?&quot;</span><span class="p">)</span>
+<span class="go">Joanna</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span>
+<span class="go">&#39;Joanna&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Very nice to meet you,&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="go">Very nice to meet you, Joanna</span>
+</pre></div>
+</div>
+<p>Is that enough to improve our program?</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="go">60.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span>
+<span class="go">&#39;60.5&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">Can&#39;t convert &#39;int&#39; object to str implicitly</span>
+</pre></div>
+</div>
+<p>As you can see, Python doesn’t know what result we expect. Both strings (<code class="docutils literal"><span class="pre">str</span></code>), and
+numbers (<code class="docutils literal"><span class="pre">int</span></code>) can&#8217;t be added together. Python does not know if we are referring to the number <code class="docutils literal"><span class="pre">60.5</span></code>
+or to the string <code class="docutils literal"><span class="pre">&quot;60.5&quot;</span></code>. Only we know that, so we have to include this information in the program.</p>
+<p>Let’s introduce two more functions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>  
+<span class="go">Help on class int in module builtins:</span>
+
+<span class="go">class int(object)</span>
+<span class="go"> |  int(x=0) -&gt; integer</span>
+<span class="go"> |  int(x, base=10) -&gt; integer</span>
+<span class="go"> |</span>
+<span class="go"> |  Convert a number or string to an integer, or return 0 if no arguments</span>
+<span class="go"> |  are given.  If x is a number, return x.__int__().  For floating point</span>
+<span class="go"> |  numbers, this truncates towards zero.</span>
+<span class="go"> |</span>
+<span class="go"> |  ...</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>  
+<span class="go">Help on class float in module builtins:</span>
+
+<span class="go">class float(object)</span>
+<span class="go"> |  float(x) -&gt; floating point number</span>
+<span class="go"> |</span>
+<span class="go"> |  Convert a string or number to a floating point number, if possible.</span>
+<span class="go"> |</span>
+<span class="go"> |  ...</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="http://docs.python.org/3/library/functions.html#help" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">help()</span></code></a> function does not hesitate to inform us that, in fact,
+<code class="xref py py-func docutils literal"><span class="pre">int()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">float()</span></code> are not functions but classes (we will talk about those later), hence the information about all the other things that you can use them for. For now, we
+are only interested in the basic functionality of converting strings into numbers of a
+determined type.</p>
+<p>Let’s test <code class="xref py py-func docutils literal"><span class="pre">int()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">float()</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot; 63 &quot;</span><span class="p">)</span>
+<span class="go">63</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;60.5&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">invalid literal for int() with base 10: &#39;60.5&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot; 63 &quot;</span><span class="p">)</span>
+<span class="go">63.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;60.5&quot;</span><span class="p">)</span>
+<span class="go">60.5</span>
+</pre></div>
+</div>
+<p>Before we use the newly learnt functions in our program, let’s make a plan of how it should work:</p>
+<ol class="arabic simple">
+<li>Ask the user to enter the height.</li>
+<li>Load the string from the user and save it under the name <code class="docutils literal"><span class="pre">height</span></code>.</li>
+<li>Change the string with the number to a number with a fraction.</li>
+<li>Ask the user to enter the weight.</li>
+<li>Load the string from the user and save it under the name of <code class="docutils literal"><span class="pre">weight</span></code>.</li>
+<li>Change the string with the number to a number with a fraction.</li>
+<li>Using the remembered values calculate BMI and save as <code class="docutils literal"><span class="pre">bmi</span></code>.</li>
+<li>Print the calculated BMI.</li>
+</ol>
+<p>It should not surprise us that these eight points can be directly translated into eight lines of our
+program (not counting spaces):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter the height in meters:&quot;</span><span class="p">)</span>
+<span class="n">height</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="n">height</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter the weight in kilograms:&quot;</span><span class="p">)</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+
+<span class="n">bmi</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">height</span><span class="o">**</span><span class="mi">2</span> <span class="c1"># calculate BMI</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your BMI is:&quot;</span><span class="p">,</span> <span class="n">bmi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can save this program to <code class="docutils literal"><span class="pre">bmi.py</span></code> and run <code class="docutils literal"><span class="pre">python</span> <span class="pre">bmi.py</span></code>. The result should look like this:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Enter the height in meters:
+1.75
+Enter the weight in kilograms:
+65.5
+Your BMI is: 21.387755102040817
+</pre></div>
+</div>
+<p>In conclusion, to call a function we need to know its name (until now we learnt a bunch of functions: <a class="reference external" href="http://docs.python.org/3/library/functions.html#print" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">print()</span></code></a>, <a class="reference external" href="http://docs.python.org/3/library/functions.html#help" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">help()</span></code></a>, <a class="reference external" href="http://docs.python.org/3/library/functions.html#input" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">input()</span></code></a>, <code class="xref py py-func docutils literal"><span class="pre">int()</span></code>, <code class="xref py py-func docutils literal"><span class="pre">float()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">quit()</span></code>),
+and what data it expects from us.
+The data we provide in the brackets is called the list of <strong>arguments</strong>.</p>
+<p>Entering just the name does not activate the function. It will tell us only that it is a function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span>  
+<span class="go">&lt;built-in function input&gt;</span>
+</pre></div>
+</div>
+<p>In order to call the function, we must put parentheses after its name:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span><span class="p">()</span>  
+</pre></div>
+</div>
+<p>Now Python will execute the function.</p>
+<p>All arguments are given in parentheses. To specify more than one, separate them with a comma:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="p">)</span>
+<span class="go">a, b, c</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="checking-conditions">
+<h2>Checking conditions<a class="headerlink" href="#checking-conditions" title="Permalink to this headline">¶</a></h2>
+<p>Let’s go to our next problem. We want our program to print the appropriate
+classification for the calculated BMI by using the table below:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="54%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">BMI</th>
+<th class="head">Classification</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&lt; 18,5</td>
+<td>underweight</td>
+</tr>
+<tr class="row-odd"><td>18,5 – 24,99</td>
+<td>normal weight</td>
+</tr>
+<tr class="row-even"><td>≥ 25,0</td>
+<td>overweight</td>
+</tr>
+</tbody>
+</table>
+<p>We need to use the <strong>conditional statement</strong> <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#if" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">if</span></code></a>. It will execute the rest of the program
+depending on a given condition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter your height in meters:&quot;</span><span class="p">)</span>
+<span class="n">height</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="n">height</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter your weight in kilograms:&quot;</span><span class="p">)</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+
+<span class="n">bmi</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">height</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># Calculate BMI</span>
+
+<span class="k">if</span> <span class="n">bmi</span> <span class="o">&lt;</span> <span class="mf">18.5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;underweight&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">bmi</span> <span class="o">&lt;</span> <span class="mf">25.0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;normal weight&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;overweight&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Enter your height in meters:
+1.75
+Enter your weight in kilograms:
+65.5
+normal weight
+</pre></div>
+</div>
+<div class="section" id="comparisons-true-or-false">
+<h3>Comparisons:  true or false?<a class="headerlink" href="#comparisons-true-or-false" title="Permalink to this headline">¶</a></h3>
+<p>Let us now talk about comparisons. Let&#8217;s look at how they behave in a short math lesson:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">1</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">==</span> <span class="mf">1.0</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">10</span> <span class="o">&gt;=</span> <span class="mi">10</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">13</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">-</span><span class="mi">1</span> <span class="o">!=</span> <span class="mi">0</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The result of a comparison is always <code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code>.
+Comparisons can be combined into more complex conditions by using the words <a class="reference external" href="http://docs.python.org/3/reference/expressions.html#and" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">and</span></code></a> and
+<a class="reference external" href="http://docs.python.org/3/reference/expressions.html#or" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">or</span></code></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">x</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">x</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">x</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="indentations">
+<h3>Indentations<a class="headerlink" href="#indentations" title="Permalink to this headline">¶</a></h3>
+<p>Another thing you should pay attention to is the indentation in the code. Open the interactive mode
+and enter a simple condition such as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<p>So far nothing has happened, as evidenced by dots <code class="docutils literal"><span class="pre">...</span></code> instead of a prompt <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code>, which we
+have seen so far. Python expects us to give further instructions that are supposed to be executed if the
+condition <code class="docutils literal"><span class="pre">2</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>  turns out to be true. Let’s try to make Python print &#8220;OK&#8221;:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="gp">... </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">)</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">)</span>
+        <span class="o">^</span>
+<span class="gr">IndentationError</span>: <span class="n">expected an indented block</span>
+</pre></div>
+</div>
+<p>Unfortunately, we did not succeed. Python needs to know whether the instruction we have written is a
+continuation of <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#if" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">if</span></code></a> or it is the next instruction not covered by the condition. For this
+purpose, we need to indent our code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="gp">... </span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">OK</span>
+</pre></div>
+</div>
+<p>All you need is one space or <code class="docutils literal"><span class="pre">TAB</span></code>. However, all the lines that are supposed to be executed one
+after another should be indented the same way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="gp">... </span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="gp">... </span>  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+    <span class="o">^</span>
+<span class="gr">IndentationError</span>: <span class="n">unexpected indent</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="gp">... </span>  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+            <span class="o">^</span>
+<span class="gr">IndentationError</span>: <span class="n">unindent does not match any outer indentation level</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="gp">... </span>  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="gp">... </span>  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">A</span>
+<span class="go">B</span>
+</pre></div>
+</div>
+<p>To avoid chaos, most Python programmers use four spaces for each level of indentation. We will
+do the same:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FAIL&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DONE&quot;</span><span class="p">)</span>
+<span class="go">OK</span>
+<span class="go">DONE</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-if-not">
+<h3>What if not?<a class="headerlink" href="#what-if-not" title="Permalink to this headline">¶</a></h3>
+<p>Actually, we could write our program just by using <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#if" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">if</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">bmi</span> <span class="o">&lt;</span> <span class="mf">18.5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;underweight&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">bmi</span> <span class="o">&gt;=</span> <span class="mf">18.5</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">bmi</span> <span class="o">&lt;</span> <span class="mf">25.0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;normal weight&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">bmi</span> <span class="o">&gt;=</span> <span class="mf">25.0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;overweight&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can also use <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#else" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">else</span></code></a> and <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#elif" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">elif</span></code></a> to avoid repeating similar conditions and increase readability. In more complex programs it may not be obvious from
+the beginning that a certain condition is the opposite of the previous one.</p>
+<p>Using <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#else" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">else</span></code></a> , we have the guarantee that the given instructions will be executed only if the instructions printed under <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#if" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">if</span></code></a> haven’t been executed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">bmi</span> <span class="o">&lt;</span> <span class="mf">18.5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;underweight&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># If your program executes this instruction,</span>
+    <span class="c1"># for sure bmi &gt;= 18.5 !</span>
+    <span class="k">if</span> <span class="n">bmi</span> <span class="o">&lt;</span> <span class="mf">25.0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;normal weight&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># now for sure bmi &gt;= 25.0, we don’t have to</span>
+        <span class="c1"># check it</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;overweight&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pay particular attention to the indentations. Every use of <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#else" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">else</span></code></a>,
+will cause an increased indentation of our code. It is very annoying when you have to check a few or a
+dozen or so conditions which exclude one another. Therefore the authors of Python added a little
+&#8216;improvement&#8217; in the form of <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#elif" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">elif</span></code></a>: instruction, which allows you to check another condition
+immediately:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;one&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="c1"># if it wasn’t n &lt; 1, and now it is n &lt; 2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;two&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="c1"># ,if none of the previous condition was true.</span>
+    <span class="c1"># n &gt;= 1 i n&gt;= 2, but n &lt; 3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;three&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># trolls can count only to three</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;more&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="strings-formatting">
+<h2>Strings formatting<a class="headerlink" href="#strings-formatting" title="Permalink to this headline">¶</a></h2>
+<p>The last issue which we have mentioned above was the problem with too many digits in a printed BMI.
+Out of the three problems we had, this one is the easiest to solve.</p>
+<p>That’s why we left it for the end of our adventure with the BMI calculator. We already know
+that we can add strings to each other and multiply them by integers. You will see that we can also
+format them.</p>
+<p>Currently the result is reduced to a single line. Now we want to write the
+BMI as a number and the interval in which it is located, that is to say:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Your</span> <span class="n">BMI</span> <span class="ow">is</span> <span class="n">equal</span><span class="p">:</span> <span class="mf">21.39</span> <span class="p">(</span><span class="n">normal</span> <span class="n">weight</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Modify the current program so that the calculated BMI would be available under the name of <code class="docutils literal"><span class="pre">bmi</span></code>,and
+the name of the interval under the name of <code class="docutils literal"><span class="pre">category</span></code>. Then we can use <a class="reference external" href="http://docs.python.org/3/library/functions.html#print" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">print()</span></code></a> and obtain the
+required result:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your BMI is equal:&quot;</span><span class="p">,</span> <span class="n">bmi</span><span class="p">,</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="n">category</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Well, almost…. We still have too many digits. We would also have a problem if we wanted to generate
+such a string and save with a name, because we use <a class="reference external" href="http://docs.python.org/3/library/functions.html#print" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">print()</span></code></a> to separate the elements.
+Fortunately, there is a better way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bmi</span> <span class="o">=</span> <span class="mf">21.387755102040817</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;normal weight&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;Your BMI: </span><span class="si">%f</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">bmi</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">&#39;Your BMI: 21.387755 (normal weight)&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">Your BMI: 21.387755 (normal weight)</span>
+</pre></div>
+</div>
+<p>We have here a string and a couple of variables in brackets, joined by <code class="docutils literal"><span class="pre">%</span></code>. The string is a template which will be completed
+with values present after <code class="docutils literal"><span class="pre">%</span></code>. The spaces to be filled are also labeled with the percentage (<code class="docutils literal"><span class="pre">%</span></code>). .
+The letter that follows defines the type of a value we want to insert. The integers are represented
+by  <code class="docutils literal"><span class="pre">i</span></code> as <strong>integer</strong> (we can also use <code class="docutils literal"><span class="pre">d</span></code> as <strong>decimal</strong>),  strings are represented by <code class="docutils literal"><span class="pre">s</span></code> as
+<strong>string</strong>, and floating-point numbers are represented by <code class="docutils literal"><span class="pre">f</span></code> for <strong>float</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;String: </span><span class="si">%s</span><span class="s2">, Numbers: </span><span class="si">%d</span><span class="s2"> </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Ala&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">3.1415</span><span class="p">)</span>
+<span class="go">&#39;String: Ala, Numbers: 10 3.141500&#39;</span>
+</pre></div>
+</div>
+<p>Now instead of nine decimal places we always get six, but the formatting has the advantage that it
+allows us to have more control by putting between <code class="docutils literal"><span class="pre">%</span></code> and <code class="docutils literal"><span class="pre">f</span></code> additional information, e.g. if you
+want to display only two places after the decimal point:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="mf">3.1415</span>
+<span class="go">&#39;3.14&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="mf">21.387755102040817</span>
+<span class="go">&#39;21.39&#39;</span>
+</pre></div>
+</div>
+<p>There are plenty options of formatting, so we will not show them all here. One of the most useful is
+the option of aligning to a specific number of characters:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">WIDTH</span> <span class="o">=</span> <span class="mi">28</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="n">WIDTH</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| Name and last name |  Weight  |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="n">WIDTH</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| </span><span class="si">%15s</span><span class="s2"> | </span><span class="si">%6.2f</span><span class="s2"> |&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Łukasz&quot;</span><span class="p">,</span> <span class="mf">67.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| </span><span class="si">%15s</span><span class="s2"> | </span><span class="si">%6.2f</span><span class="s2"> |&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Pudzian&quot;</span><span class="p">,</span> <span class="mi">123</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="n">WIDTH</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>--------------------------------
+| Name and last name  |  Weight|
+--------------------------------
+|              Łukasz |  67.50 |
+|             Pudzian | 123.00 |
+--------------------------------
+</pre></div>
+</div>
+<p>We can also align the string to the left by putting <code class="docutils literal"><span class="pre">-</span></code> before the number of characters:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">WIDTH</span> <span class="o">=</span> <span class="mi">28</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="n">WIDTH</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| Name and last name |  Weight |&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="n">WIDTH</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| </span><span class="si">%-15s</span><span class="s2"> | </span><span class="si">%6.2f</span><span class="s2"> |&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Łukasz&quot;</span><span class="p">,</span> <span class="mf">67.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| </span><span class="si">%-15s</span><span class="s2"> | </span><span class="si">%6.2f</span><span class="s2"> |&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;Pudzian&quot;</span><span class="p">,</span> <span class="mi">123</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="n">WIDTH</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>-------------------------------
+| Name and last name|  Weight |
+-------------------------------
+| Łukasz            |  67.50  |
+| Pudzian           | 123.00  |
+-------------------------------
+</pre></div>
+</div>
+<p>Aligning towards the centre is an additional excercise for you :).</p>
+<p>Description:</p>
+<p>We will implement a simple game called rock-paper-scissors. Let&#8217;s define goals of the game:</p>
+<ol class="arabic simple">
+<li>Show game manual</li>
+<li>Get users choice as an input</li>
+<li>Compare user&#8217;s choice with predefined computer&#8217;s choice</li>
+<li>Print the outcome</li>
+</ol>
+<p>Initial code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Welcome&quot;</span><span class="p">)</span>
+<span class="n">computer_choice</span> <span class="o">=</span> <span class="s1">&#39;rock&#39;</span>
+
+<span class="c1"># Print game manual, possible chocies, author itp.</span>
+
+<span class="c1"># Get user input</span>
+
+<span class="c1"># Compare user&#39;s and computer&#39;s choices</span>
+
+<span class="c1"># Print the outcome</span>
+</pre></div>
+</div>
+<p>Explore:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Print game manual in stylish frame</li>
+<li>Print game manual on call (for instance, when user&#8217;s choice was help)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter we learned basics of Python syntax. We discovered how to print integers,
+floating-point numbers and strings.</p>
+<p>We learnt the function <a class="reference external" href="http://docs.python.org/3/library/functions.html#print" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">print()</span></code></a>, that prints information for the user and the function
+<a class="reference external" href="http://docs.python.org/3/library/functions.html#input" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">input()</span></code></a>, which reads it.</p>
+<p>We also know now that indentations can be important, especially when we want to use
+the instruction <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#if" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">if</span></code></a> (also in connection with <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#else" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">else</span></code></a> and <a class="reference external" href="http://docs.python.org/3/reference/compound_stmts.html#elif" title="(in Python v3.6)"><code class="xref std std-keyword docutils literal"><span class="pre">elif</span></code></a>).</p>
+<p>We successfully created a program stored in a file and ran it. Our program asks the user to answer
+a few simple questions, performs calculations and presents results in the form which is useful for the
+user.</p>
+<p>This is quite a lot like for a first program. We still have a lot of work, anyhow you can be proud of
+what we have done so far!</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <a href="index.html" class="logo"><img class="logo" src="_static/logo.png" style="width: 200px; height: 169px; margin: -10px 0 10px 0"></a>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduce-yourself">Introduce yourself</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#strings">Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#printing-the-strings">Printing the strings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#source-files">Source files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bmi-calculator">BMI calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calling-a-function">Calling a function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checking-conditions">Checking conditions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#comparisons-true-or-false">Comparisons:  true or false?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#indentations">Indentations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-if-not">What if not?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#strings-formatting">Strings formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_objects.html">Everything is an object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_data_structures.html">Basic Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loops_functions.html">Tic Tac Toe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="going_further.html">Going Further</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Geek Girls Carrots Code of Conduct</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright Code Carrots.
+  </div>
+  
+  <a href="https://github.com/ggcarrots/python-carrots">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
+  </a>
+  </body>
+</html>

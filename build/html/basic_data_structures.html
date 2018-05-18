@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en_GB">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic Data Structures &mdash; Code Carrots</title>
+    
+    <link rel="stylesheet" href="_static/carrots.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Code Carrots" href="index.html" />
+    <link rel="next" title="Tic Tac Toe" href="loops_functions.html" />
+    <link rel="prev" title="Everything is an object" href="intro_to_objects.html" /> 
+  </head>
+  <body role="document">
+  
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="loops_functions.html" title="Tic Tac Toe"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="intro_to_objects.html" title="Everything is an object"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Code Carrots</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-data-structures">
+<h1>Basic Data Structures<a class="headerlink" href="#basic-data-structures" title="Permalink to this headline">¶</a></h1>
+<p>Data structures are Python objects (no surprise here). They help us organize and store data on our computer. Just as the name suggests, they provide structure to our data, not only keeping the values, but also the relationships between them and even defining operations that can be applied to them.</p>
+<p>In this chapter you will learn about Python&#8217;s most popular data structures, starting with a list.</p>
+<div class="section" id="lists">
+<h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<p>In real life we can have shopping lists, or &#8220;todo&#8221; lists. They are very similar to their Python counterparts. In Python, we use them in order to store some values, where the order might be important.</p>
+<p>Lists are associated with the square brackets, so in order to create a new <code class="xref py py-func docutils literal"><span class="pre">list()</span></code>, you need to define it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<p>At any time we can check how many items we have saved on our list by using the function <a class="reference external" href="http://docs.python.org/3/library/functions.html#len" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">len()</span></code></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p>Let&#8217;s make another list (which can have the same name or a different one):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Jack&quot;</span><span class="p">,</span> <span class="s2">&quot;Jill&quot;</span><span class="p">,</span> <span class="s2">&quot;John&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>To preview a particular position of an element on the list (remember that we count the positions from 0):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&#39;Jack&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&#39;Jill&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">&#39;John&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr"> File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="gr">IndexError</span>: <span class="n">list index out of range</span>
+</pre></div>
+</div>
+<p>Python&#8217;s lists are flexible enough to let us store any type of value we want - <cite>int</cite>, <cite>float</cite>, <cite>str</cite> - you name it. Not only on different lists, but we can also store all of them on one list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Some string&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Some string&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>There are also some helpful methods defined on the <code class="docutils literal"><span class="pre">list</span></code> objects.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># append to the end of the list</span>
+<span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="c1"># insert at a given position; here at 0</span>
+<span class="n">L</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="c1"># remove first occurence from the list</span>
+<span class="n">L</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># yo dawg! I&#39;ve heard you like lists, so I put a list in your list</span>
+<span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generators">
+<h2>Generators<a class="headerlink" href="#generators" title="Permalink to this headline">¶</a></h2>
+<p>Imagine that you need a list of a length 100 consisting of numbers 0-99 (or 1-100). Thus far you know no smart way of doing that. We have to type the entire contents of the list. This problem can be solved by the function <code class="xref py py-func docutils literal"><span class="pre">range()</span></code>. Check <code class="docutils literal"><span class="pre">help(range)</span></code> for the full story, or check these quick examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">[1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">[1, 3, 5, 7, 9]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<span class="go">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">[1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">[0, 1]</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">range()</span></code> function does not directly create a list, but it returns a generator.</p>
+<p>You wouldn&#8217;t see much of a difference for our examples, but if you start playing with really big numbers, it will become apparent.
+When you create a list, each element needs to be evaluated and saved to memory before we even begin our operations on it. So if we try to create a list of a bilion elements, it might take up some of our memory and slow our computers down.
+On the other hand, generator only works at one element at the time. It fetches the element, does the operations that needed to be done and generates the next element only after the first one was completely processed.</p>
+<p>In order to obtain a list of the sequence, we use the function <code class="xref py py-func docutils literal"><span class="pre">list()</span></code>. If we skip <code class="xref py py-func docutils literal"><span class="pre">list()</span></code> call,
+the result will look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">range(1, 4)</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">range()</span></code> function has three forms. The most basic and most used one creates a sequence from 0 to the
+given number minus one. The other forms allow you to specify the start of the range and a step. The created
+sequence never includes the end of the specified range.</p>
+</div>
+<div class="section" id="tuples">
+<h2>Tuples<a class="headerlink" href="#tuples" title="Permalink to this headline">¶</a></h2>
+<p>Tuples are very similar to lists, with one <em>crucial</em> difference - they are immutable. It means, that once we define our tuple, we won&#8217;t be able to add nor delete objects from it. They are really useful, for example if you don&#8217;t want people to mess up your data by accident.</p>
+<p><cite>list</cite> was associated with the square brackets, <cite>tuple</cite> is associated with the round ones (although the parentheses are optional):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">tuple1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span>
+<span class="n">not_a_tuple</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The last example is not a tuple. Since the parentheses are optional, Python will treat <code class="docutils literal"><span class="pre">(2)</span></code> as a normal <cite>2</cite>, not a tuple. In order for it to be treated as a tuple, we need to add a coma afterwards:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">tuple3</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sets">
+<h2>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Sets are once again structures that differ slightly from lists. Two of the biggest differences are that:</dt>
+<dd><ul class="first last simple">
+<li>sets are not ordered (each time you ask Python to print it, it can give you a different ordering)</li>
+<li>every value in the set is unique</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="n">S</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>There is one very cool property of sets: you can subtract two sets from each other:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">S1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">S2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">S2</span> <span class="o">-</span> <span class="n">S1</span><span class="p">)</span>
+<span class="p">{</span><span class="mi">3</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dictionaries">
+<h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="introduction">
+<h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<p>Dictionary is the last data structure you will get to know. It is a bit more complex than the previous ones. Dictionaries are used to store data as a key and value (just like in encyclopedia - you have entry and a description attached to it). Imagine you want to store information about library users. For every reader you have: name, surname, birthdate, birthplace, id number.
+In python such a structure would look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">reader</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Kasia&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;surname&#39;</span><span class="p">:</span> <span class="s1">&#39;Kowalska&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;date_of_birth&#39;</span><span class="p">:</span> <span class="s1">&#39;19-01-1985&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;place_of_birth&#39;</span><span class="p">:</span> <span class="s1">&#39;Wrocław&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;readers_nr&#39;</span><span class="p">:</span> <span class="s1">&#39;ASDF1234&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example <code class="docutils literal"><span class="pre">name</span></code> is a key (dictionary entry), witch assigned value <code class="docutils literal"><span class="pre">Kasia</span></code> (entry description).
+Try to create your own user entry.</p>
+<p>Nowoczesna Biblioteka Raczyńskich in Poznan wants to send its users birthday wishes. For the library worker to know when you were born it only takes to check:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">reader</span><span class="p">[</span><span class="s1">&#39;date_of_birth&#39;</span><span class="p">]</span>
+<span class="go">&#39;19-01-1985&#39;</span>
+</pre></div>
+</div>
+<p>The clerk recalled: to send you birthday wishes he needs your address as well. You can add them to your reader&#8217;s data in such manner:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">reader</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ul. Marszałkowska 1, 01-234 Warszawa&#39;</span>
+</pre></div>
+</div>
+<p>You can easily change the value in dictionary, if you make any mistake- it only takes to rewrite existing value:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">reader</span><span class="p">[</span><span class="s1">&#39;place_of_birth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Łódź&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="task-1">
+<h3>Task 1<a class="headerlink" href="#task-1" title="Permalink to this headline">¶</a></h3>
+<p>Description: Library system contains author data assigned to every book. Library clerk checks book author while putting books on shelf in alphabetic order.
+Try to write down pairs: book &#8211;&gt; author for every record in dictionary, used to store library information.</p>
+<p>EXAMPLE (one line output):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="s1">&#39;Introduction to Algorithms&#39;</span> <span class="o">--&gt;</span> <span class="s1">&#39;Thomas H. Cormen&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">title_to_author</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;Structure and Interpretation of Computer Programs&#39;</span> <span class="p">:</span> <span class="s1">&#39;Harold Abelson&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Introduction to Algorithms&#39;</span> <span class="p">:</span> <span class="s1">&#39;Thomas H. Cormen&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;The C Programming Language&#39;</span> <span class="p">:</span> <span class="s1">&#39;Brian W. Kernighan&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;The Pragmatic Programmer: From Journeyman to Master&#39;</span> <span class="p">:</span> <span class="s1">&#39;Andrew Hunt&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Art of Computer Programming&#39;</span> <span class="p">:</span> <span class="s1">&#39;Donald Ervin Knuth&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Design Patterns: Elements of Reusable Object-Oriented Software&#39;</span> <span class="p">:</span> <span class="s1">&#39;Erich Gamma&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Artificial Intelligence: A Modern Approach&#39;</span> <span class="p">:</span> <span class="s1">&#39;Stuart Russell&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Introduction to the Theory of Computation&#39;</span> <span class="p">:</span> <span class="s1">&#39;Michael Sipser&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Code Complete&#39;</span> <span class="p">:</span> <span class="s1">&#39;Steve McConnell&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;The Mythical Man-Month: Essays on Software Engineering&#39;</span> <span class="p">:</span> <span class="s1">&#39;Frederick P. Brooks Jr.&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="task-2">
+<h3>Task 2<a class="headerlink" href="#task-2" title="Permalink to this headline">¶</a></h3>
+<p>You can help the clerk to find out on which shelf given book should be putted. In this very moment the library store data about its books in two dictionaries:: <code class="docutils literal"><span class="pre">title_to_author</span></code> and <code class="docutils literal"><span class="pre">title_to_shelf_number</span></code>. We need to join them.
+After join there will be one dictionary, containing information about shelf and author of a book.
+These information will be stored in tuplets of such elements (shelf number, author&#8217;s full name)</p>
+<p>Merge two dictionaries <code class="docutils literal"><span class="pre">title_to_author</span></code> and <code class="docutils literal"><span class="pre">title_to_shelf_number</span></code> in one, stored in variable <code class="docutils literal"><span class="pre">title_to_book_record</span></code>:</p>
+<ul class="simple">
+<li>The key in dictionary <code class="docutils literal"><span class="pre">title_to_author</span></code> is &#8220;book&#8217;s title&#8221;, and value is &#8220;main author&#8217;s name&#8221;</li>
+<li>The key in dictionary <code class="docutils literal"><span class="pre">title_to_shelf_number</span></code> is &#8220;book&#8217;s title&#8221;, and value is &#8220;shelf number&#8221;</li>
+<li>The key in output dictionary <code class="docutils literal"><span class="pre">title_to_book_record</span></code> should be &#8220;book&#8217;s title&#8221;, and value should contain 2 elements tuple
+(&#8220;main author&#8217;s name&#8221;, &#8220;shelf number&#8221;)</li>
+</ul>
+<p>EXAMPLE:</p>
+<p>For key <code class="docutils literal"><span class="pre">The</span> <span class="pre">C</span> <span class="pre">Programming</span> <span class="pre">Language</span></code> dictionary <code class="docutils literal"><span class="pre">title_to_book_record</span></code> should return a tuplet:
+<code class="docutils literal"><span class="pre">('Brian</span> <span class="pre">W.</span> <span class="pre">Kernighan',</span> <span class="pre">23)</span></code>. In Python interpreter:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">title_to_book_record</span><span class="p">[</span><span class="s1">&#39;The C Programming Language&#39;</span><span class="p">]</span>
+<span class="go">(&#39;Brian W. Kernighan&#39;, 23)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">title_to_author</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;Structure and Interpretation of Computer Programs&#39;</span> <span class="p">:</span> <span class="s1">&#39;Harold Abelson&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Introduction to Algorithms&#39;</span> <span class="p">:</span> <span class="s1">&#39;Thomas H. Cormen&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;The C Programming Language&#39;</span> <span class="p">:</span> <span class="s1">&#39;Brian W. Kernighan&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;The Pragmatic Programmer: From Journeyman to Master&#39;</span> <span class="p">:</span> <span class="s1">&#39;Andrew Hunt&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Art of Computer Programming&#39;</span> <span class="p">:</span> <span class="s1">&#39;Donald Ervin Knuth&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Design Patterns: Elements of Reusable Object-Oriented Software&#39;</span> <span class="p">:</span> <span class="s1">&#39;Erich Gamma&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Artificial Intelligence: A Modern Approach&#39;</span> <span class="p">:</span> <span class="s1">&#39;Stuart Russell&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Introduction to the Theory of Computation&#39;</span> <span class="p">:</span> <span class="s1">&#39;Michael Sipser&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Code Complete&#39;</span> <span class="p">:</span> <span class="s1">&#39;Steve McConnell&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;The Mythical Man-Month: Essays on Software Engineering&#39;</span> <span class="p">:</span> <span class="s1">&#39;Frederick P. Brooks Jr.&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">title_to_shelf_number</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;Structure and Interpretation of Computer Programs&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s1">&#39;Introduction to Algorithms&#39;</span> <span class="p">:</span> <span class="mi">34</span><span class="p">,</span>
+  <span class="s1">&#39;The C Programming Language&#39;</span> <span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
+  <span class="s1">&#39;The Pragmatic Programmer: From Journeyman to Master&#39;</span> <span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="s1">&#39;Art of Computer Programming&#39;</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s1">&#39;Design Patterns: Elements of Reusable Object-Oriented Software&#39;</span> <span class="p">:</span> <span class="mi">586</span><span class="p">,</span>
+  <span class="s1">&#39;Artificial Intelligence: A Modern Approach&#39;</span> <span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+  <span class="s1">&#39;Introduction to the Theory of Computation&#39;</span> <span class="p">:</span> <span class="mi">98</span><span class="p">,</span>
+  <span class="s1">&#39;Code Complete&#39;</span> <span class="p">:</span> <span class="mi">77</span><span class="p">,</span>
+  <span class="s1">&#39;The Mythical Man-Month: Essays on Software Engineering&#39;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="task-3">
+<h3>Task 3<a class="headerlink" href="#task-3" title="Permalink to this headline">¶</a></h3>
+<p>If you would like to find books particular edition by ISBN, you can use dictionary as below.</p>
+<p>Print out dictionary&#8217;s content in such manner:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;TITLE&#39;</span> <span class="n">by</span> <span class="s1">&#39;AUTOR&#39;</span> <span class="ow">is</span> <span class="n">on</span> <span class="n">shelf</span> <span class="s1">&#39;NUMBER_OF_SHELF&#39;</span> <span class="p">(</span><span class="n">ISBN</span><span class="p">:</span> <span class="s1">&#39;NUMBER_OF_ISBN&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The key in dictionary <code class="docutils literal"><span class="pre">books</span></code> is integer &#8220;ISBN&#8221; , and value is THREE ELEMENTS TUPLE (&#8220;book&#8217;s title&#8221;, &#8220;main author&#8217;s name&#8221;, &#8220;shelf number&#8221;)</p>
+<p>EXAMPLE (one line output):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Introduction</span> <span class="n">to</span> <span class="n">Algorithms</span> <span class="n">by</span> <span class="n">Thomas</span> <span class="n">H</span><span class="o">.</span> <span class="n">Cormen</span> <span class="ow">is</span> <span class="n">on</span> <span class="n">shelf</span> <span class="mi">34</span> <span class="p">(</span><span class="n">ISBN</span><span class="p">:</span> <span class="mi">0262032937</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">books</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;0262510871&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Structure and Interpretation of Computer Programs&#39;</span><span class="p">,</span> <span class="s1">&#39;Harold Abelson&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+  <span class="s1">&#39;0262032937&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Introduction to Algorithms&#39;</span><span class="p">,</span> <span class="s1">&#39;Thomas H. Cormen&#39;</span><span class="p">,</span> <span class="mi">34</span><span class="p">),</span>
+  <span class="s1">&#39;0131103628&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;The C Programming Language&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian W. Kernighan&#39;</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span>
+  <span class="s1">&#39;020161622X&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;The Pragmatic Programmer: From Journeyman to Master&#39;</span><span class="p">,</span> <span class="s1">&#39;Andrew Hunt&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+  <span class="s1">&#39;0201485419&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Art of Computer Programming&#39;</span><span class="p">,</span> <span class="s1">&#39;Donald Ervin Knuth&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+  <span class="s1">&#39;0201633612&#39;</span> <span class="p">:</span> <span class="p">(</span>
+    <span class="s1">&#39;Design Patterns: Elements of Reusable Object-Oriented Software&#39;</span><span class="p">,</span> <span class="s1">&#39;Erich Gamma&#39;</span><span class="p">,</span> <span class="mi">586</span><span class="p">),</span>
+  <span class="s1">&#39;0130803022&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Artificial Intelligence: A Modern Approach&#39;</span><span class="p">,</span> <span class="s1">&#39;Stuart Russell&#39;</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+  <span class="s1">&#39;0534950973&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Introduction to the Theory of Computation&#39;</span><span class="p">,</span> <span class="s1">&#39;Michael Sipser&#39;</span><span class="p">,</span> <span class="mi">98</span><span class="p">),</span>
+  <span class="s1">&#39;0735619670&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Code Complete&#39;</span><span class="p">,</span> <span class="s1">&#39;Steve McConnell&#39;</span><span class="p">,</span> <span class="mi">77</span><span class="p">),</span>
+  <span class="s1">&#39;0201835959&#39;</span> <span class="p">:</span> <span class="p">(</span>
+    <span class="s1">&#39;The Mythical Man-Month: Essays on Software Engineering&#39;</span><span class="p">,</span> <span class="s1">&#39;Frederick P. Brooks Jr.&#39;</span><span class="p">,</span> <span class="mi">3</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="additional-task">
+<h3>Additional task<a class="headerlink" href="#additional-task" title="Permalink to this headline">¶</a></h3>
+<p>Fill the body of method <code class="docutils literal"><span class="pre">find_by_isbn_part</span></code>, so it would return all books&#8217; titles matching part of given ISBN.
+The key in dictionary <code class="docutils literal"><span class="pre">books</span></code> is <code class="docutils literal"><span class="pre">ISBN</span></code>, and value is THREE ELEMENTS TUPLE:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s2">&quot;book&#39;s title&quot;</span><span class="p">,</span> <span class="s2">&quot;main author&#39;s name&quot;</span><span class="p">,</span> <span class="s2">&quot;shelf number&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Running this script will execute test function, that will verify if the method works properly and output the result to the terminal.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">books</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;0262510871&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Structure and Interpretation of Computer Programs&#39;</span><span class="p">,</span> <span class="s1">&#39;Harold Abelson&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+  <span class="s1">&#39;0262032937&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Introduction to Algorithms&#39;</span><span class="p">,</span> <span class="s1">&#39;Thomas H. Cormen&#39;</span><span class="p">,</span> <span class="mi">34</span><span class="p">),</span>
+  <span class="s1">&#39;0131103628&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;The C Programming Language&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian W. Kernighan&#39;</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span>
+  <span class="s1">&#39;020161622X&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;The Pragmatic Programmer: From Journeyman to Master&#39;</span><span class="p">,</span> <span class="s1">&#39;Andrew Hunt&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+  <span class="s1">&#39;0201485419&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Art of Computer Programming&#39;</span><span class="p">,</span> <span class="s1">&#39;Donald Ervin Knuth&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+  <span class="s1">&#39;0201633612&#39;</span> <span class="p">:</span> <span class="p">(</span>
+    <span class="s1">&#39;Design Patterns: Elements of Reusable Object-Oriented Software&#39;</span><span class="p">,</span> <span class="s1">&#39;Erich Gamma&#39;</span><span class="p">,</span> <span class="mi">586</span><span class="p">),</span>
+  <span class="s1">&#39;0130803022&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Artificial Intelligence: A Modern Approach&#39;</span><span class="p">,</span> <span class="s1">&#39;Stuart Russell&#39;</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+  <span class="s1">&#39;0534950973&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Introduction to the Theory of Computation&#39;</span><span class="p">,</span> <span class="s1">&#39;Michael Sipser&#39;</span><span class="p">,</span> <span class="mi">98</span><span class="p">),</span>
+  <span class="s1">&#39;0735619670&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Code Complete&#39;</span><span class="p">,</span> <span class="s1">&#39;Steve McConnell&#39;</span><span class="p">,</span> <span class="mi">77</span><span class="p">),</span>
+  <span class="s1">&#39;0201835959&#39;</span> <span class="p">:</span> <span class="p">(</span>
+    <span class="s1">&#39;The Mythical Man-Month: Essays on Software Engineering&#39;</span><span class="p">,</span> <span class="s1">&#39;Frederick P. Brooks Jr.&#39;</span><span class="p">,</span> <span class="mi">3</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>CORRECT THE FUNCTION <code class="docutils literal"><span class="pre">find_by_isbn_part</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_by_isbn_part</span><span class="p">(</span><span class="n">books</span><span class="p">,</span> <span class="n">isbn_part</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># HINTS:</span>
+    <span class="c1">#  - user for loop</span>
+    <span class="c1">#  - isbn_part in isbn is a condition that verifies if isbn contains isbn_part</span>
+    <span class="c1">#  - adding elements to list, where x is a list and e is an element to add: x.append(e)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># DO NOT ALTER</span>
+<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">books</span><span class="p">):</span>
+    <span class="n">single_test</span><span class="p">(</span><span class="n">books</span><span class="p">,</span> <span class="s1">&#39;020&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;The Pragmatic Programmer: From Journeyman to Master&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;Art of Computer Programming&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;Design Patterns: Elements of Reusable Object-Oriented Software&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;The Mythical Man-Month: Essays on Software Engineering&#39;</span><span class="p">])</span>
+    <span class="n">single_test</span><span class="p">(</span><span class="n">books</span><span class="p">,</span> <span class="s1">&#39;18&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;The Mythical Man-Month: Essays on Software Engineering&#39;</span><span class="p">])</span>
+    <span class="n">single_test</span><span class="p">(</span><span class="n">books</span><span class="p">,</span> <span class="s1">&#39;22&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;The Pragmatic Programmer: From Journeyman to Master&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;Artificial Intelligence: A Modern Approach&#39;</span><span class="p">])</span>
+    <span class="n">single_test</span><span class="p">(</span><span class="n">books</span><span class="p">,</span> <span class="s1">&#39;0735619670&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Code Complete&#39;</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">single_test</span><span class="p">(</span><span class="n">books</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">find_by_isbn_part</span><span class="p">(</span><span class="n">books</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">expected_output</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">expected_output</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span>
+          <span class="s2">&quot;WRONG! FOR &#39;&quot;</span> <span class="o">+</span> <span class="nb">input</span> <span class="o">+</span>
+          <span class="s2">&quot;&#39; RESULT IS: &#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">+</span>
+          <span class="s2">&quot;&#39;, EXPECTED: &#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">expected_output</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;OK! FOR &#39;&quot;</span> <span class="o">+</span> <span class="nb">input</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+
+<span class="n">test</span><span class="p">(</span><span class="n">books</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <a href="index.html" class="logo"><img class="logo" src="_static/logo.png" style="width: 200px; height: 169px; margin: -10px 0 10px 0"></a>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_objects.html">Everything is an object</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic Data Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lists">Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generators">Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tuples">Tuples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sets">Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dictionaries">Dictionaries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#task-1">Task 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#task-2">Task 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#task-3">Task 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-task">Additional task</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loops_functions.html">Tic Tac Toe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="going_further.html">Going Further</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Geek Girls Carrots Code of Conduct</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright Code Carrots.
+  </div>
+  
+  <a href="https://github.com/ggcarrots/python-carrots">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
+  </a>
+  </body>
+</html>
