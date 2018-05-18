@@ -46,6 +46,7 @@ To preview a particular position of an element on the list (remember that we cou
 Python's lists are flexible enough to let us store any type of value we want - `int`, `float`, `str` - you name it. Not only on different lists, but we can also store all of them on one list:
 
 .. code-block:: python
+
   L = [1, "Some string", 2.0]
   print(L)
   [1, "Some string", 2.0]
@@ -71,6 +72,10 @@ There are also some helpful methods defined on the ``list`` objects.
   L.remove(2)
   print(L)
   [3, 1]
+  # yo dawg! I've heard you like lists, so I put a list in your list
+  L.append(['a', 2])
+  print(L)
+  [3, 1, ['a', 2]]
 
 Generators
 ==========
@@ -95,7 +100,8 @@ Imagine that you need a list of a length 100 consisting of numbers 0-99 (or 1-10
 The :func:`range` function does not directly create a list, but it returns a generator.
 
 You wouldn't see much of a difference for our examples, but if you start playing with really big numbers, it will become apparent.
-When you create a list, each element needs to be evaluated and saved to memory before we even begin
+When you create a list, each element needs to be evaluated and saved to memory before we even begin our operations on it. So if we try to create a list of a bilion elements, it might take up some of our memory and slow our computers down.
+On the other hand, generator only works at one element at the time. It fetches the element, does the operations that needed to be done and generates the next element only after the first one was completely processed.
 
 In order to obtain a list of the sequence, we use the function :func:`list`. If we skip :func:`list` call,
 the result will look like this:
@@ -109,18 +115,58 @@ The :func:`range` function has three forms. The most basic and most used one cre
 given number. The other forms allow you to specify the start of the range and a step. The created
 sequence never includes the end of the specified range.
 
+Tuples
+======
 
+Tuples are very similar to lists, with one *crucial* difference - they are immutable. It means, that once we define our tuple, we won't be able to add nor delete objects from it. They are really useful, for example if you don't want people to mess up your data by accident.
 
-As in the case of tuples, consecutive elements of the list are separated by commas. Unlike tuples,
-brackets ``[`` and ``]`` are obligatory.
+`list` was associated with the square brackets, `tuple` is associated with the round ones (although the parentheses are optional):
+
+.. code-block:: python
+
+    tuple1 = (1, 2, 3)
+    tuple2 = 4, 5, 6
+    not_a_tuple=(2)
+
+The last example is not a tuple. Since the parentheses are optional, Python will treat ``(2)`` as a normal `2`, not a tuple. In order for it to be treated as a tuple, we need to add a coma afterwards:
+
+.. code-block:: python
+
+    tuple3=(2, )
+
+Sets
+====
+
+Sets are once again structures that differ slightly from lists. Two of the biggest differences are that:
+  * sets are not ordered (each time you ask Python to print it, it can give you a different ordering)
+  * every value in the set is unique
+
+.. code-block:: python
+
+  L = [1, 2, 3, 1, 2, 3]
+  print(L)
+  [1, 2, 3, 1, 2, 3]
+
+  S = set(L)
+  print(S)
+  {2, 3, 1}
+
+There is one very cool property of sets: you can subtract two sets from each other:
+
+.. code-block:: python
+
+  S1 = {1, 2, 3}
+  S2 = {1, 2}
+  print(S2 - S1)
+  {3}
 
 Dictionaries
-========
+============
 
 Introduction
 ------------
 
-It is time for you to get to know useful data structure - dictionary. Dictionaries are used to store data as a key and value (just like in encyclopedia - you have entry and a description attached to it). Imagine you want to store information about library users. For every reader you have: name, surname, birthdate, birthplace, id number.
+Dictionary is the last data structure you will get to know. It is a bit more complex than the previous ones. Dictionaries are used to store data as a key and value (just like in encyclopedia - you have entry and a description attached to it). Imagine you want to store information about library users. For every reader you have: name, surname, birthdate, birthplace, id number.
 In python such a structure would look like this:
 
 .. code-block:: python
@@ -141,7 +187,7 @@ Nowoczesna Biblioteka Raczyńskich in Poznan wants to send its users birthday wi
   >>> print reader['date_of_birth']
   '19-01-1985'
 
-The clerk recalled: to send you birthday wishes he needs your address aswell. You can add them to your reader's data in such manner:
+The clerk recalled: to send you birthday wishes he needs your address as well. You can add them to your reader's data in such manner:
 
 .. code-block:: python
 
@@ -152,16 +198,6 @@ You can easily change the value in dictionary, if you make any mistake- it only 
 .. code-block:: python
 
   reader['place_of_birth'] = 'Łódź'
-
-To print to screen whole dictionary, we can use loop :keyword:`for`:
-
-.. code-block:: python
-
-  for key in reader:
-    print key, reader[key]
-
-Using 'for' loop on dictionary allows to iterate though every single key. ``reader[key]`` gives access to the value under given key.
-Beware, the order of records is random, dictionaries do not have assigned order. If you want to use ordered structures use lists.
 
 Task 1
 ------
