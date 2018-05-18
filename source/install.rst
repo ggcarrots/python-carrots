@@ -45,8 +45,9 @@ In the command line enter::
 OS X
 ----
 
-Download and install the package for your system version from `python.org`_ .
+In the command line enter::
 
+    brew install python3
 
 Other
 -----
