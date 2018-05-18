@@ -201,7 +201,7 @@ a separate file with regular polyhedrons.
 
 To keep all of shapes in one place, a good idea is to put all shape definitions into one folder - a module. This creates the following file structure:
 
-.. code-block::
+::
 
     + shapes
     |--- polygons.py
@@ -407,7 +407,7 @@ problem that was spotted and a corresponing message. In the parenthesis is the n
 If you are not sure what given message means, you can ask pylint to explain it. For example to show what
 ``too-few-public-methods`` mean use:
 
-.. code-block:: sh
+.. code:: sh
 
     (workshops) ~$ pylint --help-msg=too-few-public-methods
     No config file found, using default configuration
@@ -475,4 +475,4 @@ Here are some resources to get you going on your further python development.
 
 .. rubric:: Footnotes
 
-.. [#f1] This is just an example. In a day-to-day programming, writing such simple classes and not using inheritance is not a good idea.
+.. [#fn1] This is just an example. In a day-to-day programming, writing such simple classes and not using inheritance is not a good idea.

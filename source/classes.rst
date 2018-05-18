@@ -377,7 +377,7 @@ Let's put ``board`` in charge of checking whether the game should end or not.
 **Additional task**: the game should also end when the board is full.
 Add that to the ``check`` method.
 
-Couple of thing require explanation.
+Couple of things require explanation.
 First, the comment below the name of the method ``check``.
 It's called a docstring, because it's a string that documents something -
 in this case, a method.
@@ -397,7 +397,7 @@ The following two ``for``'s will do exactly the same thing:
     # second version
     my_list = [i**2 for i in range(3)]
 
-And finally last thing: the ``all`` function.
+And finally the last thing: the ``all`` function.
 It's a function that checks whether all the elements in the list, tuple or anything else iterable are True.
 Here is a couple of examples:
 
@@ -657,6 +657,7 @@ and ``TicTacToeBoard`` and ``ConnectFourBoard`` are **child** classes of ``Board
 We can check it with ``isinstance`` function:
 
 .. code:: python
+
     board = ConnectFourBoard()
     isinstance(board, ConnectFourBoard)
     isinstance(board, TicTacToeBoard)
@@ -681,9 +682,10 @@ has a ``plot()`` method, even though we don't define it in them anymore.
 They have all the methods defined in the ``Board`` class.
 We say that classes ``TicTacToeBoard`` and ``ConnectFourBoard`` **inherit** the method ``plot``.
 
-Let's see how it works in practice
+Let's see how it works in practice:
 
 .. code:: python
+
     tic_tac_toe = TicTacToeBoard()
     connect4 = ConnectFourBoard()
     some_small_board = Board(2, 2)
@@ -703,14 +705,13 @@ Anything that should be specific to ``TicTacToeBoard`` or ``ConnectFourBoard``, 
 
 **Additional task**: add a method ``add_pawn(pawn, address)`` to the ``Board`` class.
 
-
-=======
 What about the method ``__init__``, that appears in all the classes? Which one will be used during construction of an object?
 Well, when we create an object ``ConnectFourBoard``, its constructor will be evoked, not its parent's.
 The one inside the ``Board`` is more general, and would be used only if we define a sub-class of ``Board`` without its own ``__init__`` method.
 Observe:
 
 .. code:: python
+
     class Some_Random_Board(Board):
         pass
         

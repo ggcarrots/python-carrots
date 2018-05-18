@@ -95,7 +95,7 @@ objects to be evoked.
 
 Creating an object of a given type, also called **an instance** of a class, is done by using its class name:
 
-.. code-block::
+.. code-block:: python
 
     >>> int()
     0
