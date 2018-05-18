@@ -371,13 +371,16 @@ We can define it ourselves and add what we need.
         def __init__(self):
             self.crosses = []
             self.noughts = []
+
+        # all the rest of the methods
+        # ...
             
 
 Now every time we create a new instance of the class TicTacToeBoard,
 it already has the attributes ``crosses`` and ``noughts`` -
 empty lists, ready to be filled.
 Note that the constructor also needs the ``self`` argument,
-even if we provide it neither inside the brackets, nor before the dot. 
+even if we don't provide it neither inside the brackets, nor before the dot. 
 
 It's worth noting that it is highly discouraged to do what we did before:
 to add some attributes that weren't defined in the constructor.
@@ -412,12 +415,14 @@ So, let's do it!
         def add_nought(self, address):
             self.noughts.append(address)
 
+        # nothing changes in the other methods
+
 
 
 **Additional task**: modify the method that adds a cross,
 so that it will check whether it is a legal move.
 That is, whether the address is formatted properly ("A2", not "A 2", ['A', 2] or "Please put it on A2 field"),
-is inside the board and whether the field is free.
+is inside the board and the field is free.
 Do the same for the ``add_nought()`` method.
 
 Now we can finnally create a simple game using our class ``TicTacToeBoard``:
@@ -437,16 +442,15 @@ Now we can finnally create a simple game using our class ``TicTacToeBoard``:
             current_move = 'O'
 
 
-And so we managed to recreate the game from the previous chapter, but now using classes
+...And so we've managed to recreate the game from the previous chapter, but now using classes
 (one could even say, in a more *classy* way).
 Of course still the game goes on forever.
 Let's put ``board`` in charge of checking whether the game should end or not.
+(We will write here only the fragments of code that are new or changed.)
 
 .. code:: python
 
     class TicTacToeBoard:
-
-        # ... (init, add_cross, add_nought stay the same)
 
         def check(self):
             """
@@ -454,9 +458,9 @@ Let's put ``board`` in charge of checking whether the game should end or not.
             return True if so, False otherwise
             """
             potential_wins = []
-            potential_wins.extend([[ letter+column for letter in ('A', 'B', 'C')]
+            potential_wins.extend([[letter+column for letter in ('A', 'B', 'C')]
                 for column in range(3)])    # vertical win
-            potential_wins.extend([[ letter+column for column in range(3)]
+            potential_wins.extend([[letter+column for column in range(3)]
                 for letter in ('A', 'B', 'C')])    # horizontal win
             potential_wins.append(['A0', 'B1', 'C2'])
             potential_wins.append(['A2', 'B1', 'C0'])
@@ -490,7 +494,7 @@ First, the comment below the name of the method ``check``.
 It's called a docstring, because it's a string that documents something -
 in this case, a method.
 It's a good habit to add docstrings to your functions, methods or classes,
-to help everyone understand what they are doing and how to use them.
+to help everyone (including yourself!) understand what they are doing and how to use them.
 Second thing: there is a new way of using ``for`` statement.
 It's called ``list comprehension``, and it is very similar to the regular ``for`` loop.
 The following two ``for``'s will do exactly the same thing:
@@ -525,14 +529,15 @@ Here is a couple of examples:
 
 To sum up:
 ``check`` method creates a list of potential wins.
-Each potential win is a list of addresses that imply a winner wins, if she has her pawns on all these adresses.
+Each potential win is a list of addresses that imply a player wins, if she has her pawns on all these adresses.
 For example ``["A0", "B1", "C2"]`` is a potential win - those are the addresses of the diagonal.
-Next, ``check`` check for every win,
+Next, ``check`` checks for every win,
 whether all the addresses from this win are in ``self.noughts`` or ``self.crosses``.
-If so, it return True and that's it.
-If it goes through the whole loop and finds nothing, it finally returns False at the end.
+If so, it returns True and that's it;
+if a method returns something, it ends.
+If it goes through the whole loop and finds nothing, it eventually returns False at the end.
 
-Notice that in the while loop we do similar thing (placing a pawn) two times.
+Notice that in the ``while`` loop we do similar thing (placing a pawn) two times.
 Also, if you added some checking if the move is legal,
 you needed to put it in two different methods.
 If we ever decide to do some small change, we need to do it in two places.
@@ -549,21 +554,26 @@ Let's modify this code so that it will look more elegant:
             self.pawns = {'O':[], 'X':[]}
             self.potential_wins = self.generate_potential_wins()
 
-        def add_pawn(self, pawn, x, y):
-            self.pawns[pawn].append((x, y))
+        def add_pawn(self, pawn, address):
+            self.pawns[pawn].append(address)
+
+        def get_field_content(self, address):
+            for pawn in self.pawns.keys():
+                if address in self.pawns[pawn]:
+                    return pawn
+            return ' '
 
         def generate_potential_wins(self):
             potential_wins = []
-            potential_wins.extend([[ letter+column for letter in ('A', 'B', 'C')]
+            potential_wins.extend([[letter+column for letter in ('A', 'B', 'C')]
                 for column in range(3)])    # vertical win
-            potential_wins.extend([[ letter+column for column in range(3)]
+            potential_wins.extend([[letter+column for column in range(3)]
                 for letter in ('A', 'B', 'C')])    # horizontal win
             potential_wins.append(['A0', 'B1', 'C2'])
             potential_wins.append(['A2', 'B1', 'C0'])
             # diagonal win
             return potential_wins
     
-     
         def check(self):
             """
             check whether the game is won by some player
@@ -718,10 +728,10 @@ Just like before, we will store pawns' positions as a dictionary in an attribute
 We add two more attributes, describing size of our board.
 We needed to change :func:`draw_board_row` a little:
 now we don't know how many columns there will be,
-so we can't just draw every row as a row consisting of three fields.
+so we can't just draw every row as consisting of three fields.
 We used ``for`` loop to print in every row as many fields as there are columns.
 We don't know how many rows there will be, either;
-this makes creating our dictionary ``letters`` a little bit more complicated.
+this makes creating dictionary ``letters`` a little bit more complicated.
 We create a long string with all the upper case letters
 and then we fill the dictionary ``letters`` with them in a loop.
 The last new thing is the :func:`join` method, called on a string with five spaces.
