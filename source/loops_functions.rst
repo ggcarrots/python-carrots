@@ -257,6 +257,7 @@ For the code repetitions like this one, we normally use functions.
         print(last_line)
 
 
+
     line_middle = '     |     |     '
     line_bottom = '_____|_____|_____'
 
@@ -538,6 +539,7 @@ But wait! It only executes once. We want our game to have more than one round.
     crosses = []
 
     while True:
+
         print('    1     2     3  ')
         for row in range(3):
             if row == 2:
